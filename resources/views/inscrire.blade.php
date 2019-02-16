@@ -225,7 +225,9 @@
                             <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" required>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="checkbox">
+
                                 <label class="custom-control-label" for="customCheckDisabled">J'accèpte <a href="{{url('/charte')}}" target="_blank">les termes de la charte déontologique</a></label>
+                              
                             </div>
 
                         </div>
