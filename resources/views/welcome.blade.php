@@ -116,13 +116,6 @@
                     </ul>
 
 
-
-
-
-
-
-
-
                               </li>
                             <li><a class="menu" href="#Annuaire">Annuaire </a></li>
                             <li><a class="menu" href="#FAQ">FAQ</a></li>
@@ -425,7 +418,7 @@
                 </div>
             
             <div class="col-xs-5 footer-para">
-                 <p>made with <i class="fa fa-heart"></i> by Nour & Adiba</p>
+                 <p>fait avec <i class="fa fa-heart"></i> par Nour & Adiba</p>
             </div>
 
             <div id="footerMenu"> 
