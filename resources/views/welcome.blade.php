@@ -71,7 +71,59 @@
                           <ul class="nav navbar-nav navbar-right">
                            
                             <li><a class="menu active" href="#home" >Acceuil</a></li>
-                            <li><a class="menu" href="#cat">Catégorie</a></li>
+                         <li  class="dropdown ">
+
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        Catégories
+                        <span class="caret"></span>
+                        </a>
+
+
+
+
+                      <ul class="dropdown-menu" role="menu">
+                        <li >
+                            <a href="#">
+                                <strong>Grossesse</strong>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"> <strong>Nouveau-Né</strong></a>
+                        </li>
+                        <li>
+                            <a href="#"><strong>Vêtements</strong></a>
+                        </li>
+                        <li>
+                            <a href="#"><strong> Jouets</strong></a>
+                        </li>
+                        <li>
+                            <a href="#"><strong>Sommeil</strong></a>
+                        </li>
+                        <li>
+                            <a href="#"><strong>Santé</strong></a>
+                        </li>
+                        <li>
+                            <a href="#"><strong>Bien-être</strong></a>
+                        </li>
+                        <li>
+                            <a href="#"><strong>Psychologie</strong></a>
+                        </li>
+                        <li>
+                            <a href="#"><strong>Premières Marches</strong></a>
+                        </li>
+
+                    </ul>
+
+
+
+
+
+
+
+
+
+                              </li>
                             <li><a class="menu" href="#Annuaire">Annuaire </a></li>
                             <li><a class="menu" href="#FAQ">FAQ</a></li>
                             <li><a class="menu" href="#forum"> Forum</a></li>
