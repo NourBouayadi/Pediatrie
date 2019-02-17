@@ -29,3 +29,7 @@ Route::get('/charte', function () {
 Route::get('contact', function () {
     return view('contact');
 });
+
+Route::get('propos', function () {
+    return view('propos');
+});
