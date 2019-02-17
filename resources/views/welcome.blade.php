@@ -74,7 +74,7 @@
                          <li  class="dropdown ">
 
 
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <a href="#service" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         Catégories
                         <span class="caret"></span>
                         </a>
@@ -84,33 +84,33 @@
 
                       <ul class="dropdown-menu" role="menu">
                         <li >
-                            <a href="#">
+                            <a href="#Gro">
                                 <strong>Grossesse</strong>
                             </a>
                         </li>
                         <li>
-                            <a href="#"> <strong>Nouveau-Né</strong></a>
+                            <a href="#NV"> <strong>Nouveau-Né</strong></a>
                         </li>
                         <li>
-                            <a href="#"><strong>Vêtements</strong></a>
+                            <a href="#Vet"><strong>Vêtements</strong></a>
                         </li>
                         <li>
-                            <a href="#"><strong> Jouets</strong></a>
+                            <a href="#J"><strong> Jouets</strong></a>
                         </li>
                         <li>
-                            <a href="#"><strong>Sommeil</strong></a>
+                            <a href="#So"><strong>Sommeil</strong></a>
                         </li>
                         <li>
-                            <a href="#"><strong>Santé</strong></a>
+                            <a href="#Sa"><strong>Santé</strong></a>
                         </li>
                         <li>
-                            <a href="#"><strong>Bien-être</strong></a>
+                            <a href="#Be"><strong>Bien-être</strong></a>
                         </li>
                         <li>
-                            <a href="#"><strong>Psychologie</strong></a>
+                            <a href="#Ps"><strong>Psychologie</strong></a>
                         </li>
                         <li>
-                            <a href="#"><strong>Premières Marches</strong></a>
+                            <a href="#Pm"><strong>Premières Marches</strong></a>
                         </li>
 
                     </ul>
@@ -215,7 +215,7 @@
         <div class="container">
             <div class="row">
                 <h2> espace de discussion</h2>
-                <h4>Contenant des sujets autour de plusieurs catégories : la santé , psychologie , jouets...</h4>
+                <h4>Contenant des sujets autour de plusieurs sujets : la santé , psychologie , jouets...</h4>
                 
 
                 <div class="col-md-3 col-sm-6">
@@ -224,8 +224,8 @@
                             <div class="service-img">
                                 <img class="heart img-responsive" src="{{asset('service1.png')}}" alt="">
                             </div>
-                        </div>
-                        <h3>Heart problem</h3>
+                    </div>
+                        <h3>Santé</h3>
                     </div>
                 </div>
                 
@@ -237,7 +237,7 @@
                                 <img class="brain img-responsive" src="{{asset('service2.png')}}" alt="">
                             </div>
                         </div>
-                        <h3>brain problem</h3>
+                        <h3>Psychologie</h3>
                     </div>
                 </div>
                 
@@ -250,7 +250,7 @@
                                 <img class="knee img-responsive" src="{{asset('service3.png')}}" alt="">
                             </div>
                         </div>
-                        <h3>knee problem</h3>
+                        <h3>Premières Marches</h3>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
@@ -260,7 +260,7 @@
                                 <img class="bone img-responsive" src="{{asset('service4.png')}}" alt="">
                             </div>
                         </div>
-                        <h3>human bones problem</h3>
+                        <h3>Bien-être</h3>
                     </div>
                 </div>
             </div>
@@ -403,49 +403,7 @@
 <br>
 <br>
 
-    <!-- map section -->
-    <div class="api-map" id="contact">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 map" id="map"></div>
-            </div>
-        </div>
-    </div><!-- end of map section -->
-
-    <!-- contact section starts here -->
-    <section class="contact">
-        <div class="container">
-            <div class="row">
-                <div class="contact-caption clearfix">
-                    <div class="contact-heading text-center">
-                        <h2>contactez nous</h2>
-                    </div>
-                    <div class="col-md-5 contact-info text-left">
-                        <h3>les infromations du contact</h3>
-                        <div class="info-detail">
-                            <ul><li><i class="fa fa-calendar"></i><span>lundi - vendredi:</span> 9:30 a 16:30 PM</li></ul>
-                            <ul><li><i class="fa fa-map-marker"></i><span>Addresse:</span> XXXXX , XXXX, algerie, CP </li></ul>
-                            <ul><li><i class="fa fa-phone"></i><span>Telephone:</span> (213) XXX XX XX XX</li></ul>
-                            <ul><li><i class="fa fa-envelope"></i><span>Email:</span> pediatre_dz@gmail.com</li></ul>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-md-offset-1 contact-form">
-                        <h3>laissez un message</h3>
-
-                        <form class="form">
-                            <input class="name" type="text" placeholder="Nom">
-                            <input class="email" type="email" placeholder="Email">
-                            <input class="phone" type="text" placeholder="Telephone">
-                            <textarea class="message" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-                            <input class="submit-btn" type="submit" value="SUBMIT">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section><!-- end of contact section -->
-
-
+ 
 <!-- footer starts here -->
     <footer class="footer clearfix">
         <div class="container">
@@ -472,7 +430,7 @@
 
             <div id="footerMenu"> 
          
-            <a href="#Contact"><b> Contact &nbsp;</b></a> 
+            <a href="url{{('/contact')}}"><b> Contact &nbsp;</b></a> 
 
             <a href="#propos"><b>  &nbsp; A propos de nous</b> </a>
    
