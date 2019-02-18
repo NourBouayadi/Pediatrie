@@ -27,6 +27,15 @@ Route::get('/charte', function () {
     return view('charte');
 });
 
+Route::get('contact', function () {
+    return view('contact');
+});
+
+Route::get('propos', function () {
+    return view('propos');
+});
+
+
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');
@@ -68,3 +77,4 @@ Route::group(['prefix' => 'mom'], function () {
   Route::get('/password/reset', 'MomAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'MomAuth\ResetPasswordController@showResetForm');
 });
+

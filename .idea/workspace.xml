@@ -146,6 +146,7 @@
         <option value="$PROJECT_DIR$/resources/assets/fonts/font-awesome/font-awesome.css" />
         <option value="$PROJECT_DIR$/resources/assets/js/scripts.js" />
         <option value="$PROJECT_DIR$/resources/views/singup.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/public/assets/js/script2.js" />
         <option value="$PROJECT_DIR$/public/assets/js/scripts.js" />
         <option value="$PROJECT_DIR$/public/assets/js/confirm_password.js" />
@@ -274,7 +275,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
+     <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
