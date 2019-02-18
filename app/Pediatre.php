@@ -16,7 +16,7 @@ class Pediatre extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+            'name', 'email', 'password','description','date_debut_carriere', 'tel1', 'tel2','specialite','adresse_cabinet',
     ];
 
     /**
