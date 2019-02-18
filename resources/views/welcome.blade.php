@@ -183,7 +183,9 @@
                         </div>
 
                     </div>
-         <!-- Controls -->
+        
+
+                    <!-- Controls -->
                     <a class="left carousel-control" href="#carouselHacked" role="button" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
@@ -203,7 +205,7 @@
 <br>
 <br>
 
-<!-- service section starts here -->
+    <!-- service section starts here -->
     <section class="service text-center" id="cat">
         <div class="container">
             <div class="row">
@@ -260,7 +262,7 @@
         </div>
     </section><!-- end of service section -->
 
-<!-- team section -->
+    <!-- team section -->
     <section class="team" id="Annuaire">
         <div class="container">
             <div class="row">

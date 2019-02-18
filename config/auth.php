@@ -36,6 +36,21 @@ return [
     */
 
     'guards' => [
+        'mom' => [
+            'driver' => 'session',
+            'provider' => 'moms',
+        ],
+
+        'pediatre' => [
+            'driver' => 'session',
+            'provider' => 'pediatres',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -65,6 +80,21 @@ return [
     */
 
     'providers' => [
+        'moms' => [
+            'driver' => 'eloquent',
+            'model' => App\Mom::class,
+        ],
+
+        'pediatres' => [
+            'driver' => 'eloquent',
+            'model' => App\Pediatre::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
@@ -92,6 +122,24 @@ return [
     */
 
     'passwords' => [
+        'moms' => [
+            'provider' => 'moms',
+            'table' => 'mom_password_resets',
+            'expire' => 60,
+        ],
+
+        'pediatres' => [
+            'provider' => 'pediatres',
+            'table' => 'pediatre_password_resets',
+            'expire' => 60,
+        ],
+
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'admin_password_resets',
+            'expire' => 60,
+        ],
+
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
