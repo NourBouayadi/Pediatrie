@@ -20,7 +20,7 @@
         <div class="navbar-header">
 
 
-                                <!-- Collapsed Hamburger -->
+           <!-- Collapsed Hamburger -->
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#app-navbar-collapse">
                 <span class="sr-only">Toggle Navigation</span>
@@ -28,6 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="http://demo.procoderr.tech">
@@ -38,10 +39,10 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
 
-            <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav navbar-right">
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
-                                                                                <li  class=active>
+                 <li  class=active>
                             <a href="http://demo.procoderr.tech/forums">Forums</a>
                         </li>
 
@@ -74,7 +75,7 @@ Settings
                             </li>
                         </ul>
                     </li>
-                            </ul>
+                 </ul>
         </div>
     </div>
 </nav>
