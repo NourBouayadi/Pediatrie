@@ -275,11 +275,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-<<<<<<< HEAD
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
-=======
-      <pane id="ProjectPane">
+     <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
@@ -370,7 +366,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
->>>>>>> 1a980bb65c8b6e086d75aa143dd269f0b3873b60
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -417,8 +412,6 @@
       <workItem from="1549960272075" duration="13110000" />
       <workItem from="1549977259513" duration="1517000" />
       <workItem from="1550048893628" duration="1321000" />
-<<<<<<< HEAD
-=======
       <workItem from="1550083123293" duration="2912000" />
       <workItem from="1550136771917" duration="40000" />
       <workItem from="1550337928509" duration="550000" />
