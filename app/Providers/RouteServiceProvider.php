@@ -39,7 +39,70 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapMomRoutes();
+
+        $this->mapPediatreRoutes();
+
+        $this->mapAdminRoutes();
+
         //
+    }
+
+    /**
+     * Define the "admin" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapAdminRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'admin', 'auth:admin'],
+            'prefix' => 'admin',
+            'as' => 'admin.',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/admin.php');
+        });
+    }
+
+    /**
+     * Define the "pediatre" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapPediatreRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'pediatre', 'auth:pediatre'],
+            'prefix' => 'pediatre',
+            'as' => 'pediatre.',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/pediatre.php');
+        });
+    }
+
+    /**
+     * Define the "mom" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapMomRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'mom', 'auth:mom'],
+            'prefix' => 'mom',
+            'as' => 'mom.',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/mom.php');
+        });
     }
 
     /**
