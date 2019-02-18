@@ -419,8 +419,12 @@
 
                 </div>
             
-            <div class="col-xs-5 footer-para">
-                 <p>fait avec <i class="fa fa-heart"></i> par Nour & Adiba</p>
+           <div class="col-xs-5 footer-para">
+                 <p>Fait avec <i class="fa fa-heart"></i> par 
+                     <a href="https://www.linkedin.com/in/bouayadi/">Nour</a>
+                     & 
+                     <a href="https://www.linkedin.com/in/adiba-boufeldja-81a092155/">Adiba</a>
+                 </p>
             </div>
 
             <div id="footerMenu"> 

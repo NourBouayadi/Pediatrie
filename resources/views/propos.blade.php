@@ -158,20 +158,23 @@
                 </center>
 
                 </div>
-            
-            <div class="col-xs-5 footer-para">
-                 <p>Powered by Nour & Adiba</p>
+                
+               
+           <div class="col-xs-5 footer-para">
+                 <p>Fait avec <i class="fa fa-heart"></i> par 
+                     <a href="https://www.linkedin.com/in/bouayadi/">Nour</a>
+                     & 
+                     <a href="https://www.linkedin.com/in/adiba-boufeldja-81a092155/">Adiba</a>
+                 </p>
             </div>
 
-            <div id="footerMenu"> 
-            <br> 
+           <div id="footerMenu"> 
+         
+            <a href="url{{('/contact')}}"><b> Contact &nbsp;</b></a> 
+
+            <a href="#propos"><b>  &nbsp; A propos de nous</b> </a>
+   
         
-            <a href="#Contact"><b> Contact </b></a> 
-
-
-            <a href="#propos"><b> A propos de nous</b> </a>
-           
-
             </div>
             </div>
         </div>

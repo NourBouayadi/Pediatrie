@@ -131,6 +131,7 @@
                                 <button>S'inscrire</button>
                             </div>
                         </div>
+                       
                         <div class="item">
                             <img src='img/babby5.jpg' alt="">
                             <div class="carousel-caption">
@@ -139,6 +140,7 @@
                                 <button>S'inscrire</button>
                             </div>
                         </div>
+                       
                         <div class="item">
                             <img src='img/babby4.jpg' alt="">
                             <div class="carousel-caption">
@@ -169,9 +171,9 @@
             </div>
         </div>
     </section><!-- end of slider section -->
-<br>
-<br>
-<br>
+ <br>
+ <br>
+ <br>
     <!-- map section -->
     <div class="api-map" id="contact">
         <div class="container-fluid">
@@ -218,8 +220,7 @@
     <footer class="footer clearfix">
         <div class="container">
             <div class="row">
-                
-                
+
                 <div>
                     
                 <center>
@@ -235,18 +236,20 @@
                 </div>
             
             <div class="col-xs-5 footer-para">
-                 <p>Powered by Nour & Adiba</p>
+                 <p>Fait avec <i class="fa fa-heart"></i> par 
+                     <a href="https://www.linkedin.com/in/bouayadi/">Nour</a>
+                     & 
+                     <a href="https://www.linkedin.com/in/adiba-boufeldja-81a092155/">Adiba</a>
+                 </p>
             </div>
 
             <div id="footerMenu"> 
-            <br> 
+         
+            <a href="url{{('/contact')}}"><b> Contact &nbsp;</b></a> 
+
+            <a href="#propos"><b>  &nbsp; A propos de nous</b> </a>
+   
         
-            <a href="#Contact"><b> Contact </b></a> 
-
-
-            <a href="#propos"><b> A propos de nous</b> </a>
-           
-
             </div>
             </div>
         </div>
