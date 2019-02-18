@@ -7,6 +7,6 @@ Route::get('/home', function () {
 
     //dd($users);
 
-    return view('pediatre.home');
+    return view('forum');
 })->name('home');
 

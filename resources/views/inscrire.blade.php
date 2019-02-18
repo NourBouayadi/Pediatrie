@@ -189,12 +189,12 @@
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" required></textarea>
                         </div>
                         <div class="form-group">
-                            <select class="form-control">
-                                <option>Pédiatrie Générale </option>
-                                <option>Gynécologie </option>
-                                <option>Néonatologie et médecine du nouveau-né </option>
-                                <option>Psychologie de l'Enfant </option>
-                                <option>Cardiologie Pédiatrique</option>
+                            <select name="specialite" class="form-control">
+                                <option value="1" selected>Pédiatrie Générale </option>
+                                <option value="2">Gynécologie </option>
+                                <option value="3">Néonatologie et médecine du nouveau-né </option>
+                                <option value="4">Psychologie de l'Enfant </option>
+                                <option value="5">Cardiologie Pédiatrique</option>
                             </select>
                         </div>
 
