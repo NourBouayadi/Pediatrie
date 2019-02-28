@@ -1,6 +1,7 @@
 @extends('pediatre.layout.auth')
 @section('content')
-<div class="container">
+
+    <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -64,11 +65,13 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-6" >
                             <label for="exampleFormControlTextarea1">Description</label>
                             <textarea value="desscription par defaut" name="description" class="form-control" id="exampleFormControlTextarea1" rows="2" required></textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-6">
+                            <label for="exampleFormControlTextarea1">Spécialité</label>
+
                             <select name="specialite" class="form-control">
                                 <option value="1" selected>Pédiatrie Générale </option>
                                 <option value="2">Gynécologie </option>
@@ -78,25 +81,25 @@
                             </select>
                         </div>
 
-                        <div class="form-group ">
-                            <label for="example-date-input" class="col-2 col-form-label">Date du début de carrière</label>
-                            <div class="col-10">
+                        <div class="form-group col-md-6">
+                            <label for="example-date-input">Date du début de carrière</label>
+                            <div>
                                 <input name= "date_debut_carriere" class="form-control" type="date" value="2011-08-19" id="example-date-input" required>
                             </div>
                         </div>
-                        <div class="form-group ">
-                            <label for="example-tel-input" class="col-2 col-form-label">Telephone 1</label>
-                            <div class="col-10">
+                        <div class="form-group col-md-6">
+                            <label for="example-tel-input">Telephone 1</label>
+                            <div >
                                 <input name="tel1" class="form-control" type="tel" value="213-(555)-025-102" id="example-tel-input" required>
                             </div>
                         </div>
-                        <div class="form-group ">
-                            <label for="example-tel-input" class="col-2 col-form-label">Telephone 2</label>
-                            <div class="col-10">
+                        <div class="form-group col-md-6">
+                            <label for="example-tel-input" >Telephone 2</label>
+                            <div >
                                 <input name="tel2" class="form-control" type="tel" value="213-(555)-025-103" id="example-tel2-input">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-6">
                             <label for="exampleFormControlTextarea1">Adresse Cabinet</label>
                             <textarea value="adresse cabinet par defaut" name="adresse_cabinet" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
                         </div>
@@ -111,7 +114,14 @@
 
                         </div>
 -->
+                        <div class="col-md-6">
+                            <!-- Learn about this code on MDN: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API -->
 
+                            <button id ="find-me">Afficher ma loalisation</button><br/>
+                            <p id = "status"></p>
+                            <a id = "map-link" target="_blank"></a>
+
+                        </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
@@ -125,4 +135,42 @@
         </div>
     </div>
 </div>
+
+    <script>
+        function geoFindMe() {
+
+            const status = document.querySelector('#status');
+            const mapLink = document.querySelector('#map-link');
+
+            mapLink.href = '';
+            mapLink.textContent = '';
+
+            function success(position) {
+                const latitude  = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                status.textContent = '';
+                mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+
+                document.getElementById("mapouter").innerHTML=`<div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas"
+                                                                src="https://maps.google.com/maps?q=${latitude}%2C${longitude}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>`
+            }
+
+            function error() {
+                status.textContent = 'Unable to retrieve your location';
+            }
+
+            if (!navigator.geolocation) {
+                status.textContent = 'Geolocation is not supported by your browser';
+            } else {
+                status.textContent = 'Locating…';
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
+
+        }
+
+        document.querySelector('#find-me').addEventListener('click', geoFindMe);
+
+    </script>
+    <div id="mapouter"></div>
 @endsection
