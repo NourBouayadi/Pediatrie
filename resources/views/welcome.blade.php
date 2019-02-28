@@ -429,8 +429,6 @@
 
             <div id="footerMenu"> 
          
-            <a href="url{{('/contact')}}"><b> Contact &nbsp;</b></a> 
-
             <a href="#propos"><b>  &nbsp; A propos de nous</b> </a>
    
         
