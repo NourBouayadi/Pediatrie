@@ -422,6 +422,31 @@
 
 <br>
 <br>
+
+
+<section class="team" id="Annuaire">
+        <div class="container">
+            <div class="row">
+                <div class="team-heading text-center">
+                    <h2>Un système de prédiction</h2>
+                    <h4>basé sur la collecte des symptomes</h4>
+                </div>
+                
+                <div >
+                    <div class="person">
+                        <img class="img-responsive" src="{{asset('prédir.jpg')}}" alt="member-1">
+                    </div>
+                   
+                </div>
+               
+            </div>
+        </div>          
+  </section>         
+
+
+
+
+
 <br>
 
 
