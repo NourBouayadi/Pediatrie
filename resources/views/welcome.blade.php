@@ -270,6 +270,10 @@
                     <h2>Bienvenue</h2>
                     <h4>Sur le 1ᵉʳ Forum algérienne des pédiatres, vous etes actuellement entouré d'une équipe des pédiatres</h4>
                 </div>
+                
+
+
+
                 <div class="col-md-2 single-member col-sm-4">
                     <div class="person">
                         <img class="img-responsive" src="{{asset('member1.jpg')}}" alt="member-1">
@@ -280,6 +284,9 @@
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
                     </div>
                 </div>
+
+                
+
                 <div class="col-md-2 single-member col-sm-4">
                     <div class="person-detail">
                         <div class="arrow-top"></div>
@@ -290,6 +297,9 @@
                         <img class="img-responsive" src="{{asset('member2.jpg')}}" alt="member-2">
                     </div>
                 </div>
+                
+
+
                 <div class="col-md-2 single-member col-sm-4">
                     <div class="person">
                         <img class="img-responsive" src="{{asset('member3.jpg')}}" alt="member-3">
@@ -300,6 +310,11 @@
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
                     </div>
                 </div>
+                
+
+
+
+
                 <div class="col-md-2 single-member col-sm-4">
                     <div class="person-detail">
                         <div class="arrow-top"></div>
@@ -316,7 +331,7 @@
                     </div>
                     <div class="person-detail">
                         <div class="arrow-bottom"></div>
-                        <h3>Dr. Mohammed, M.D.</h3>
+                        <h3>Dr. Mohamed, M.D.</h3>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
                     </div>
                 </div>
@@ -332,7 +347,14 @@
                 </div>
             </div>
         </div>
+
+
+
+                 
+
     </section><!-- end of team section -->
+
+
 
 <!-- about section -->
     <section class="about text-center" id="FAQ">
@@ -364,10 +386,12 @@
                             <img class="img-responsive" src="{{asset('discu2.jpg')}}" alt="">
                         </div>
                         <div class="about-details">
+                            
                             <div class="pentagon-text">
                                 <br>
-                                <b>
-                                Discussion</b>
+                             
+                                <b>Discussion</b>
+                            
                             </div>
 
                             <h3>Titre</h3>
@@ -394,6 +418,100 @@
             </div>
         </div>
     </section><!-- end of about section -->
+
+
+<br>
+<br>
+
+
+<section class="team" id="Annuaire">
+        <div class="container">
+            <div class="row">
+                <div class="team-heading text-center">
+                    <h2>Un système de prédiction</h2>
+                    <h4>basé sur la collecte des symptomes</h4>
+                </div>
+                
+                <div >
+                    <div class="person">
+                        <img class="img-responsive" src="{{asset('prédir.jpg')}}" alt="member-1">
+                    </div>
+                   
+                </div>
+               
+            </div>
+        </div>          
+  </section>         
+
+
+
+
+
+<br>
+
+
+ <section class="about text-center" id="FAQ">
+        <div class="container">
+            <div class="row">
+                <br>
+                <h2>Articles plus populaires</h2>
+                <h4>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</h4>
+                <br>
+                <div class="col-md-4 col-sm-6">
+                    <div class="single-about-detail clearfix">
+                        <div class="about-img">
+                            <img class="img-responsive" src="{{asset('1article.jpg')}}" alt="">
+                        </div>
+                        <div class="about-details">
+                            <div class="pentagon-text">
+                                <br>
+                                <b>
+                                Article 1</b>
+                            </div>
+                            <h3>Titre</h3>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="single-about-detail">
+                        <div class="about-img">
+                            <img class="img-responsive" src="{{asset('article2.jpg')}}" alt="">
+                        </div>
+                        <div class="about-details">
+                            
+                            <div class="pentagon-text">
+                                <br>
+                             
+                                <b>Article 2</b>
+                            
+                            </div>
+
+                            <h3>Titre</h3>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="single-about-detail">
+                        <div class="about-img">
+                            <img class="img-responsive" src="{{asset('article3.jpg')}}" alt="">
+                        </div>
+                        <div class="about-details">
+                            <div class="pentagon-text">
+                                <br>
+                                <b>
+                                Article 3</b>
+                            </div>
+                            <h3>Titre</h3>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 <br>
 <br>
 <br>
@@ -429,8 +547,6 @@
 
             <div id="footerMenu"> 
          
-            <a href="url{{('/contact')}}"><b> Contact &nbsp;</b></a> 
-
             <a href="#propos"><b>  &nbsp; A propos de nous</b> </a>
    
         

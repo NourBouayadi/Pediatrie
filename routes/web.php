@@ -27,14 +27,16 @@ Route::get('/charte', function () {
     return view('charte');
 });
 
-Route::get('contact', function () {
+/*Route::get('contact', function () {
     return view('contact');
 });
-
+*/
 Route::get('propos', function () {
     return view('propos');
 });
-
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+});
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
