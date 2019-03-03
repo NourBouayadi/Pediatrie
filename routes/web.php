@@ -34,7 +34,9 @@ Route::get('contact', function () {
 Route::get('propos', function () {
     return view('propos');
 });
-
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+});
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
