@@ -27,10 +27,10 @@ Route::get('/charte', function () {
     return view('charte');
 });
 
-Route::get('contact', function () {
+/*Route::get('contact', function () {
     return view('contact');
 });
-
+*/
 Route::get('propos', function () {
     return view('propos');
 });
