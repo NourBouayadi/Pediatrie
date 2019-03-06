@@ -7,7 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Input;
+use Barryvdh\Debugbar\Facade as Debugbar;
 class RegisterController extends Controller
 {
     /*
@@ -52,7 +53,19 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:pediatres',
             'password' => 'required|min:6|confirmed',
+            'description' => 'nullable|alpha_dash|max:255',
+            'date_debut_carriere' => 'required',
+            'tel1' => 'required|digits_between:9,10',
+            'tel2' => 'digits_between:9,10',
+            'specialite' => 'required',
+            'adresse_cabinet' => 'nullable',
+            'latitude' => 'numeric|nullable',
+            'longitude' => 'numeric|nullable',
+            'attestation' => 'required|mimes:pdf'
+
         ]);
+
+
     }
 
     /**
@@ -63,6 +76,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Debugbar::info($data);
+        $file = Input::file('attestation');
+        $file->move("attestations",str_replace('@','.',$data['email']).'.pdf');
         return Pediatre::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -73,6 +89,9 @@ class RegisterController extends Controller
             'tel2' => $data['tel2'],
             'specialite' => $data['specialite'],
             'adresse_cabinet' => $data['adresse_cabinet'],
+            'longitude' => $data['longitude'],
+            'latitude' => $data['latitude'],
+
         ]);
     }
 
@@ -85,6 +104,7 @@ class RegisterController extends Controller
     {
         return view('pediatre.auth.register');
     }
+
 
     /**
      * Get the guard to be used during registration.

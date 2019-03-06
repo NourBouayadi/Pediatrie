@@ -51,14 +51,14 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Interface
+            Demandes
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Components</span>
+                <span>Demandes des Pédiatres</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -397,34 +397,49 @@
                 <!-- Content Row -->
 
                 <div class="row">
-
+                    <h1 class="h3 mb-0 text-gray-800">Table des Demandes</h1>
                     <!-- Area Chart -->
-                    <div class="col-xl-8 col-lg-7">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-area">
-                                    <canvas id="myAreaChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-xl-10 col-lg-7">
+                        <!-- tabeau des demandes des pédiatres  -->
+                        @foreach($pediatres as $pediatre)
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Attestations</th>
+                                    <th scope="col">Date de Création</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                            <tr>
+
+                                <td>{{$pediatre->name}}</td>
+                                <td>{{$pediatre->email}}</td>
+                                <td><a  target="_blank" href="/attestations/<?php echo str_replace('@','.',$pediatre->email).'.pdf' ?>">attestation</a></td>
+                                <td>{{$pediatre->created_at}}</td>
+
+
+
+                                <td>
+
+
+
+                                   <!-- <form action="{{url('etudiants/'.$pediatre->id)}}" method="post">
+                                        {{csrf_field()}}
+                                        {{--{{method_field('DELETE')}}--}}
+
+                                        <a href="{{url ('etudiants/'.$pediatre->id.'/edit')}}" class="btn btn-secondary">Editer</a>
+
+                                    </form>-->
+
+
+                                </td>
+                            </tr>
+                          </table>
+                        @endforeach
                     </div>
+                </div>
 
                     <!-- Pie Chart -->
 
@@ -439,13 +454,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2019</span>
-                </div>
-            </div>
-        </footer>
+
         <!-- End of Footer -->
 
     </div>
