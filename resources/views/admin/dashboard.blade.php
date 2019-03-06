@@ -399,7 +399,7 @@
                 <div class="row">
                     <h1 class="h3 mb-0 text-gray-800">Table des Demandes</h1>
                     <!-- Area Chart -->
-                    <div class="col-xl-10 col-lg-7">
+                    <div class="col-xl-12 col-lg-7">
                         <!-- tabeau des demandes des pédiatres  -->
                         @foreach($pediatres as $pediatre)
                             <table class="table">
@@ -409,6 +409,7 @@
                                     <th scope="col">Email</th>
                                     <th scope="col">Attestations</th>
                                     <th scope="col">Date de Création</th>
+                                    <th scope="col"> Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -416,8 +417,22 @@
 
                                 <td>{{$pediatre->name}}</td>
                                 <td>{{$pediatre->email}}</td>
-                                <td><a  target="_blank" href="/attestations/<?php echo str_replace('@','.',$pediatre->email).'.pdf' ?>">attestation</a></td>
+                                <td><a class="btn btn-primary" target="_blank" href="/attestations/<?php echo str_replace('@','.',$pediatre->email).'.pdf' ?>">attestation</a></td>
                                 <td>{{$pediatre->created_at}}</td>
+                                <td>
+                                    <button class="btn btn-secondary" aria-hidden="true">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-success">
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+
+                                    </button>
+
+
+                                </td>
 
 
 
