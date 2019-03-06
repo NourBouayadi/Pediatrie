@@ -16,7 +16,7 @@ class CreatePediatresTable extends Migration
         Schema::create('pediatres', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('password');
             $table->string('description');
             $table->date('date_debut_carriere');
@@ -24,6 +24,9 @@ class CreatePediatresTable extends Migration
             $table->string('tel1');
             $table->string('tel2');
             $table->string('adresse_cabinet');
+            $table->double('latitude');
+            $table->double('longitude');
+            $table->boolean('isActive');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -36,6 +39,8 @@ class CreatePediatresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pediatres');
+        Schema::table('pediatres', function (Blueprint $table) {
+            //
+        });
     }
 }

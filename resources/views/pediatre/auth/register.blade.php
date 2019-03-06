@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/pediatre/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/pediatre/register') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -66,11 +66,17 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group col-md-6" >
+
+                        <div class="form-group col-md-6 {{ $errors->has('description') ? ' has-error' : '' }}" >
                             <label for="exampleFormControlTextarea1">Description</label>
                             <textarea value="desscription par defaut" name="description" class="form-control" id="exampleFormControlTextarea1" rows="2" required></textarea>
+                            @if ($errors->has('description'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                            @endif
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 {{ $errors->has('specialite') ? ' has-error' : '' }}">
                             <label for="exampleFormControlTextarea1">Spécialité</label>
 
                             <select name="specialite" class="form-control">
@@ -80,51 +86,91 @@
                                 <option value="4">Psychologie de l'Enfant </option>
                                 <option value="5">Cardiologie Pédiatrique</option>
                             </select>
+                            @if ($errors->has('specialite'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('specialite') }}</strong>
+                                    </span>
+                            @endif
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 {{ $errors->has('date_debut_carriere') ? ' has-error' : '' }}">
                             <label for="example-date-input">Date du début de carrière</label>
                             <div>
                                 <input name= "date_debut_carriere" class="form-control" type="date" value="2011-08-19" id="example-date-input" required>
+                                @if ($errors->has('date_debut_carriere'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('date_debut_carriere') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 {{ $errors->has('tel1') ? ' has-error' : '' }}">
                             <label for="example-tel-input">Telephone 1</label>
                             <div >
                                 <input name="tel1" class="form-control" type="tel" value="213-(555)-025-102" id="example-tel-input" required>
+                                @if ($errors->has('tel1'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('tel1') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 {{ $errors->has('tel2') ? ' has-error' : '' }}">
                             <label for="example-tel-input" >Telephone 2</label>
                             <div >
                                 <input name="tel2" class="form-control" type="tel" value="213-(555)-025-103" id="example-tel2-input">
+                                @if ($errors->has('tel2'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('tel2') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6 {{ $errors->has('adresse_cabinet') ? ' has-error' : '' }}">
                             <label for="exampleFormControlTextarea1">Adresse Cabinet</label>
                             <textarea value="adresse cabinet par defaut" name="adresse_cabinet" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+                            @if ($errors->has('adresse_cabinet'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('adresse_cabinet') }}</strong>
+                                    </span>
+                            @endif
                         </div>
-                        <div class="form-group col-md-6">
-                            <input type="text" name="latitude" class="form-control" id="latitude" rows="3" hidden></input>
+                        <div class="form-group col-md-6 {{ $errors->has('latitude') ? ' has-error' : '' }}">
+                            <input type="text" name="latitude" class="form-control" id="latitude" rows="3" ></input>
+                            @if ($errors->has('latitude'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('latitude') }}</strong>
+                                    </span>
+                            @endif
                         </div>
-                        <div class="form-group col-md-6">
-                            <input type="text"  name="longitude" class="form-control" id="longitude" rows="3" hidden></input>
+                        <div class="form-group col-md-6 {{ $errors->has('longitude') ? ' has-error' : '' }}">
+                            <input type="text"  name="longitude" class="form-control" id="longitude" rows="3" ></input>
+                            @if ($errors->has('longitude'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('longitude') }}</strong>
+                                    </span>
+                            @endif
                         </div>
 
                         <div class="col-md-6">
                             <!-- Learn about this code on MDN: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API -->
 
-                            <button id ="find-me">Afficher ma loalisation</button><br/>
+                            <button type="button" id ="find-me">Afficher ma loalisation</button><br/>
                             <p id = "status"></p>
                             <a id = "map-link" target="_blank"></a>
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('attestation') ? ' has-error' : '' }}">
                             <label for="exampleInputFile">Attestation</label>
-                            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" required>
+                            <input type="file" class="form-control-file" id="attestation" name="attestation" aria-describedby="fileHelp" required>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                                 <label >J'accèpte <a href="{{url('/charte')}}" target="_blank">les termes de la charte déontologique</a></label>
+                                @if ($errors->has('attestation'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('attestation') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <button type="submit" class="btn btn-primary" id="submit" disabled="disabled">Submit</button>
 
