@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Hesto\MultiAuth\Traits\LogsoutGuard;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -50,6 +51,31 @@ class LoginController extends Controller
     {
         return view('pediatre.auth.login');
     }
+    protected function credentials(Request $request)
+    {
+        $credentials = $request->only($this->username(), 'password');
+        $credentials['isActive'] = 1;
+        return $credentials;
+    }
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        $errors = [$this->username() => trans('auth.failed')];
+        // Load user from database
+        $pediatre = \App\Pediatre::where($this->username(), $request->{$this->username()})->first();
+        // Check if user was successfully loaded, that the password matches
+        // and active is not 1. If so, override the default error message.
+        if ($pediatre && \Hash::check($request->password, $pediatre->password) && $pediatre->isActive != 1) {
+            $errors = [$this->username() => 'Demande en traitement. Vous allez recevoir un email'];
+        }
+        if ($request->expectsJson()) {
+            return response()->json($errors, 422);
+        }
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors($errors);
+    }
+
+
 
     /**
      * Get the guard to be used during authentication.
