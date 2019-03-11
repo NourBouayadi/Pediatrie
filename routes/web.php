@@ -51,6 +51,10 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
   Route::get('/dashboard', 'AdminController@index');
+  Route::get('/dashboard/{id}', ['as' => 'dashboard', 'uses' => 'AdminController@approve']);
+  Route::delete('dashboard/{id}', 'AdminController@destroy');
+
+
 });
 
 Route::group(['prefix' => 'pediatre'], function () {
