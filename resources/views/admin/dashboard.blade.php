@@ -401,7 +401,7 @@
                     <!-- Area Chart -->
                     <div class="col-xl-12 col-lg-7">
                         <!-- tabeau des demandes des pédiatres  -->
-                        @foreach($pediatres as $pediatre)
+
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -413,6 +413,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($pediatres as $pediatre)
                             <tr>
 
                                 <td>{{$pediatre->name}}</td>
@@ -423,36 +424,28 @@
                                     <button class="btn btn-secondary" aria-hidden="true">
                                         <i class="fa fa-envelope" aria-hidden="true"></i>
                                     </button>
-                                    <button type="button" class="btn btn-success">
+
+                                    <button type="button" class="btn btn-success" >
+                                        <a href="{{ action('AdminController@approve', ['id' => $pediatre->id]) }}">here</a>
+
                                         <i class="fa fa-check" aria-hidden="true"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-
-                                    </button>
+                                     </button>
 
 
-                                </td>
-
-
-
-                                <td>
-
-
-
-                                   <!-- <form action="{{url('etudiants/'.$pediatre->id)}}" method="post">
+                                    <form action="{{url('admin/dashboard/'.$pediatre->id)}}" method="post">
                                         {{csrf_field()}}
-                                        {{--{{method_field('DELETE')}}--}}
-
-                                        <a href="{{url ('etudiants/'.$pediatre->id.'/edit')}}" class="btn btn-secondary">Editer</a>
-
-                                    </form>-->
+                                        {{method_field('DELETE')}}
+                                     <button type ="submit" class="btn btn-danger" onclick="return myFunction();"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                    </form>
 
 
                                 </td>
+
+
                             </tr>
+                                @endforeach
                           </table>
-                        @endforeach
+
                     </div>
                 </div>
 
@@ -518,7 +511,12 @@
 <!-- Page level custom scripts -->
 <script src="{{asset('assets/js/chart-area-demo.js')}}"></script>
 <script src="{{asset('assets/js/chart-pie-demo.js')}}"></script>
-
+<script>
+    function myFunction() {
+        if(!confirm("Voulez-vous supprimer la demande ?"))
+            event.preventDefault();
+    }
+</script>
 </body>
 
 </html>

@@ -162,7 +162,7 @@
                         </div>
                         <div class="form-group {{ $errors->has('attestation') ? ' has-error' : '' }}">
                             <label for="exampleInputFile">Attestation</label>
-                            <input type="file" class="form-control-file" id="attestation" name="attestation" aria-describedby="fileHelp" required>
+                            <input type="file"  accept="application/pdf" class="form-control-file" id="attestation" name="attestation" aria-describedby="fileHelp" required>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                                 <label >J'accèpte <a href="{{url('/charte')}}" target="_blank">les termes de la charte déontologique</a></label>
