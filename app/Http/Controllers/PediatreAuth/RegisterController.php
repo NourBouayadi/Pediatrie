@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\PediatreAuth;
-
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 use App\Pediatre;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -29,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/pediatre/home';
+    protected $redirectTo = '/pediatre/login';
 
     /**
      * Create a new controller instance.
@@ -103,10 +104,20 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function showRegistrationForm()
     {
         return view('pediatre.auth.register');
     }
+public function register(Request $request)
+   {
+       $this->validator($request->all())->validate();
+
+       event(new Registered($pediatre = $this->create($request->all())));
+
+
+       return $this->registered($request, $pediatre)?: redirect($this->redirectPath());
+   }
 
 
     /**
