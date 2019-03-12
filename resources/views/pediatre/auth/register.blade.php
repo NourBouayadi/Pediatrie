@@ -69,7 +69,7 @@
 
                         <div class="form-group col-md-6 {{ $errors->has('description') ? ' has-error' : '' }}" >
                             <label for="exampleFormControlTextarea1">Description</label>
-                            <textarea value="desscription par defaut" name="description" class="form-control" id="exampleFormControlTextarea1" rows="2" required></textarea>
+                            <textarea value="desscription par defaut" name="description" class="form-control" id="exampleFormControlTextarea1" rows="2" maxlength="255" required></textarea>
                             @if ($errors->has('description'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
@@ -107,7 +107,7 @@
                         <div class="form-group col-md-6 {{ $errors->has('tel1') ? ' has-error' : '' }}">
                             <label for="example-tel-input">Telephone 1</label>
                             <div >
-                                <input name="tel1" class="form-control" type="tel" value="213-(555)-025-102" id="example-tel-input" required>
+                                <input name="tel1" class="form-control" type="tel" value="0541101010" id="example-tel-input" pattern="tel" required>
                                 @if ($errors->has('tel1'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('tel1') }}</strong>
@@ -118,7 +118,7 @@
                         <div class="form-group col-md-6 {{ $errors->has('tel2') ? ' has-error' : '' }}">
                             <label for="example-tel-input" >Telephone 2</label>
                             <div >
-                                <input name="tel2" class="form-control" type="tel" value="213-(555)-025-103" id="example-tel2-input">
+                                <input name="tel2" class="form-control" type="tel" value="0541101010" id="example-tel2-input"  pattern="tel" >
                                 @if ($errors->has('tel2'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('tel2') }}</strong>
