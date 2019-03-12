@@ -10,6 +10,7 @@ class Mom extends Authenticatable
 {
     use Notifiable;
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -37,5 +38,14 @@ class Mom extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new MomResetPassword($token));
+    }
+
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
+    }
+    public function discussions()
+    {
+        return $this->hasMany('App\Discussion');
     }
 }
