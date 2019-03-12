@@ -8,12 +8,14 @@
     
     <title>Pédiatre-Dz</title>
 
-    <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/font-awesome2.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{asset('assets/css/style2.css')}}">
+     <link rel="stylesheet" href="{{asset('assets/css/notationEtoile.css')}}">
+    <!--link rel="stylesheet" href="{{asset('assets/css/style1.css')}}"-->
+    <!--link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'-->
 
 <style>
 
@@ -26,16 +28,11 @@
         text-align: right;
     }
 
+
 </style>
     
 <script src="{{asset('assets/js/modernizr.js')}}"></script>
-    <!--[if lt IE 9]>
-
-        "{{asset('assets/js/scripts.js')}}"
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
-
+ 
 </head>
 <body>
     
@@ -78,9 +75,6 @@
                         Catégories
                         <span class="caret"></span>
                         </a>
-
-
-
 
                       <ul class="dropdown-menu" role="menu">
                         <li >
@@ -131,16 +125,13 @@
     </header> <!-- end of header area -->
 
 
-
-
-
 <section class="slider" id="home">
         <div class="container-fluid">
             <div class="row">
-                <div id="carouselHacked" class="carousel slide carousel-fade" data-ride="carousel">
-                    <div class="header-backup"></div>
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
+                 <div id="carouselHacked" class="carousel slide carousel-fade" data-ride="carousel">
+                     <div class="header-backup"></div>
+                         <!-- Wrapper for slides -->
+                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
                             <img src="{{asset('babby1.jpg')}}" alt="">
                             <div class="carousel-caption">
@@ -206,14 +197,18 @@
 <br>
 
     <!-- service section starts here -->
+    
+
+
+
     <section class="service text-center" id="cat">
         <div class="container">
             <div class="row">
-                <h2> espace de discussion</h2>
-                <h4>Contenant des sujets autour de plusieurs sujets : la santé , psychologie , jouets...</h4>
+              <!--div class="slider-holder"-->
+                  <h2> espace de discussion</h2>
+                   <h4>Contenant des sujets autour de plusieurs sujets : la santé , psychologie , jouets...</h4>
                 
-
-                <div class="col-md-3 col-sm-6">
+                  <div class="col-md-3 col-sm-6">
                     <div class="single-service">
                         <div class="single-service-img">
                             <div class="service-img">
@@ -224,7 +219,6 @@
                     </div>
                 </div>
                 
-
                 <div class="col-md-3 col-sm-6">
                     <div class="single-service">
                         <div class="single-service-img">
@@ -236,7 +230,6 @@
                     </div>
                 </div>
                 
-
                 <div class="col-md-3 col-sm-6">
                     
                     <div class="single-service">
@@ -248,7 +241,10 @@
                         <h3>Premières Marches</h3>
                     </div>
                 </div>
+
                 <div class="col-md-3 col-sm-6">
+
+
                     <div class="single-service">
                         <div class="single-service-img">
                             <div class="service-img">
@@ -258,8 +254,10 @@
                         <h3>Bien-être</h3>
                     </div>
                 </div>
-            </div>
-        </div>
+           
+
+</div> 
+  </div>
     </section><!-- end of service section -->
 
     <!-- team section -->
@@ -281,6 +279,16 @@
                     <div class="person-detail">
                         <div class="arrow-bottom"></div>
                         <h3>Dr.Allal, M.D.</h3>
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fa fa-star gold"></i>
+                                <i class="fa fa-star gold"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                          
+                        </div>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
                     </div>
                 </div>
@@ -291,6 +299,18 @@
                     <div class="person-detail">
                         <div class="arrow-top"></div>
                         <h3>Dr. Benkalfat, M.D.</h3>
+                        
+                             <div class="rating">
+                            <div class="stars">
+                                <i class="fa fa-star gold"></i>
+                                <i class="fa fa-star gold"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                          
+                        </div>
+
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
                     </div>
                     <div class="person">
@@ -307,6 +327,17 @@
                     <div class="person-detail">
                         <div class="arrow-bottom"></div>
                         <h3>Dr. Mansour, M.D.</h3>
+                             <div class="rating">
+                            <div class="stars">
+                                <i class="fa fa-star gold"></i>
+                                <i class="fa fa-star gold"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                          
+                        </div>
+
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
                     </div>
                 </div>
@@ -319,6 +350,17 @@
                     <div class="person-detail">
                         <div class="arrow-top"></div>
                         <h3>Dr. BenAllal, M.D.</h3>
+                             <div class="rating">
+                            <div class="stars">
+                                <i class="fa fa-star gold"></i>
+                                <i class="fa fa-star gold"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                          
+                        </div>
+
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
                     </div>
                     <div class="person">
@@ -332,26 +374,45 @@
                     <div class="person-detail">
                         <div class="arrow-bottom"></div>
                         <h3>Dr. Mohamed, M.D.</h3>
+                        
+                          <div class="rating">
+                            <div class="stars">
+                                <i class="fa fa-star gold"></i>
+                                <i class="fa fa-star gold"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                          
+                        </div> 
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
                     </div>
                 </div>
                 <div class="col-md-2 single-member col-sm-4">
+                    
                     <div class="person-detail">
                         <div class="arrow-top"></div>
                         <h3>Dr. Hasina, M.D.</h3>
+                        
+                           <div class="rating">
+                            <div class="stars">
+                                <i class="fa fa-star gold"></i>
+                                <i class="fa fa-star gold"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                          
+                        </div>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
                     </div>
+                    
                     <div class="person">
                         <img class="img-responsive" src="{{asset('member6.jpg')}}" alt="member-5">
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-                 
-
     </section><!-- end of team section -->
 
 
@@ -443,11 +504,8 @@
         </div>          
   </section>         
 
-
-
-
-
 <br>
+
 
 
  <section class="about text-center" id="FAQ">
@@ -516,7 +574,10 @@
 <br>
 <br>
 
- 
+
+
+
+
 <!-- footer starts here -->
     <footer class="footer clearfix">
         <div class="container">
