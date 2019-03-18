@@ -9,6 +9,11 @@ class Discussion extends Model
     /**
      * Get the messages for the forum discussion.
      */
+
+    protected $fillable = [
+        'titre', 'description','date_pub', 'created_at'
+    ];
+
     public function messages()
     {
         return $this->hasMany('App\Message');
@@ -26,9 +31,9 @@ class Discussion extends Model
     {
         return $this->belongsTo('App\Pediatre');
     }
-    public function user()
+    public function admin()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Admin');
     }
 
 }

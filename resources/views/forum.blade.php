@@ -87,127 +87,56 @@ Settings
 
         <form class="navbar-form" role="search">
     <div class="input-group">
-        <input type="text" value="" class="form-control" placeholder="Search" name="search" id="search">
+        <input type="text" value="" class="form-control" placeholder="Rechercher" name="search" id="search">
         <div class="input-group-btn">
             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
         </div>
     </div>
 </form>
         <div class="list-group">
-            <a href="http://demo.procoderr.tech/forums/create"
+            <a href="{{url('forum/create')}}"
                class=" list-group-item list-group-item-text list-group-item-success text-center"><i class="wb-plus"></i>
-Thread
+               Nouvelle Discussion
             </a>
 
-            <a href="http://demo.procoderr.tech/forums" class="list-group-item">All</a>
-                            <a href="http://demo.procoderr.tech/forums/general"
-                   class="list-group-item ">General
+
+            <a href="{{url('forum')}}" class="list-group-item">Toutes les Catégories</a>
+                            <a href="{{url('forum/1')}}" class="list-group-item ">Grossesse
                     <span class="badge badge-info">8</span>
                 </a>
-                            <a href="http://demo.procoderr.tech/forums/site%20feedback"
-                   class="list-group-item ">Site Feedback
+                            <a href="{{url('forum/2')}}"
+                   class="list-group-item ">Nouveau-Né
 <span class="badge badge-info">2</span>
                 </a>
-                            <a href="http://demo.procoderr.tech/forums/jjj"
-                   class="list-group-item ">Jjj
+                            <a href="{{url('forum/3')}}"
+                   class="list-group-item ">Vetements
                     <span class="badge badge-info">3</span>
                 </a>
-                            <a href="http://demo.procoderr.tech/forums/cars"
-                   class="list-group-item ">Cars
+                            <a href="{{url('forum/4')}}"
+                   class="list-group-item ">Jouets
                     <span class="badge badge-info">9</span>
                 </a>
-                            <a href="http://demo.procoderr.tech/forums/boats"
-                   class="list-group-item ">Boats
+                            <a href="{{url('forum/5')}}"
+                   class="list-group-item ">Sommeil
                     <span class="badge badge-info">23</span>
                 </a>
-                            <a href="http://demo.procoderr.tech/forums/computer%20technology"
-                   class="list-group-item ">Computer Technology
+                            <a href="{{url('forum/6')}}"
+                   class="list-group-item ">Santé
 <span class="badge badge-info">5</span>
                 </a>
-                            <a href="http://demo.procoderr.tech/forums/zozo"
-                   class="list-group-item ">zozo
+                            <a href="{{url('forum/7')}}"
+                   class="list-group-item ">Bien-etre
                     <span class="badge badge-info">0</span>
                 </a>
-                            <a href="http://demo.procoderr.tech/forums/dsffs"
-                   class="list-group-item ">dsffs
+                            <a href="{{url('forum/8')}}"
+                   class="list-group-item ">Psychologie
                     <span class="badge badge-info">0</span>
                 </a>
-                            <a href="http://demo.procoderr.tech/forums/dsffs2222222222222222222222222222222222222"
-                   class="list-group-item ">dsffs2222222222222222222222222222222222222
+                            <a href="{{url('forum/9')}}"
+                   class="list-group-item ">Premières-Marches
                     <span class="badge badge-info">0</span>
                 </a>
-                            <a href="http://demo.procoderr.tech/forums/dsffs"
-                   class="list-group-item ">dsffs
-                    <span class="badge badge-info">2</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/dsffs"
-                   class="list-group-item ">dsffs
-                    <span class="badge badge-info">0</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/dsffs"
-                   class="list-group-item ">dsffs
-                    <span class="badge badge-info">0</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/dsffs"
-                   class="list-group-item ">dsffs
-                    <span class="badge badge-info">0</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/dsffs"
-                   class="list-group-item ">dsffs
-                    <span class="badge badge-info">1</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/dsffs"
-                   class="list-group-item ">dsffs
-                    <span class="badge badge-info">0</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/dsffs"
-                   class="list-group-item ">dsffs
-                    <span class="badge badge-info">0</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/pc%20gamez"
-                   class="list-group-item ">PC GameZ
-<span class="badge badge-info">2</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/test%20pro"
-                   class="list-group-item ">Test Pro
-<span class="badge badge-info">3</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/test%20one%20two%20three"
-                   class="list-group-item ">test one two three
-<span class="badge badge-info">2</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/five%205"
-                   class="list-group-item ">Five 5
-<span class="badge badge-info">7</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/testing%20forum"
-                   class="list-group-item ">Testing Forum
-<span class="badge badge-info">1</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/new%20event"
-                   class="list-group-item ">New Event
-                    <span class="badge badge-info">1</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/test"
-                   class="list-group-item ">Test
-                    <span class="badge badge-info">2</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/prueba001"
-                   class="list-group-item ">Prueba001
-                    <span class="badge badge-info">0</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/sks"
-                   class="list-group-item ">sks
-                    <span class="badge badge-info">0</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/tdtdj"
-                   class="list-group-item ">tdtdj
-                    <span class="badge badge-info">0</span>
-                </a>
-                            <a href="http://demo.procoderr.tech/forums/amma"
-                   class="list-group-item ">amma
-                    <span class="badge badge-info">0</span>
-                </a>
+
                     </div>
     </div>
 
@@ -217,155 +146,34 @@ Thread
             <thead>
             <tr>
                 <th class="cell-stat"></th>
-                <th>
-Threads
-                </th>
-                <th class="cell-stat text-center hidden-xs hidden-sm">Total Posts</th>
-                <th class="cell-stat-2x hidden-xs hidden-sm">Last Post</th>
+                <th>Titres</th>
+                <th>Total Réponses</th>
+                <th class=" hidden-xs hidden-sm">Date</th>
+
+
+
             </tr>
             </thead>
             <tbody>
-                            <tr>
-                    <td class="text-center">
-                                                    <i class="fa fa-file fa-2x"></i>
-
-                    </td>
-                    <td>
-                        <h4>
-                            <a href="http://demo.procoderr.tech/forums/thread/71">Thread created</a>
+            @foreach($discussions as $discussion)
+              <tr>
+                    <td class="text-center"><i class="fa fa-file fa-2x"></i></td>
+                    <td><h4><a href="http://demo.procoderr.tech/forums/thread/71">{{$discussion->titre}}</a>
                             <br>
-                            <small class="help-block"> by
-                                <a href="http://demo.procoderr.tech/profile/prouser">prouser</a>
-2 days ago in
-<span class="label label-primary">
-Cars
-                                </span>
+                            <small class="help-block"> Par
+                                <a href="http://demo.procoderr.tech/profile/prouser"><?php echo App\Mom::find($discussion->mom_id)->name;?></a>
+
+                            <span class="label label-primary"><?php echo App\Categorie::find($discussion->categorie_id)->name;?></span>
                             </small>
                         </h4>
                     </td>
-                    <td class="text-center hidden-xs hidden-sm">
-                        <a href="#">2</a>
-                    </td>
+                  <td><?php echo App\Message::where("discussion_id","=",$discussion->id)->count();?></td>
+                    <td class="hidden-xs hidden-sm">{{$discussion->created_at}}</td>
 
-                    <td class="hidden-xs hidden-sm">by
-                        <a href=" http://demo.procoderr.tech/profile/prouser">prouser</a>
-                        <br>
-                        <small><i class="fa fa-clock-o"></i> 2 days ago </small>
-                    </td>
+
                 </tr>
-                            <tr>
-                    <td class="text-center">
-                                                    <i class="fa fa-file fa-2x"></i>
-
-                    </td>
-                    <td>
-                        <h4>
-                            <a href="http://demo.procoderr.tech/forums/thread/70">dfgdf</a>
-                            <br>
-                            <small class="help-block"> by
-                                <a href="http://demo.procoderr.tech/profile/prouser">prouser</a>
-2 days ago in
-<span class="label label-primary">
-General
-                                </span>
-                            </small>
-                        </h4>
-                    </td>
-                    <td class="text-center hidden-xs hidden-sm">
-                        <a href="#">2</a>
-                    </td>
-
-                    <td class="hidden-xs hidden-sm">by
-                        <a href=" http://demo.procoderr.tech/profile/prouser">prouser</a>
-                        <br>
-                        <small><i class="fa fa-clock-o"></i> 2 days ago </small>
-                    </td>
-                </tr>
-                            <tr>
-                    <td class="text-center">
-                                                    <i class="fa fa-file fa-2x"></i>
-
-                    </td>
-                    <td>
-                        <h4>
-                            <a href="http://demo.procoderr.tech/forums/thread/21">My first Question</a>
-                            <br>
-                            <small class="help-block"> by
-                                <a href="http://demo.procoderr.tech/profile/prouser">prouser</a>
-1 year ago in
-<span class="label label-primary">
-General
-                                </span>
-                            </small>
-                        </h4>
-                    </td>
-                    <td class="text-center hidden-xs hidden-sm">
-                        <a href="#">3</a>
-                    </td>
-
-                    <td class="hidden-xs hidden-sm">by
-                        <a href=" http://demo.procoderr.tech/profile/prouser">Olly</a>
-                        <br>
-                        <small><i class="fa fa-clock-o"></i> 1 year ago </small>
-                    </td>
-                </tr>
-                            <tr>
-                    <td class="text-center">
-                                                    <i class="fa fa-file fa-2x"></i>
-
-                    </td>
-                    <td>
-                        <h4>
-                            <a href="http://demo.procoderr.tech/forums/thread/69">ghfdh</a>
-                            <br>
-                            <small class="help-block"> by
-                                <a href="http://demo.procoderr.tech/profile/prouser">prouser</a>
-1 week ago in
-<span class="label label-primary">
-Boats
-                                </span>
-                            </small>
-                        </h4>
-                    </td>
-                    <td class="text-center hidden-xs hidden-sm">
-                        <a href="#">2</a>
-                    </td>
-
-                    <td class="hidden-xs hidden-sm">by
-                        <a href=" http://demo.procoderr.tech/profile/prouser">prouser</a>
-                        <br>
-                        <small><i class="fa fa-clock-o"></i> 1 week ago </small>
-                    </td>
-                </tr>
-                            <tr>
-                    <td class="text-center">
-                                                    <i class="fa fa-file fa-2x"></i>
-
-                    </td>
-                    <td>
-                        <h4>
-                            <a href="http://demo.procoderr.tech/forums/thread/68">Something something rather</a>
-                            <br>
-                            <small class="help-block"> by
-                                <a href="http://demo.procoderr.tech/profile/prouser">prouser</a>
-2 weeks ago in
-<span class="label label-primary">
-Boats
-                                </span>
-                            </small>
-                        </h4>
-                    </td>
-                    <td class="text-center hidden-xs hidden-sm">
-                        <a href="#">1</a>
-                    </td>
-
-                    <td class="hidden-xs hidden-sm">by
-                        <a href=" http://demo.procoderr.tech/profile/prouser">prouser</a>
-                        <br>
-                        <small><i class="fa fa-clock-o"></i> 2 weeks ago </small>
-                    </td>
-                </tr>
-                        </tbody>
+            @endforeach
+             </tbody>
         </table>
 
                 <ul class="pagination"><li class="disabled"><span>&laquo;</span></li> <li class="active"><span>1</span></li><li><a href="http://demo.procoderr.tech/forums?page=2">2</a></li><li><a href="http://demo.procoderr.tech/forums?page=3">3</a></li><li><a href="http://demo.procoderr.tech/forums?page=4">4</a></li><li><a href="http://demo.procoderr.tech/forums?page=5">5</a></li><li><a href="http://demo.procoderr.tech/forums?page=6">6</a></li><li><a href="http://demo.procoderr.tech/forums?page=7">7</a></li><li><a href="http://demo.procoderr.tech/forums?page=8">8</a></li><li class="disabled"><span>...</span></li><li><a href="http://demo.procoderr.tech/forums?page=14">14</a></li><li><a href="http://demo.procoderr.tech/forums?page=15">15</a></li> <li><a href="http://demo.procoderr.tech/forums?page=2" rel="next">&raquo;</a></li></ul>

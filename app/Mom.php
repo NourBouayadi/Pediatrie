@@ -48,4 +48,10 @@ class Mom extends Authenticatable
     {
         return $this->hasMany('App\Discussion');
     }
+    public function id(){
+        return $this->id;
+    }
+    public function name(){
+        return $this->name;
+    }
 }

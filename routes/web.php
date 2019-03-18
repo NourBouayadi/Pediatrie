@@ -37,6 +37,8 @@ Route::get('propos', function () {
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 });
+Route::resource('forum', 'DiscussionController');
+
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
