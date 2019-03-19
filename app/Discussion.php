@@ -35,5 +35,11 @@ class Discussion extends Model
     {
         return $this->belongsTo('App\Admin');
     }
-
+    public function getMessages()
+    {
+        return Message::where("discussion_id","=",$this->id)->get();
+    }
+    public function getAuthor(){
+        return Mom::find($this->mom_id)->name;
+    }
 }

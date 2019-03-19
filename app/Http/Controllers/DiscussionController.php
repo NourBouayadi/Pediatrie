@@ -71,4 +71,9 @@ class DiscussionController extends Controller
         $discussion->delete();
         return redirect('discussions');
     }
+    public function show($id) {
+        $discussion = Discussion::find($id);
+        return view('discussion.show', compact(['discussion']));
+
+    }
 }

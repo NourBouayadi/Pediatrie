@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> Forums | Procoderr</title>
+    <title>PediatreDZ</title>
 
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
@@ -140,7 +140,7 @@ Settings
                     </div>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-6">
 
         <table class="table forum table-striped">
             <thead>
@@ -149,16 +149,13 @@ Settings
                 <th>Titres</th>
                 <th>Total Réponses</th>
                 <th class=" hidden-xs hidden-sm">Date</th>
-
-
-
             </tr>
             </thead>
             <tbody>
             @foreach($discussions as $discussion)
               <tr>
-                    <td class="text-center"><i class="fa fa-file fa-2x"></i></td>
-                    <td><h4><a href="http://demo.procoderr.tech/forums/thread/71">{{$discussion->titre}}</a>
+                    <td class="text-center"><i class="fa fa-star-o" id="{{$discussion->id}}" onclick="favoris(this)"></i></td>
+                    <td ><h4><a href="forum/show/{{$discussion->id}}">{{$discussion->titre}}</a>
                             <br>
                             <small class="help-block"> Par
                                 <a href="http://demo.procoderr.tech/profile/prouser"><?php echo App\Mom::find($discussion->mom_id)->name;?></a>
@@ -167,7 +164,7 @@ Settings
                             </small>
                         </h4>
                     </td>
-                  <td><?php echo App\Message::where("discussion_id","=",$discussion->id)->count();?></td>
+                  <td class="text-center"><?php echo App\Message::where("discussion_id","=",$discussion->id)->count();?></td>
                     <td class="hidden-xs hidden-sm">{{$discussion->created_at}}</td>
 
 
@@ -177,6 +174,25 @@ Settings
         </table>
 
                 <ul class="pagination"><li class="disabled"><span>&laquo;</span></li> <li class="active"><span>1</span></li><li><a href="http://demo.procoderr.tech/forums?page=2">2</a></li><li><a href="http://demo.procoderr.tech/forums?page=3">3</a></li><li><a href="http://demo.procoderr.tech/forums?page=4">4</a></li><li><a href="http://demo.procoderr.tech/forums?page=5">5</a></li><li><a href="http://demo.procoderr.tech/forums?page=6">6</a></li><li><a href="http://demo.procoderr.tech/forums?page=7">7</a></li><li><a href="http://demo.procoderr.tech/forums?page=8">8</a></li><li class="disabled"><span>...</span></li><li><a href="http://demo.procoderr.tech/forums?page=14">14</a></li><li><a href="http://demo.procoderr.tech/forums?page=15">15</a></li> <li><a href="http://demo.procoderr.tech/forums?page=2" rel="next">&raquo;</a></li></ul>
+    </div>
+    <div class="sidebar col-md-3">
+
+
+        <div class="list-group">
+
+
+            <a href="{{url('forum/1')}}" class="list-group-item ">Mes Sujets
+                <span class="badge badge-info">8</span><br>
+                    <a href=""  class="list-group-item ">Sujet 1</a>
+                    <a href=""  class="list-group-item ">Sujet 2</a>
+                    <a href=""  class="list-group-item ">Sujet 3</a>
+            </a>
+            <a href="{{url('forum/2')}}"
+               class="list-group-item ">Favoris
+                <span class="badge badge-info">2</span>
+
+            </a>
+        </div>
     </div>
 </div>
 
@@ -192,6 +208,16 @@ Copyright &copy; Procoderr 2019 - All rights reserved
 <script>
 $(':checkbox').radiocheck();
 </script>
+<script>
+function favoris(fav) {
 
+    if(fav.getAttribute("class") == "fa fa-star-o")
+     fav.setAttribute("class", "fa fa-star");
+    else
+        fav.setAttribute("class", "fa fa-star-o");
+
+
+}
+</script>
 </body>
 </html>

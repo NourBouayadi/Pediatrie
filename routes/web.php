@@ -27,6 +27,7 @@ Route::get('/charte', function () {
     return view('charte');
 });
 
+
 /*Route::get('contact', function () {
     return view('contact');
 });
@@ -37,7 +38,11 @@ Route::get('propos', function () {
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 });
+Route::get('forum/show/{id}','DiscussionController@show');
+
+
 Route::resource('forum', 'DiscussionController');
+Route::post('forum/show/{id}', 'MessageController@store');
 
 
 Route::group(['prefix' => 'admin'], function () {

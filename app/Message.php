@@ -22,4 +22,7 @@ class Message extends Model
     {
         return $this->belongsTo('App\Admin');
     }
+    public function getAuthor(){
+        return Mom::find($this->mom_id)->name;
+    }
 }
