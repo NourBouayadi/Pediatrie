@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{url('discussions/'.$discussion->id)}}" method="post" >
+                <form action="{{url('forum/'.$discussion->id)}}" method="post" >
                     <input type="hidden" name="_method" value="PUT">
                     <!--generer les tokens, pour les cles publiques pour passer les données-->
                     {{csrf_field()}}

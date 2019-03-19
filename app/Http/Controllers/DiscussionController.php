@@ -40,7 +40,7 @@ class DiscussionController extends Controller
 
         session()->flash('success', 'la discussion a été bien enregistrée');
 
-        return redirect('discussions');
+        return redirect('forum');
 
     }
 
@@ -62,14 +62,14 @@ class DiscussionController extends Controller
         $discussion->mom_id = $request->input('admin_id');
 
         $discussion->save();
-        return redirect('discussions')->with('success', ' mise à jour étudiant');;
+        return redirect('forum')->with('success', ' mise à jour étudiant');;
     }
 
     public function destroy($id)
     {
         $discussion = Discussion::find($id);
         $discussion->delete();
-        return redirect('discussions');
+        return redirect('forum');
     }
     public function show($id) {
         $discussion = Discussion::find($id);

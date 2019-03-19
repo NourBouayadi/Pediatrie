@@ -43,6 +43,7 @@ Route::get('forum/show/{id}','DiscussionController@show');
 
 Route::resource('forum', 'DiscussionController');
 Route::post('forum/show/{id}', 'MessageController@store');
+Route::delete('forum/show/{id}', 'MessageController@destroy');
 
 
 Route::group(['prefix' => 'admin'], function () {

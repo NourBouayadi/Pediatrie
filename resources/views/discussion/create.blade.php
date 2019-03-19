@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{url('discussions')}}" method="post" >
+                <form action="{{url('forum')}}" method="post" >
                     <!--generer les tokens, pour les cles publiques pour passer les données-->
                     {{csrf_field()}}
                     <div class="form-group">

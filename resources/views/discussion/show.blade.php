@@ -41,15 +41,15 @@
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
-                <li class=active >
+                <li class=active>
                     <a href="http://demo.procoderr.tech/forums">Forums</a>
                 </li>
 
-                <li  >
+                <li>
                     <a href="http://demo.procoderr.tech/users">Users</a>
                 </li>
 
-                <li  >
+                <li>
                     <a href="http://demo.procoderr.tech/profile">Profile</a>
                 </li>
 
@@ -64,7 +64,7 @@
                     </a>
 
                     <ul class="dropdown-menu" role="menu">
-                        <li >
+                        <li>
                             <a href="http://demo.procoderr.tech/settings"><i class="wb-settings "></i>
                                 Settings
                             </a>
@@ -81,15 +81,10 @@
 
 <div class="container">
 
-
-    <h1>
-        <a href="http://demo.procoderr.tech/forums/thread/1/lock" class="btn btn-inverse btn-sm pull-right">
-            Lock
-        </a>
-    </h1>
+    <h3><a href="{{url('forum')}}"> << Forum </a></h3>
     <h3><a href="http://demo.procoderr.tech/forums/thread/1">{{$discussion->titre}}</a></h3>
 
-<!-- le bloc ul concerne la discussion avec l'ID cliqué-->
+    <!-- le bloc ul concerne la discussion avec l'ID cliqué-->
     <ul class="media-list forum">
         <li class="media well">
             <div class="pull-left user-info" href="#">
@@ -110,24 +105,30 @@
             </div>
             <div class="media-body">
                 <div class="forum-post-panel btn-group btn-group-xs">
-                    <a
-                            class="btn btn-default" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i class="fa fa-clock-o"></i>  {{$discussion->created_at}}
-                    </a>
-                    <a data-postid="1" data-threadid="1" data-toggle="modal"
-                       class="btn btn-warning report-post" href="#reportPost"><i class="fa fa-warning"></i> <span class="hidden-xs">Report post</span>
-                    </a>
+                    <form action="{{url('forum/'.$discussion->id)}}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
 
-                    <a href="http://demo.procoderr.tech/forums/post/1/edit" class="btn btn-info"><i
-                                class="wb-pencil"></i> Edit
-                        <span class="hidden-xs">                Thread
+                        <a
+                                class="btn btn-default btn-sm" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i
+                                    class="fa fa-clock-o"></i> {{$discussion->created_at}}
+                        </a>
+                        <a data-postid="1" data-threadid="1" data-toggle="modal"
+                           class="btn btn-warning report-post btn-sm" href="#reportPost"><i class="fa fa-warning"></i> <span
+                                    class="hidden-xs">Report post</span>
+                        </a>
+
+                        <a href="http://demo.procoderr.tech/forums/post/1/edit" class="btn btn-info btn-sm"><i
+                                    class="wb-pencil"></i> Editer
+                            <span class="hidden-xs">
           </span>
-                    </a>
+                        </a>
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="supprimer();">
 
-                    <a href="http://demo.procoderr.tech/forums/thread/1/delete" class="btn btn-danger"><i
-                                class="wb-trash"></i> Delete
-                        <span class="hidden-xs">              Thread
-                </span>
-                    </a>
+                            <i class="wb-trash"></i> Supprimer
+                            <span class="hidden-xs"></span></button>
+
+                    </form>
                 </div>
 
                 <p>
@@ -139,54 +140,62 @@
 
         </li>
     </ul>
-<!--c'est ce bloque là qu'on va le boucler pour générer les réponses-->
+    <!--c'est ce bloque là qu'on va le boucler pour générer les réponses-->
 
     <ul class="media-list forum">
         @foreach($discussion->getMessages() as $message)
-        <li class="media well">
-            <div class="pull-left user-info" href="#">
-                <img class="avatar img-circle img-thumbnail" src="{{asset('assets/img/avatar.jpg')}}"
-                     width="64" alt="Avatar">
-                <strong>
-                    <a href="http://demo.procoderr.tech/profile/admin">
-                        {{$message->getAuthor()}}
-                    </a>
-                </strong>
-                <br>
 
-                <small class="btn-group btn-group-xs">
-                    <a class="btn btn-default" href="">0 Feedback Points
-                    </a>
-                </small>
-            </div>
-            <div class="media-body">
-                <div class="forum-post-panel btn-group btn-group-xs">
-                    <a class="btn btn-default" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i class="fa fa-clock-o"></i>  {{$message->created_at}}
-                    </a>
-                    <a data-postid="1" data-threadid="1" data-toggle="modal"
-                       class="btn btn-warning report-post" href="#reportPost"><i class="fa fa-warning"></i> <span class="hidden-xs">Report post</span>
-                    </a>
+                <li class="media well">
+                    <div class="pull-left user-info" href="#">
+                        <img class="avatar img-circle img-thumbnail" src="{{asset('assets/img/avatar.jpg')}}"
+                             width="64" alt="Avatar">
+                        <strong>
+                            <a href="http://demo.procoderr.tech/profile/admin">
+                                {{$message->getAuthor()}}
+                            </a>
+                        </strong>
+                        <br>
 
-                    <a href="http://demo.procoderr.tech/forums/post/1/edit" class="btn btn-info"><i
-                                class="wb-pencil"></i> Edit
-                        <span class="hidden-xs">                Thread
+                        <small class="btn-group btn-group-xs">
+                            <a class="btn btn-default" href="">0 Feedback Points
+                            </a>
+                        </small>
+                    </div>
+                    <div class="media-body">
+                        <div class="forum-post-panel btn-group btn-group-xs">
+                            <form action="{{url('forum/show/'.$message->id)}}" method="post">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                            <a class="btn btn-default btn-xs" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i
+                                        class="fa fa-clock-o"></i> {{$message->created_at}}
+                            </a>
+                            <a data-postid="1" data-threadid="1" data-toggle="modal"
+                               class="btn btn-warning report-post btn-xs" href="#reportPost"><i class="fa fa-warning"></i>
+                                <span class="hidden-xs">Report post</span>
+                            </a>
+
+                            <a href="http://demo.procoderr.tech/forums/post/1/edit" class="btn btn-info btn-xs"><i
+                                        class="wb-pencil"></i> Editer
+                                <span class="hidden-xs">
           </span>
-                    </a>
+                            </a>
 
-                    <a href="http://demo.procoderr.tech/forums/thread/1/delete" class="btn btn-danger"><i
-                                class="wb-trash"></i> Delete
-                        <span class="hidden-xs">              Thread
-                </span>
-                    </a>
-                </div>
+                            <button type="submit" class="btn btn-danger btn-xs">
 
-                <p> {{$message->description}}</p>
-
+                                <i class="wb-trash"></i> Supprimer
+                                <span class="hidden-xs"></span>
+                            </button>
+                            </form>
+                            <p> {{$message->description}}</p>
 
 
-            </div>
+                        </div>
 
-        </li>
+
+                    </div>
+
+                </li>
+
         @endforeach
     </ul>
 
@@ -201,7 +210,7 @@
             <div class="form-group">
 
                 <textarea class="form-control fl flat" rows="5" id="message" name="description" cols="50"></textarea>
-                 <input type="text" name="discussion_id" hidden value="{{$discussion->id}}">
+                <input type="text" name="discussion_id" hidden value="{{$discussion->id}}">
                 <span class="help-block pull-right">
       You may use Markdown - <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">Basic writing and formatting syntax</a>
     </span>
@@ -220,11 +229,14 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Report Post</h4>
                 </div>
-                <form method="POST" action="http://demo.procoderr.tech/forums/thread" accept-charset="UTF-8" class="report-post-form"><input name="_token" type="hidden" value="SsNhKTepziN0DGedgF6Vu9BZ2qkSUTDHeexzaXfu">
+                <form method="POST" action="http://demo.procoderr.tech/forums/thread" accept-charset="UTF-8"
+                      class="report-post-form"><input name="_token" type="hidden"
+                                                      value="SsNhKTepziN0DGedgF6Vu9BZ2qkSUTDHeexzaXfu">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="reason">Why are you reporting this post?</label>
-                            <textarea class="form-control" rows="2" maxlength="200" name="reason" cols="50" id="reason"></textarea>
+                            <textarea class="form-control" rows="2" maxlength="200" name="reason" cols="50"
+                                      id="reason"></textarea>
                         </div>
 
                     </div>
@@ -269,7 +281,8 @@
         min-height: 200px;
         height: 200px;
     }
-</style>        <script>
+</style>
+<script>
     $(document).on("click", ".report-post", function (e) {
         e.preventDefault();
         var _self = $(this);
@@ -279,6 +292,12 @@
         $(".report-post-form").attr("action", "/forums/thread/" + threadID + "/" + postID);
         $(_self.attr('href')).modal('show');
     });
+</script>
+<script>
+    function supprimer() {
+        if (!confirm("Voulez-vous supprimer ?"))
+            event.preventDefault();
+    }
 </script>
 </body>
 </html>

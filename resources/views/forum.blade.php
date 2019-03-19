@@ -183,9 +183,13 @@ Settings
 
             <a href="{{url('forum/1')}}" class="list-group-item ">Mes Sujets
                 <span class="badge badge-info">8</span><br>
-                    <a href=""  class="list-group-item ">Sujet 1</a>
-                    <a href=""  class="list-group-item ">Sujet 2</a>
-                    <a href=""  class="list-group-item ">Sujet 3</a>
+                @foreach($discussions as $discussion)
+                    <?php
+                    if(!$discussion->isRead && \Auth::guard('mom')->user()->id()==$discussion->mom_id){
+                    ?>
+                    <a href="forum/show/{{$discussion->id}}" class="list-group-item "> {{$discussion->titre}}</a>
+                    <?php } ?>
+                @endforeach
             </a>
             <a href="{{url('forum/2')}}"
                class="list-group-item ">Favoris
