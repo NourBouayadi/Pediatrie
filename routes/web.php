@@ -39,7 +39,8 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 });
 Route::get('forum/show/{id}','DiscussionController@show');
-
+Route::get('form/fav/{id}', 'DiscussionController@fav');
+Route::get('search/', 'DiscussionController@search');
 
 Route::resource('forum', 'DiscussionController');
 Route::post('forum/show/{id}', 'MessageController@store');

@@ -18,9 +18,10 @@ class MessageController extends Controller
         $message->save();
         // récupérer les discussions ayant une nvl notif
         $discussion = Discussion::find($message->discussion_id);
-        $discussion->isRead= 1 ;
-        $discussion->save();
-
+        if(\Auth::guard('mom')->user()->id()!=$discussion->mom_id) {
+            $discussion->isRead = 0;
+            $discussion->save();
+        }
         session()->flash('success', 'la message a été bien enregistrée');
 
         return redirect()->back();
