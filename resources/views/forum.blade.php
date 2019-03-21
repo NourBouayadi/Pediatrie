@@ -99,39 +99,39 @@
 
             <a href="{{url('forum')}}" class="list-group-item">Toutes les Catégories</a>
             <a href="{{url('forum/1')}}" class="list-group-item ">Grossesse
-                <span class="badge badge-info">8</span>
+                <span class="badge badge-info"><?php echo App\Discussion::where("categorie_id", "=", 1)->count();?></span>
             </a>
             <a href="{{url('forum/2')}}"
                class="list-group-item ">Nouveau-Né
-                <span class="badge badge-info">2</span>
+                <span class="badge badge-info"><?php echo App\Discussion::where("categorie_id", "=", 2)->count();?></span>
             </a>
             <a href="{{url('forum/3')}}"
                class="list-group-item ">Vetements
-                <span class="badge badge-info">3</span>
+                <span class="badge badge-info"><?php echo App\Discussion::where("categorie_id", "=", 3)->count();?></span>
             </a>
             <a href="{{url('forum/4')}}"
                class="list-group-item ">Jouets
-                <span class="badge badge-info">9</span>
+                <span class="badge badge-info"><?php echo App\Discussion::where("categorie_id", "=", 4)->count();?></span>
             </a>
             <a href="{{url('forum/5')}}"
                class="list-group-item ">Sommeil
-                <span class="badge badge-info">23</span>
+                <span class="badge badge-info"><?php echo App\Discussion::where("categorie_id", "=", 5)->count();?></span>
             </a>
             <a href="{{url('forum/6')}}"
                class="list-group-item ">Santé
-                <span class="badge badge-info">5</span>
+                <span class="badge badge-info"><?php echo App\Discussion::where("categorie_id", "=", 6)->count();?></span>
             </a>
             <a href="{{url('forum/7')}}"
                class="list-group-item ">Bien-etre
-                <span class="badge badge-info">0</span>
+                <span class="badge badge-info"><?php echo App\Discussion::where("categorie_id", "=", 7)->count();?></span>
             </a>
             <a href="{{url('forum/8')}}"
                class="list-group-item ">Psychologie
-                <span class="badge badge-info">0</span>
+                <span class="badge badge-info"><?php echo App\Discussion::where("categorie_id", "=", 8)->count();?></span>
             </a>
             <a href="{{url('forum/9')}}"
-               class="list-group-item ">Premières-Marches
-                <span class="badge badge-info">0</span>
+               class="list-group-item ">Première-Marche
+                <span class="badge badge-info"><?php echo App\Discussion::where("categorie_id", "=", 9)->count();?></span>
             </a>
 
         </div>
