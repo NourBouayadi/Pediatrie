@@ -21,6 +21,7 @@ class RedirectIfMom
 	        return redirect('mom/home');
 	    }
 
+
 	    return $next($request);
 	}
 }

@@ -28,12 +28,5 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function messages()
-    {
-        return $this->hasMany('App\Message');
-    }
-    public function discussions()
-    {
-        return $this->hasMany('App\Discussion');
-    }
+
 }

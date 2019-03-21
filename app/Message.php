@@ -18,8 +18,11 @@ class Message extends Model
     {
         return $this->belongsTo('App\Pediatre');
     }
-    public function user()
+    public function admin()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Admin');
+    }
+    public function getAuthor(){
+        return Mom::find($this->mom_id)->name;
     }
 }
