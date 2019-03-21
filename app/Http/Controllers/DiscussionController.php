@@ -13,13 +13,14 @@ class DiscussionController extends Controller
     {
 
 
-        $discussions = Discussion::all();
+        $discussions = Discussion::paginate(5);
 
 
         return view('forum', compact(['discussions']) );
 
 
     }
+
 
     public function create()
     {
@@ -102,5 +103,9 @@ class DiscussionController extends Controller
             ->orWhere('description', 'like', '%' . $request->get('search') . '%')
             ->get();
         return view('forum', compact( 'discussions'));
+    }
+    public function indexParCategorie($id){
+        $discussions = Discussion::where('categorie_id', '=', $id)->get();
+        return view('forum', compact(['discussions']));
     }
 }
