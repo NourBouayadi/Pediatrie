@@ -46,7 +46,10 @@ Route::resource('forum', 'DiscussionController');
 Route::post('forum/show/{id}', 'MessageController@store');
 Route::delete('forum/show/{id}', 'MessageController@destroy');
 
+/**Routes pour les catégories*/
+Route::get('/forum/categorie/{id}','DiscussionController@indexParCategorie');
 
+/***/
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');
