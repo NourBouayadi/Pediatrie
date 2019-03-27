@@ -29,22 +29,6 @@
                             <option value="9">Premières Marches</option>
                         </select>
                     </div>
-                    <div class="form-group">
-
-                        <input type="text" name="user_id" class="form-control" hidden>
-                    </div>
-                    <div class="form-group">
-
-                        <input type="text" name="admin_id" class="form-control" hidden>
-                    </div>
-                    <div class="form-group">
-
-                        <input type="text" name="pediatre_id" class="form-control" hidden>
-                    </div>
-                    <div class="form-group">
-
-                        <input type="text" name="mom_id" class="form-control" hidden>
-                    </div>
 
                     <div class="form-group">
 

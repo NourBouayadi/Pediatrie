@@ -1,88 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>PediatreDZ</title>
-
-    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/simplemde.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/fonts/web-icons/web-icons.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/fonts/font-awesome/font-awesome.css')}}">
-
-</head>
-<body id="app-layout">
-<nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-
-
-            <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#app-navbar-collapse">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-
-            <!-- Branding Image -->
-            <a class="navbar-brand" href="http://demo.procoderr.tech">
-                Procoderr Demo
-
-            </a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
-
-            <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav navbar-right">
-                <!-- Authentication Links -->
-                <li class=active>
-                    <a href="http://demo.procoderr.tech/forums">Forums</a>
-                </li>
-
-                <li>
-                    <a href="http://demo.procoderr.tech/users">Users</a>
-                </li>
-
-                <li>
-                    <a href="http://demo.procoderr.tech/profile">Profile</a>
-                </li>
-
-                <li>
-                    <a href="http://demo.procoderr.tech/admin">Admin Panel</a>
-                </li>
-
-                <li class="dropdown ">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        prouser
-                        <span class="caret"></span>
-                    </a>
-
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="http://demo.procoderr.tech/settings"><i class="wb-settings "></i>
-                                Settings
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://demo.procoderr.tech/logout"><i class="fa fa-btn fa-sign-out"></i> Logout</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
+@extends('layouts.app')
+@section('content')
 <div class="container col-md-12">
     <div class="sidebar col-md-2">
-        <form class="navbar-form" role="search" method="get" action="search">
+        <form class="navbar-form" role="search" method="get" action="/forum/search">
             <div class="input-group">
                 <input type="text" value="" class="form-control" placeholder="Rechercher" name="search" id="search">
                 <div class="input-group-btn">
@@ -151,7 +71,7 @@
             <tbody>
             @foreach($discussions as $discussion)
                 <?php $class='fa fa-star-o';
-                        if(App\Favori::where('mom_id','=',\Auth::guard('mom')->user()->id())
+                        if(App\Favori::where('user_id','=',\Auth::user()->id)
                                     ->where('discussion_id','=',$discussion->id)->first()!=null)
                             $class='fa fa-star';
                 ?>
@@ -162,7 +82,7 @@
                         <h4><a href="forum/show/{{$discussion->id}}">{{$discussion->titre}}</a>
                             <br>
                             <small class="help-block"> Par
-                                <a href="http://demo.procoderr.tech/profile/prouser"><?php echo App\Mom::find($discussion->mom_id)->name;?></a>
+                                <a href="http://demo.procoderr.tech/profile/prouser"><?php echo App\User::find($discussion->user_id)->name;?></a>
 
                                 <span class="label label-primary"><?php echo App\Categorie::find($discussion->categorie_id)->name;?></span>
                             </small>
@@ -188,27 +108,29 @@
 
 
         <div class="list-group">
-            <a href="{{url('forum/1')}}"
-               class=" list-group-item list-group-item-text list-group-item-success text-center">Mes Sujets
+            <a class=" list-group-item list-group-item-text list-group-item-success text-center">Mes Sujets
 
                 <span id="sujets" class="badge badge-info"></span><br>
+                    <!--Script pour compte le nombre de discussions crées par l'user auth (notification)-->
+                <!--if(!$discussion->isRead && \Auth::user()->id == $discussion->user_id){-->
+                <!-- </?php App\Discussion::where("user_id", "=", \Auth::user()->id )->count();?>-->
                 @foreach(App\Discussion::all() as $discussion)
                     <?php
-                    if(!$discussion->isRead && \Auth::guard('mom')->user()->id() == $discussion->mom_id){
+
+                    if(\Auth::user()->id == $discussion->user_id){
                     ?>
 
 
-                    <a href="forum/show/{{$discussion->id}}" class="list-group-item sujet"> {{$discussion->titre}}</a>
+                    <a href="forum/show/ {{$discussion->id}}" class="list-group-item sujet"> {{$discussion->titre}}</a>
                     <?php } ?>
 
                 @endforeach
 
-
             </a>
-            <a href="{{url('forum/2')}}"
-               class=" list-group-item list-group-item-text list-group-item-success text-center">Favoris
+
+            <a class=" list-group-item list-group-item-text list-group-item-success text-center">Favoris
                 <span id="favoris" class="badge badge-info"></span>
-                @foreach(App\Favori::where('mom_id','=',\Auth::guard('mom')->user()->id())->get() as $favori)
+                @foreach(App\Favori::where('user_id','=',\Auth::user()->id)->get() as $favori)
 
                     <a href="forum/show/{{$favori->discussion_id}}" class="list-group-item favoris"> {{App\Discussion::find($favori->discussion_id)->titre}}</a>
 
@@ -219,15 +141,9 @@
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        Copyright &copy; Procoderr 2019 - All rights reserved
-        <span class="pull-right"><a href="/contact">Contact Us</a></span>
-    </div>
-</footer>
 
+@endsection
 <!-- JavaScripts -->
-<script src="{{asset('assets/js/scripts.js')}}"></script>
 <script>
     $(':checkbox').radiocheck();
 </script>

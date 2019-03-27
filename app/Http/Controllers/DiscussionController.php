@@ -36,8 +36,7 @@ class DiscussionController extends Controller
 
         $discussion->categorie_id = $request->input('categorie_id');
 
-        $discussion->mom_id = \Auth::guard('mom')->user()->id();
-        $mom_name = \Auth::guard('mom')->user()->id();
+        $discussion->user_id = \Auth::user()->id;
         $discussion->save();
 
         session()->flash('success', 'la discussion a été bien enregistrée');
@@ -59,9 +58,8 @@ class DiscussionController extends Controller
         $discussion->description = $request->input('description');
 
         $discussion->categorie_id = $request->input('categorie_id');
-        $discussion->pediatre_id = $request->input('pediatre_id');
-        $discussion->admin_id = $request->input('admin_id');
-        $discussion->mom_id = $request->input('admin_id');
+        $discussion->user_id = \Auth::user()->id;
+
 
         $discussion->save();
         return redirect('forum')->with('success', ' mise à jour étudiant');;
@@ -75,7 +73,7 @@ class DiscussionController extends Controller
     }
     public function show($id) {
         $discussion = Discussion::find($id);
-        if (\Auth::guard('mom')->user()->id()==$discussion->mom_id){
+        if (\Auth::user()->id==$discussion->user_id){
             $discussion->isRead=1;
             $discussion->save();
         }
@@ -84,10 +82,10 @@ class DiscussionController extends Controller
     }
     public function fav ($id) {
         \Debugbar::disable();
-        $fav=Favori::where('mom_id','=',\Auth::guard('mom')->user()->id())->where('discussion_id','=',$id)->first();
+        $fav=Favori::where('user_id','=',\Auth::user()->id)->where('discussion_id','=',$id)->first();
         if($fav==null) {
             $fav = new Favori();
-            $fav->mom_id = \Auth::guard('mom')->user()->id();
+            $fav->user_id = \Auth::user()->id;
             $fav->discussion_id = $id;
             $fav->save();
             return "fa fa-star";
@@ -101,11 +99,11 @@ class DiscussionController extends Controller
     public function search (Request $request){
         $discussions=Discussion::where('titre', 'like', '%' . $request->get('search') . '%')
             ->orWhere('description', 'like', '%' . $request->get('search') . '%')
-            ->get();
+            ->paginate(5);//->get();
         return view('forum', compact( 'discussions'));
     }
     public function indexParCategorie($id){
-        $discussions = Discussion::where('categorie_id', '=', $id)->get();
+        $discussions = Discussion::where('categorie_id', '=', $id)->paginate(5);//->get();
         return view('forum', compact(['discussions']));
     }
 }

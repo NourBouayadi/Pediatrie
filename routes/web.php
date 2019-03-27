@@ -32,25 +32,28 @@ Route::get('/charte', function () {
     return view('contact');
 });
 */
+Auth::routes();
+Route::post('registerPediatre', 'Auth\RegisterController@registerPediatre')->name('registerPediatre');
+
 Route::get('propos', function () {
     return view('propos');
 });
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-});
-Route::get('forum/show/{id}','DiscussionController@show');
-Route::get('form/fav/{id}', 'DiscussionController@fav');
-Route::get('search/', 'DiscussionController@search');
+Route::get('/dashboard', 'AdminController@index')->middleware('auth');
+Route::get('/dashboard/{id}', ['as' => 'dashboard', 'uses' => 'AdminController@approve'])->middleware('auth');
+Route::delete('dashboard/{id}', 'AdminController@destroy')->middleware('auth');
+Route::get('forum/show/{id}','DiscussionController@show')->middleware('auth');
+Route::get('form/fav/{id}', 'DiscussionController@fav')->middleware('auth');
+Route::get('search/', 'DiscussionController@search')->middleware('auth');
 
-Route::resource('forum', 'DiscussionController');
-Route::post('forum/show/{id}', 'MessageController@store');
-Route::delete('forum/show/{id}', 'MessageController@destroy');
+Route::resource('forum', 'DiscussionController')->middleware('auth');
+Route::post('forum/show/{id}', 'MessageController@store')->middleware('auth');
+Route::delete('forum/show/{id}', 'MessageController@destroy')->middleware('auth');
 
 /**Routes pour les catégories*/
-Route::get('/forum/categorie/{id}','DiscussionController@indexParCategorie');
+Route::get('/forum/categorie/{id}','DiscussionController@indexParCategorie')->middleware('auth');
 
 /***/
-Route::group(['prefix' => 'admin'], function () {
+/*Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');
   Route::post('/logout', 'AdminAuth\LoginController@logout')->name('logout');
@@ -62,9 +65,7 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
-  Route::get('/dashboard', 'AdminController@index');
-  Route::get('/dashboard/{id}', ['as' => 'dashboard', 'uses' => 'AdminController@approve']);
-  Route::delete('dashboard/{id}', 'AdminController@destroy');
+
 
 
 });
@@ -97,3 +98,4 @@ Route::group(['prefix' => 'mom'], function () {
   Route::get('/password/reset/{token}', 'MomAuth\ResetPasswordController@showResetForm');
 });
 
+*/

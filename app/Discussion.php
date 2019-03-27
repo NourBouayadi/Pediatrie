@@ -40,6 +40,6 @@ class Discussion extends Model
         return Message::where("discussion_id","=",$this->id)->get();
     }
     public function getAuthor(){
-        return Mom::find($this->mom_id)->name;
+        return User::find($this->user_id)->name;
     }
 }

@@ -10,7 +10,7 @@ class Favori extends Model
     protected function setKeysForSaveQuery(Builder $query)
     {
         $query
-            ->where('mom_id', '=', $this->getAttribute('mom_id'))
+            ->where('user_id', '=', $this->getAttribute('user_id'))
             ->where('discussion_id', '=', $this->getAttribute('discussion_id'));
         return $query;
     }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Pediatre;
+use App\User;
 
 use Illuminate\Http\Request;
 
@@ -10,15 +10,17 @@ class AdminController extends Controller
 /** Methode Index pour afficher la liste des pédiatres non- approuvés **/
     public function index()
     {
+        if (\Auth::user()->type() == "admin") {
 
 
-
-        $pediatres = Pediatre::where('isActive', '=', 0) -> paginate(3);
+        $pediatres = User::where('isActive', '=', 0)
+            ->where('isPediatre', '=',1)
+            ->paginate(3);
         //\Barryvdh\Debugbar\Facade::info($pediatres);
 
 
-        return view('admin.dashboard', compact(['pediatres']) );
-
+        return view('admin.dashboard', compact(['pediatres']));
+    }else return redirect('forum');
 
     }
 
@@ -32,16 +34,16 @@ class AdminController extends Controller
         // return redirect()->route('trainings', ['training' => $training])->with('success', 'Training Approved'); // if you want redirect to detail page of this training
     }*/
     public function approve($id){
-        $pediatre = Pediatre::find($id);
+        $pediatre = User::find($id);
         $pediatre->isActive = 1;
         $pediatre->save();
-        return redirect('/admin/dashboard');
+        return redirect('/dashboard');
     }
     public function destroy($id)
     {
-        $pediatre = Pediatre::find($id);
+        $pediatre = User::find($id);
         $pediatre->delete();
-        return redirect('/admin/dashboard');
+        return redirect('/dashboard');
     }
 
 }

@@ -13,12 +13,12 @@ class MessageController extends Controller
         $message = new Message();
         $message->description = $request->input('description');
         $message->discussion_id = $request->input('discussion_id');
-        $message->mom_id = \Auth::guard('mom')->user()->id();
-        $mom_name = \Auth::guard('mom')->user()->id();
+        $message->user_id = \Auth::user()->id;
+
         $message->save();
         // récupérer les discussions ayant une nvl notif
         $discussion = Discussion::find($message->discussion_id);
-        if(\Auth::guard('mom')->user()->id()!=$discussion->mom_id) {
+        if(\Auth::user()->id !=$discussion->user_id) {
             $discussion->isRead = 0;
             $discussion->save();
         }
@@ -41,9 +41,7 @@ class MessageController extends Controller
         $message->description = $request->input('description');
 
         $message->categorie_id = $request->input('categorie_id');
-        $message->pediatre_id = $request->input('pediatre_id');
-        $message->admin_id = $request->input('admin_id');
-        $message->mom_id = $request->input('admin_id');
+       $message->user_id= \Auth::user()->id;
 
         $message->save();
         return redirect('messages')->with('success', ' mise à jour étudiant');
