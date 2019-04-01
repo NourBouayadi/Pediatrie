@@ -108,27 +108,28 @@
 
 
         <div class="list-group">
-            <a class=" list-group-item list-group-item-text list-group-item-success text-center">Mes Sujets
+            <a href="{{url('forum/sujet')}}"class=" list-group-item list-group-item-text list-group-item-success text-center">Mes Sujets
 
-                <span id="sujets" class="badge badge-info"></span><br>
+                <span id="sujets" class="badge badge-info">
+
+                </span><br>
                     <!--Script pour compte le nombre de discussions crées par l'user auth (notification)-->
-                <!--if(!$discussion->isRead && \Auth::user()->id == $discussion->user_id){-->
-                <!-- </?php App\Discussion::where("user_id", "=", \Auth::user()->id )->count();?>-->
+             <!--  if(!$discussion->isRead && \Auth::user()->id == $discussion->user_id){-->
                 @foreach(App\Discussion::all() as $discussion)
                     <?php
 
-                    if(\Auth::user()->id == $discussion->user_id){
+                    if(!$discussion->isRead && \Auth::user()->id == $discussion->user_id){
                     ?>
 
 
-                    <a href="forum/show/ {{$discussion->id}}" class="list-group-item sujet"> {{$discussion->titre}}</a>
+                    <a href="forum/show/ {{$discussion->id}}" class="list-group-item sujets"> {{$discussion->titre}}</a>
                     <?php } ?>
 
                 @endforeach
 
             </a>
 
-            <a class=" list-group-item list-group-item-text list-group-item-success text-center">Favoris
+            <a href="{{url('forum/favoris')}}"class=" list-group-item list-group-item-text list-group-item-success text-center">Favoris
                 <span id="favoris" class="badge badge-info"></span>
                 @foreach(App\Favori::where('user_id','=',\Auth::user()->id)->get() as $favori)
 
@@ -141,12 +142,6 @@
     </div>
 </div>
 
-
-@endsection
-<!-- JavaScripts -->
-<script>
-    $(':checkbox').radiocheck();
-</script>
 <script>
     function favoris(fav) {
 
@@ -169,8 +164,15 @@
     }
 </script>
 <script>
-    document.getElementById("sujets").innerHTML = document.getElementsByClassName("sujet").length;
+
+    document.getElementById("sujets").innerHTML = document.getElementsByClassName("sujets").length;
     document.getElementById("favoris").innerHTML = document.getElementsByClassName("favoris").length;
+</script>
+
+@endsection
+<!-- JavaScripts -->
+<script>
+    $(':checkbox').radiocheck();
 </script>
 </body>
 </html>

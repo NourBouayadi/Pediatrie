@@ -378,10 +378,10 @@
                             <div class="col-md-6">
                                 <input type="file" accept="application/pdf" class="form-control-file" id="attestation"
                                        name="attestation" aria-describedby="fileHelp" required>
+
+                                <div class="form-group row">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="checkbox">
-                                    <label>J'accèpte <a href="{{url('/charte')}}" target="_blank">les termes de la
-                                            charte déontologique</a></label>
+
                                     @if ($errors->has('attestation'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('attestation') }}</strong>
@@ -389,6 +389,7 @@
                                     @endif
                                 </div>
                             </div>
+                        </div>
                         </div>
                         <div class="form-group {{ $errors->has('latitude') ? ' has-error' : '' }}">
                             <div class="col-md-6">
@@ -413,10 +414,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary" id="submit" disabled="disabled">Submit
-
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary" id="submit">Submit
+                                    {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
@@ -446,20 +447,9 @@
 <script>
     $(':checkbox').radiocheck();
 </script>
-<!-- Script pour activer le button submit apres avoir coché le checkbox j'accepte les termes-->
-<script>
-    var checker = document.getElementById('checkbox');
-    var sendbtn = document.getElementById('submit');
-    // when unchecked or checked, run the function
-    checker.onchange = function () {
-        if (this.checked) {
-            sendbtn.disabled = false;
-        } else {
-            sendbtn.disabled = true;
-        }
 
-    }
-</script>
+<!-- Script pour activer le button submit apres avoir coché le checkbox j'accepte les termes-->
+
 <script>
     var checker = document.getElementById('checkbox2');
     var sendbtn = document.getElementById('submit2');
@@ -513,6 +503,6 @@
 
 </script>
 <script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>
-
+<script src="{{asset('assets/js/scripts.js')}}"></script>
 
 </html>

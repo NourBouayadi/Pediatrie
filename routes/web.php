@@ -51,6 +51,10 @@ Route::delete('forum/show/{id}', 'MessageController@destroy')->middleware('auth'
 
 /**Routes pour les catégories*/
 Route::get('/forum/categorie/{id}','DiscussionController@indexParCategorie')->middleware('auth');
+/** Routes pour Mes Sujets**/
+Route::get('/forum/sujet','DiscussionController@indexParSujet')->middleware('auth');
+/** Routes pour Mes Favoris**/
+Route::get('/forum/favoris','DiscussionController@indexParFavoris')->middleware('auth');
 
 /***/
 /*Route::group(['prefix' => 'admin'], function () {

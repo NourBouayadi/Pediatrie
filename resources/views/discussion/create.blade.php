@@ -13,7 +13,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Description</label>
-                        <input type="text" name="description" class="form-control">
+                        <textarea name="description" class="form-control" rows="4"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="">Catégorie</label>

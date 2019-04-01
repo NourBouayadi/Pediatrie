@@ -81,12 +81,17 @@
 
 <div class="container">
 
+
     <h3><a href="{{url('forum')}}"> << Forum </a></h3>
-    <h3><a href="http://demo.procoderr.tech/forums/thread/1">{{$discussion->titre}}</a></h3>
+
+    <div class="col-md-12" style="background-color: #f5f5f5 ; border: #000000;">
+        <h2 class="col-md-offset-2"><a href="http://demo.procoderr.tech/forums/thread/1">{{$discussion->titre}}</a></h2>
+
 
     <!-- le bloc ul concerne la discussion avec l'ID cliqué-->
     <ul class="media-list forum">
-        <li class="media well">
+
+     <li class="media well  col-md-12 " style ="background-color: #ffffff ; border: none";>
             <div class="pull-left user-info" href="#">
                 <img class="avatar img-circle img-thumbnail" src="{{asset('assets/img/avatar.jpg')}}"
                      width="64" alt="Avatar">
@@ -103,6 +108,7 @@
                     </a>
                 </small>
             </div>
+
             <div class="media-body">
                 <div class="forum-post-panel btn-group btn-group-xs">
                     <form action="{{url('forum/'.$discussion->id)}}" method="post">
@@ -113,20 +119,19 @@
                                 class="btn btn-default btn-sm" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i
                                     class="fa fa-clock-o"></i> {{$discussion->created_at}}
                         </a>
-                        <a data-postid="1" data-threadid="1" data-toggle="modal"
-                           class="btn btn-warning report-post btn-sm" href="#reportPost"><i class="fa fa-warning"></i> <span
-                                    class="hidden-xs">Report post</span>
+                        <a
+                          href="#reportPost"><i class="fa fa-warning btn btn-warning btn-xs"></i> <span
+                                    class="hidden-xs"></span>
                         </a>
 
-                        <a href="http://demo.procoderr.tech/forums/post/1/edit" class="btn btn-info btn-sm"><i
-                                    class="wb-pencil"></i> Editer
+                        <a href="http://demo.procoderr.tech/forums/post/1/edit" ><i
+                                    class="wb-pencil btn btn-info btn-xs"></i>
                             <span class="hidden-xs">
           </span>
                         </a>
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="supprimer();">
 
-                            <i class="wb-trash"></i> Supprimer
-                            <span class="hidden-xs"></span></button>
+                            <i class="wb-trash btn btn-danger btn-xs" onclick="supprimer();"></i>
+                            <span class="hidden-xs"></span>
 
                     </form>
                 </div>
@@ -142,10 +147,12 @@
     </ul>
     <!--c'est ce bloque là qu'on va le boucler pour générer les réponses-->
 
-    <ul class="media-list forum">
+
+    <ul class=" media-list forum ">
         @foreach($discussion->getMessages() as $message)
 
-                <li class="media well">
+
+            <div class="row"> <li class="media well  col-md-12">
                     <div class="pull-left user-info" href="#">
                         <img class="avatar img-circle img-thumbnail" src="{{asset('assets/img/avatar.jpg')}}"
                              width="64" alt="Avatar">
@@ -194,10 +201,11 @@
 
                     </div>
 
-                </li>
+            </li>  </div>
 
         @endforeach
     </ul>
+
 
     <form method="POST" action="" accept-charset="UTF-8">
         {{csrf_field()}}
@@ -249,8 +257,8 @@
         </div>
     </div>
 
+</ul>
 </div>
-
 <footer class="footer">
     <div class="container">
         Copyright &copy; Procoderr 2019 - All rights reserved

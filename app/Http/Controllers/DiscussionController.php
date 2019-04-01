@@ -20,7 +20,18 @@ class DiscussionController extends Controller
 
 
     }
+    public function indexParCategorie($id){
+        $discussions = Discussion::where('categorie_id', '=', $id)->paginate(5);//->get();
+        return view('forum', compact(['discussions']));
+    }
 
+    public function indexParSujet(){
+
+            $discussions = Discussion::where('user_id', '=', \Auth::user()->id )
+                ->paginate(5);
+
+        return view('forum', compact(['discussions']));
+    }
 
     public function create()
     {
@@ -102,8 +113,5 @@ class DiscussionController extends Controller
             ->paginate(5);//->get();
         return view('forum', compact( 'discussions'));
     }
-    public function indexParCategorie($id){
-        $discussions = Discussion::where('categorie_id', '=', $id)->paginate(5);//->get();
-        return view('forum', compact(['discussions']));
-    }
+
 }
