@@ -132,7 +132,7 @@
 
             <a href="{{url('forum/favoris')}}"class=" list-group-item list-group-item-text list-group-item-success text-center">Favoris
                 <span id="favoris" class="badge badge-info"></span>
-                @foreach(App\Favori::where('user_id','=',\Auth::user()->id)->get() as $favori)
+                @foreach(App\Favori::where('user_id','=',\Auth::user()->id)->where('isRead', '=', 0)->get() as $favori)
 
                     <a href="forum/show/{{$favori->discussion_id}}" class="list-group-item favoris"> {{App\Discussion::find($favori->discussion_id)->titre}}</a>
 

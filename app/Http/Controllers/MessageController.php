@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Discussion;
+use App\Favori;
 use App\Message;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,12 @@ class MessageController extends Controller
         if(\Auth::user()->id !=$discussion->user_id) {
             $discussion->isRead = 0;
             $discussion->save();
+            $fav=Favori::where ('discussion_id','=',$message->discussion_id)->where('user_id', '!=',\Auth::user()->id )
+                ->update(['isRead' => 0]);
+
+
+            
+
         }
         session()->flash('success', 'la message a été bien enregistrée');
         //TODO notify favoris
