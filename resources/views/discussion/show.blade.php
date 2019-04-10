@@ -78,7 +78,9 @@
         </div>
     </div>
 </nav>
-
+@if($unread)
+    <style> div.row:last-child {border:solid;}</style>
+@endif
 <div class="container">
 
 
@@ -88,147 +90,163 @@
         <h2 class="col-md-offset-2"><a href="http://demo.procoderr.tech/forums/thread/1">{{$discussion->titre}}</a></h2>
 
 
-    <!-- le bloc ul concerne la discussion avec l'ID cliqué-->
-    <ul class="media-list forum">
+        <!-- le bloc ul concerne la discussion avec l'ID cliqué-->
+        <ul class="media-list forum">
 
-     <li class="media well  col-md-12 " style ="background-color: #ffffff ; border: none";>
-            <div class="pull-left user-info" href="#">
-                <img class="avatar img-circle img-thumbnail" src="{{asset('assets/img/avatar.jpg')}}"
-                     width="64" alt="Avatar">
-                <strong>
-                    <a href="http://demo.procoderr.tech/profile/admin">
-                        {{$discussion->getAuthor()}}
-                    </a>
-                </strong>
-                <br>
-
-                <small class="btn-group btn-group-xs">
-                    <a class="btn btn-default"
-                       href="">0 Feedback Points
-                    </a>
-                </small>
-            </div>
-
-            <div class="media-body">
-                <div class="forum-post-panel btn-group btn-group-xs">
-                    <form action="{{url('forum/'.$discussion->id)}}" method="post">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-
-                        <a
-                                class="btn btn-default btn-sm" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i
-                                    class="fa fa-clock-o"></i> {{$discussion->created_at}}
+            <li class="media well" style ="background-color: #ffffff ; border: none";>
+                <div class="pull-left user-info" href="#">
+                    <img class="avatar img-circle img-thumbnail" src="{{asset('assets/img/avatar.jpg')}}"
+                         width="64" alt="Avatar">
+                    <strong>
+                        <a href="http://demo.procoderr.tech/profile/admin">
+                            {{$discussion->getAuthor()}}
                         </a>
-                        <a
-                          href="#reportPost"><i class="fa fa-warning btn btn-warning btn-xs"></i> <span
-                                    class="hidden-xs"></span>
+                    </strong>
+                    <br>
+
+                    <small class="btn-group btn-group-xs">
+                        <a class="btn btn-default"
+                           href="">0 Feedback Points
                         </a>
+                    </small>
+                    <div class="forum-post-panel btn-group btn-group-xs">
+                        <form action="{{url('forum/'.$discussion->id)}}" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
 
-                        <a href="http://demo.procoderr.tech/forums/post/1/edit" ><i
-                                    class="wb-pencil btn btn-info btn-xs"></i>
-                            <span class="hidden-xs">
-          </span>
-                        </a>
-
-                            <i class="wb-trash btn btn-danger btn-xs" onclick="supprimer();"></i>
-                            <span class="hidden-xs"></span>
-
-                    </form>
-                </div>
-
-                <p>
-                <p>{{$discussion->description}}</p>
-                </p>
-
-
-            </div>
-
-        </li>
-    </ul>
-    <!--c'est ce bloque là qu'on va le boucler pour générer les réponses-->
-
-
-    <ul class=" media-list forum ">
-        @foreach($discussion->getMessages() as $message)
-
-
-            <div class="row"> <li class="media well  col-md-12">
-                    <div class="pull-left user-info" href="#">
-                        <img class="avatar img-circle img-thumbnail" src="{{asset('assets/img/avatar.jpg')}}"
-                             width="64" alt="Avatar">
-                        <strong>
-                            <a href="http://demo.procoderr.tech/profile/admin">
-                                {{$message->getAuthor()}}
-                            </a>
-                        </strong>
-                        <br>
-
-                        <small class="btn-group btn-group-xs">
-                            <a class="btn btn-default" href="">0 Feedback Points
-                            </a>
-                        </small>
-                    </div>
-                    <div class="media-body">
-                        <div class="forum-post-panel btn-group btn-group-xs">
-                            <form action="{{url('forum/show/'.$message->id)}}" method="post">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                            <a class="btn btn-default btn-xs" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i
-                                        class="fa fa-clock-o"></i> {{$message->created_at}}
-                            </a>
-                            <a data-postid="1" data-threadid="1" data-toggle="modal"
-                               class="btn btn-warning report-post btn-xs" href="#reportPost"><i class="fa fa-warning"></i>
-                                <span class="hidden-xs">Report post</span>
-                            </a>
-
-                            <a href="http://demo.procoderr.tech/forums/post/1/edit" class="btn btn-info btn-xs"><i
-                                        class="wb-pencil"></i> Editer
+                            <a href="http://demo.procoderr.tech/forums/post/1/edit" ><i
+                                        class="wb-pencil btn btn-info btn-xs"></i>
                                 <span class="hidden-xs">
           </span>
                             </a>
 
-                            <button type="submit" class="btn btn-danger btn-xs">
+                            <button type="submit" class="wb-trash btn btn-danger btn-xs" onclick="supprimer();"></button>
+                            <span class="hidden-xs"></span>
 
-                                <i class="wb-trash"></i> Supprimer
-                                <span class="hidden-xs"></span>
-                            </button>
-                            </form>
-                            <p> {{$message->description}}</p>
-
-
-                        </div>
-
-
+                        </form>
                     </div>
 
-            </li>  </div>
+                </div>
+                <div style="float: right;" ><a
+                            class=" btn btn-default btn-xs" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i
+                                class=" fa fa-clock-o"></i> {{$discussion->created_at}}
+                    </a>
+                    @if(!$discussion->isLocked)
+                        <a href="/forum/lock/{{$discussion->id}}" class="btn btn-warning btn-xs" type="submit"> <i class="fa fa-lock"></i>cloturer</a>
+                    @else
+                        <a href="/forum/lock/{{$discussion->id}}" class="btn btn-warning btn-xs" type="submit"> <i class="fa fa-unlock"></i>ouvrir</a>
+                    @endif
+                </div>
 
-        @endforeach
-    </ul>
+                <div class="media-body">
 
 
-    <form method="POST" action="" accept-charset="UTF-8">
-        {{csrf_field()}}
-        <div class="tile">
+
+                    <p>{{$discussion->description}}</p>
+
+
+
+                </div>
+
+
+
+            </li>
+            <div><a href=""> <i></i></a></div>
+        </ul>
+        <!--c'est ce bloque là qu'on va le boucler pour générer les réponses-->
+
+
+        <ul class=" media-list forum ">
+            @foreach($discussion->getMessages() as $message)
+                <div class="row"> <li class="media well  col-md-12">
+                        <div class="pull-left user-info" href="#">
+                            <img class="avatar img-circle img-thumbnail" src="{{asset('assets/img/avatar.jpg')}}"
+                                 width="64" alt="Avatar">
+                            <strong>
+                                <a href="http://demo.procoderr.tech/profile/admin">
+                                    {{$message->getAuthor()}}
+                                </a>
+                            </strong>
+                            <br>
+
+                            <small class="btn-group btn-group-xs">
+                                <a class="btn btn-default" href="">0 Feedback Points
+                                </a>
+                            </small>
+                            <div class="forum-post-panel btn-group btn-group-xs">
+                                <form action="{{url('forum/show/'.$message->id)}}" method="post">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+
+
+                                    <a href="http://demo.procoderr.tech/forums/post/1/edit" class="btn btn-info btn-xs"><i
+                                                class="wb-pencil"></i>
+                                        <span class="hidden-xs">
+          </span>
+                                    </a>
+
+                                    <button type="submit" class="btn btn-danger btn-xs" onclick="supprimer();">
+
+                                        <i class="wb-trash"></i>
+                                        <span class="hidden-xs"></span>
+                                    </button></form></div>
+                        </div>
+
+                            <div style="float: right;" ><a
+                                                class=" btn btn-default btn-xs" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i
+                                                    class=" fa fa-clock-o"></i> {{$message->created_at}}
+                                        </a>
+                                <!-- Script php pour aimer un message-->
+                        <?php $class='fa fa-thumbs-o-up';
+                        if(App\Likes_message::where('user_id','=',\Auth::user()->id)
+                                ->where('message_id','=',$message->id)->first()!=null)
+                            $class='fa fa-thumbs-up';
+                        ?>
+
+                            <i class="{{$class}}" id="{{$message->id}}"
+                               onclick="likes(this)"></i>
+                            <?php $n=App\Likes_message::where("message_id", "=", $message->id)->count();echo $n;?>
+
+                        </div>
+                        <div class="media-body">
+                            <p> {{$message->description}}</p> </div>
+
+                    </li>
+
+                </div>
+
+            @endforeach
+        </ul>
+
+        @if(!$discussion->isLocked)
+            <form method="POST" action="" accept-charset="UTF-8">
+                {{csrf_field()}}
+                <div class="tile">
         <span class="help-block">
            Répondre à cette Discussion
         </span>
 
 
-            <div class="form-group">
+                    <div class="form-group">
 
-                <textarea class="form-control fl flat" rows="5" id="message" name="description" cols="50"></textarea>
-                <input type="text" name="discussion_id" hidden value="{{$discussion->id}}">
-                <span class="help-block pull-right">
+                        <textarea class="form-control fl flat" rows="5" id="message" name="description" cols="50"></textarea>
+                        <input type="text" name="discussion_id" hidden value="{{$discussion->id}}">
+                        <span class="help-block pull-right">
       You may use Markdown - <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">Basic writing and formatting syntax</a>
     </span>
-            </div>
+                    </div>
 
-            <div class="form-group">
-                <input class="btn btn-primary btn btn-wide" type="submit" value="Reply">
-            </div>
-        </div>
-    </form>
+                    <div class="form-group">
+                        <input class="btn btn-primary btn btn-wide" type="submit" value="Reply">
+                    </div>
+                </div>
+            </form>
+        @else
+    </div> <div class="row alert-danger"> <div class="col-md-offset-3 col-md-6"> <p>Vous ne pouvez pas répondre à cette discussion </p></div></div>
+    @endif
+
+
+
 
     <div class="modal fade" id="reportPost">
         <div class="modal-dialog">
@@ -257,7 +275,7 @@
         </div>
     </div>
 
-</ul>
+    </ul>
 </div>
 <footer class="footer">
     <div class="container">
@@ -290,6 +308,8 @@
         height: 200px;
     }
 </style>
+
+
 <script>
     $(document).on("click", ".report-post", function (e) {
         e.preventDefault();
@@ -300,6 +320,28 @@
         $(".report-post-form").attr("action", "/forums/thread/" + threadID + "/" + postID);
         $(_self.attr('href')).modal('show');
     });
+</script>
+<script>
+
+    function likes(like) {
+
+        //if(fav.getAttribute("class") == "fa fa-star-o") {
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                //document.getElementById("demo").innerHTML = this.responseText;
+                like.setAttribute("class", xhttp.response);
+            }
+        };
+        xhttp.open("GET", "/forum/like/" + like.getAttribute("id"), true);
+        xhttp.send();
+        /*}
+        else {
+            fav.setAttribute("class", "fa fa-star-o");
+        }*/
+
+    }
 </script>
 <script>
     function supprimer() {

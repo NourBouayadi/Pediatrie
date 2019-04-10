@@ -11,18 +11,29 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/ficheMaladie', function () {
+    return view('ficheMaladie');
+});
+
 Route::get('/forum', function () {
     return view('forum');
 });
-Route::get('/inscrire', function () {
-    return view('inscrire');
+
+
+/*Route::get('/login', function () {
+    return view('login');
 });
+*/
 Route::get('/profile', function () {
     return view('profile');
 });
+
 Route::get('/charte', function () {
     return view('charte');
 });
@@ -32,6 +43,7 @@ Route::get('/charte', function () {
     return view('contact');
 });
 */
+
 Auth::routes();
 Route::post('registerPediatre', 'Auth\RegisterController@registerPediatre')->name('registerPediatre');
 
@@ -39,52 +51,33 @@ Route::get('propos', function () {
     return view('propos');
 });
 
-
-/** Les routes pour la discussion
-Route::get('forum', 'DiscussionController@index')->middleware('auth');
-Route::get('forum/create', 'DiscussionController@create')->middleware('auth');
-Route::post('forum', 'DiscussionController@store')->middleware('auth');
-Route::delete('forum/show/{id}', 'DiscussionController@destroy')->middleware('auth');
-Route::get('forum/{id}/edit', 'DiscussionController@edit')->middleware('auth');
-Route::put('forum/{id}', 'DiscussionController@update')->middleware('auth');
-**/
-Route::get('/forum/lock/{id}','DiscussionController@cloturer')->middleware('auth');
-
-
 Route::get('/dashboard', 'AdminController@index')->middleware('auth');
 Route::get('/dashboard/{id}', ['as' => 'dashboard', 'uses' => 'AdminController@approve'])->middleware('auth');
 Route::delete('dashboard/{id}', 'AdminController@destroy')->middleware('auth');
 Route::get('forum/show/{id}','DiscussionController@show')->middleware('auth');
-Route::get('forum/fav/{id}', 'DiscussionController@fav')->middleware('auth');
-Route::get('forum/like/{id}', 'DiscussionController@like')->middleware('auth');
+Route::get('form/fav/{id}', 'DiscussionController@fav')->middleware('auth');
+Route::get('search/', 'DiscussionController@search')->middleware('auth');
 
-Route::get('/search/', 'DiscussionController@search')->middleware('auth');
 
+Route::resource('forum', 'DiscussionController')->middleware('auth');
 Route::post('forum/show/{id}', 'MessageController@store')->middleware('auth');
 Route::delete('forum/show/{id}', 'MessageController@destroy')->middleware('auth');
 
-/**Routes pour les catégories*/
-Route::get('/forum/categorie/{id}','DiscussionController@indexParCategorie')->middleware('auth');
-/** Routes pour Mes Sujets**/
-Route::get('/forum/sujet/','DiscussionController@indexParSujet')->middleware('auth');
-/** Routes pour Mes Favoris**/
-Route::get('/forum/favoris','DiscussionController@indexParFavoris')->middleware('auth');
-Route::resource('forum', 'DiscussionController')->middleware('auth');
 
-/** Route pour la fiche Maladie**/
-Route::get('/ficheMaladie', function () {
-    return view('ficheMaladie');
-});
 
 Route::resource('ficheMaladie', 'FicheController')->middleware('auth');
 Route::post('ficheMaladie/show/{id}', 'FicheController@store')->middleware('auth');
 Route::delete('ficheMaladie/show/{id}', 'FicheController@destroy')->middleware('auth');
 
 
-/** Profile Pediatre (Fiche Professionnelle)**/
-Route::get('/profile', function () {
-    return view('profile');
-});
+
+/**Route pour le profile pediatre*/
+Route::resource('/forum/profile/{id}','DiscussionController')->middleware('auth');
+
+/**Routes pour les catégories*/
+Route::get('/forum/categorie/{id}','DiscussionController@indexParCategorie')->middleware('auth');
+
+/***/
 /*Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');

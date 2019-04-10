@@ -32,7 +32,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="http://demo.procoderr.tech">
-                Procoderr Demo
+                Pediatrie-DZ
 
             </a>
         </div>
@@ -116,61 +116,192 @@
     </div>
 </nav>
 
+
 <div class="container">
 
 
 
 
+<div class="profile-panel">
+        <div class="col-md-4">
+            <div class="panel-default panel widget widget-shadow text-center">
+                <div class="widget-header">
+                    <div class="widget-header-content">
+                        <a class="avatar avatar-lg" href="javascript:void(0)">
+                            <img width=100px src="">
+                        </a>
+                        <h4 class="profile-user"></h4>
+                        <span class="label label-primary">Pédiatre</span>
+                                                <p>
+                            
+                        </p>
+                        <p class="help-block">
+                                                            Last Active <b>2019 years ago</b>
+                                <br>
+                                                        Registered <b>1 month ago</b>
+                        </p>  
+                         <button type="button" class="btn btn-inverse" data-toggle="modal"
+                                        data-target="#give_feedback">
+                                    <i class="wb-plus"></i> Feedback
+                                </button>
+                                                                                                       
+                                            </div>
+                </div>
+                                    <div class="widget-footer">
+                        <div class="row no-space">
+                            <strong class="profile-stat-count text-success"> 1 </strong>
+                            <span> Feedback Points </span>
+                        </div>
+                    </div>
+                            </div>
 
-    <div class="tabbable-panel">
+        </div>
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="tabbable-panel col-md-8">
         <div class="tabbable-line">
             <ul class="nav nav-tabs ">
                 <li class="active">
-                    <a href="#formulaire_maman" data-toggle="tab">
-                        Maman
-                    </a>
-                </li>
-                <li>
-                    <a href="#formulaire_pediatre" data-toggle="tab">
-                        Pédiatrie
+                    <a href="#profile" data-toggle="tab">
+                        Profile
                     </a>
                 </li>
             </ul>
+            
             <div class="tab-content">
-                <div class="tab-pane active" id="formulaire_maman">
-                    <form>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput">Pseudo</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Exemple: Nour13">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Adresse Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entez votre email">
-                            <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais votre email avec qui que ce soit.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Mot de Passe</label>
-                            <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Confirmer Mot de Passe</label>
-                            <input type="password" class="form-control" id="confirm_password" placeholder="Confirmez votre mot de passe">
-                        </div>
+                <div class="tab-pane active" id="profile">   
+                
+                <div class="media" title="">
+                <a class="pull-left" href="/profile/admin">
+                <img src=""class="">
+                            </a>
+                       
+                 <div class="media-body">
+                  
+<table>
 
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-
-
-                <div class="tab-pane" id="formulaire_pediatre">
-                   PEDIATRE FORUM
+                
+    <tr>
+        <td>
+ 
+           Nom : Ped1
+          <hr>
+        </td>
+    </tr>
+ 
+  <tr>
+        <td>
+          Description :   Pediatre
+          <hr>
+        </td>
+    </tr>
 
 
-                </div>
+  <tr>
+        <td>
+            Date Début de Carriére : 2018-12-11
+          <hr>
+        </td>
+    </tr>
+
+
+  <tr>
+        <td>
+            Spécialité : Pédiatrie Générale
+          <hr>
+        </td>
+    </tr>
+
+
+  <tr>
+        <td>
+            Numéro de Téléphone : 0000000000
+          <hr>
+        </td>
+    </tr>
+
+  <tr>
+        <td>
+            Adresse de Cabinet: adresse
+          <hr>
+        </td>
+    </tr>
+    
+
+</table>
+
+
+ <form method="POST" action="" accept-charset="UTF-8">
+        {{csrf_field()}}
+        <div class="tile">
+        <span class="help-block">
+           Laissez un Commentaire 
+        </span>
+
+
+
+            <div class="form-group">
+
+                <textarea class="form-control fl flat" rows="5" id="message" name="description" cols="50"></textarea>
+                <input type="text" name="discussion_id" hidden value="">
+      
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-primary btn btn-wide" type="submit" value="Reply">
+            </div>
+        </div>
+    </form>
+
+
+
+                            </div>
+                        </div>
+                </div>     
+
+   <div class="modal fade" id="give_feedback" role="dialog">
+    <div class="modal-dialog  modal-center">
+        
+        <div class="modal-content">
+            
+            <div class="modal-header">
+            
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            
+                <h4 class="modal-title">Feedback for Pédiatre</h4>
+            </div>
+
+            <form method="POST" action="http://demo.procoderr.tech/profile/admin/feedback" accept-charset="UTF-8">
+
+            <input name="_token" type="hidden" value="bubVJ7cqwd2z9dmEUWihJBHpXC0KRE7atP0sdpwX">
+            <div class="modal-body">
+
+                <label for="points">Points</label>
+                <select class="form-control" id="points" name="points">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <label for="text">Feedback</label>
+                <textarea class="form-control" rows="2" placeholder="Enter your feedback" name="text" cols="50" id="text">
+                    
+                </textarea>
+
+            </div>
+    
+               
 
 
 <footer class="footer">

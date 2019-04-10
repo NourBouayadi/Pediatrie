@@ -16,14 +16,14 @@ class MessageController extends Controller
         $message->user_id = \Auth::user()->id;
 
         $message->save();
-        // récupérer les discussions ayant une nvl notif
+        // récupérer les discussions ayant une nvl notif (veririfer que l'auth connecté n'est pas celui qui a ecrit la discussion
         $discussion = Discussion::find($message->discussion_id);
         if(\Auth::user()->id !=$discussion->user_id) {
             $discussion->isRead = 0;
             $discussion->save();
         }
         session()->flash('success', 'la message a été bien enregistrée');
-
+        //TODO notify favoris
         return redirect()->back();
 
     }
