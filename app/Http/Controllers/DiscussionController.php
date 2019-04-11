@@ -140,11 +140,12 @@ SELECT discussions.`*`,COUNT(messages.`id`) as num from `messages`,`discussions`
         //TODO isRead favoris
         $discussion = Discussion::find($id);
         $unread=false;
+        $discussion->views++;
         if (\Auth::user()->id==$discussion->user_id && !$discussion->isRead){
             $discussion->isRead=1;
-            $discussion->save();
             $unread=true;
         }
+        $discussion->save();
         \Debugbar::info($unread);
         return view('discussion.show', compact(['discussion','unread']));
 
