@@ -298,11 +298,11 @@
                             <label for="exampleFormControlTextarea1" class="col-md-4 control-label">Spécialité</label>
                             <div class="col-md-6">
                                 <select name="specialite" class="form-control">
-                                    <option value="1" selected>Pédiatrie Générale</option>
-                                    <option value="2">Gynécologie</option>
-                                    <option value="3">Néonatologie et médecine du nouveau-né</option>
-                                    <option value="4">Psychologie de l'Enfant</option>
-                                    <option value="5">Cardiologie Pédiatrique</option>
+                                    <option value="Pédiatrie Générale" selected>Pédiatrie Générale</option>
+                                    <option value="Gynécologie">Gynécologie</option>
+                                    <option value="Néonatologie et médecine du nouveau-né">Néonatologie et médecine du nouveau-né</option>
+                                    <option value="Psychologie de l'Enfant">Psychologie de l'Enfant</option>
+                                    <option value="Cardiologie Pédiatrique">Cardiologie Pédiatrique</option>
                                 </select>
 
                                 @if ($errors->has('specialite'))
@@ -312,7 +312,69 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group  {{ $errors->has('ville') ? ' has-error' : '' }}">
+                            <label for="exampleFormControlTextarea1" class="col-md-4 control-label">Ville</label>
+                            <div class="col-md-6">
+                                <select name="ville" class="form-control">
+                                    <option value="ADRAR"selected>ADRAR</option>
+                                    <option value="AIN DEFLA">AIN DEFLA</option>
+                                    <option value="AIN TEMOUCHENT">AIN TEMOUCHENT</option>
+                                    <option value="AL TARF">AL TARF</option>
+                                    <option value="ALGER">ALGER</option>
+                                    <option value="ANNABA">ANNABA</option>
+                                    <option value="BBARRERIDJ" >B.B.ARRERIDJ</option>
+                                    <option value="BATNA" >BATNA</option>
+                                    <option value="BECHAR">BECHAR</option>
+                                    <option value="BEJAIA" >BEJAIA</option>
+                                    <option value="BISKRA" >BISKRA</option>
+                                    <option value="BLIDA">BLIDA</option>
+                                    <option value="BOUIRA" >BOUIRA</option>
+                                    <option value="BOUMERDES" >BOUMERDES</option>
+                                    <option value="CHLEF">CHLEF</option>
+                                    <option value="CONSTANTINE" >CONSTANTINE</option>
+                                    <option value="DJELFA" >DJELFA</option>
+                                    <option value="EL BAYADH">EL BAYADH</option>
+                                    <option value="EL OUED" >EL OUED</option>
+                                    <option value="GHARDAIA" >GHARDAIA</option>
+                                    <option value="GUELMA">GUELMA</option>
+                                    <option value="ILLIZI" >ILLIZI</option>
+                                    <option value="JIJEL" >JIJEL</option>
+                                    <option value="KHENCHELA">KHENCHELA</option>
+                                    <option value="LAGHOUAT" >LAGHOUAT</option>
+                                    <option value="MASCARA" >MASCARA</option>
+                                    <option value="MEDEA" >MEDEA</option>
+                                    <option value="MILA">MILA</option>
+                                    <option value="MOSTAGANEM" >MOSTAGANEM</option>
+                                    <option value="MSILA" >M’SILA</option>
+                                    <option value="NAAMA">NAAMA</option>
+                                    <option value="ORAN" >ORAN</option>
+                                    <option value="OUARGLA" >OUARGLA</option>
+                                    <option value="OUM ELBOUAGHI">OUM ELBOUAGHI</option>
+                                    <option value="RELIZANE" >RELIZANE</option>
+                                    <option value="SAIDA" >SAIDA</option>
+                                    <option value="SETIF">SETIF</option>
+                                    <option value="SIDI BEL ABBES" >SIDI BEL ABBES</option>
+                                    <option value="SKIKDA" >SKIKDA</option>
+                                    <option value="SOUKAHRAS">SOUKAHRAS</option>
+                                    <option value="TAMANGHASSET" >TAMANGHASSET</option>
+                                    <option value="TEBESSA" >TEBESSA</option>
+                                    <option value="TIARET">TIARET</option>
+                                    <option value="TINDOUF" >TINDOUF</option>
+                                    <option value="TIPAZA" >TIPAZA</option>
+                                    <option value="TISSEMSILT">TISSEMSILT</option>
+                                    <option value="TIZI.OUZOU" >TIZI.OUZOU</option>
+                                    <option value="TLEMCEN" >TLEMCEN</option>
 
+
+                                </select>
+
+                                @if ($errors->has('ville'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('ville') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group {{ $errors->has('date_debut_carriere') ? ' has-error' : '' }}">
                             <label for="example-date-input" class="col-md-4 control-label">Date du début de
                                 carrière</label>
@@ -330,7 +392,7 @@
                             <label for="example-tel-input" class="col-md-4 control-label">Telephone 1</label>
                             <div class="col-md-6">
                                 <input name="tel1" class="form-control" type="tel" value="0541101010"
-                                       id="example-tel-input" pattern="tel" required>
+                                       id="example-tel-input" required>
                                 @if ($errors->has('tel1'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('tel1') }}</strong>
@@ -342,7 +404,7 @@
                             <label for="example-tel-input" class="col-md-4 control-label">Telephone 2</label>
                             <div class="col-md-6">
                                 <input name="tel2" class="form-control" type="tel" value="0541101010"
-                                       id="example-tel2-input" pattern="tel">
+                                       id="example-tel2-input">
                                 @if ($errors->has('tel2'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('tel2') }}</strong>

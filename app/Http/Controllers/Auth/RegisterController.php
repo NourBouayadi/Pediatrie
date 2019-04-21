@@ -123,6 +123,7 @@ class RegisterController extends Controller
         $pediatre->description=$data['description'];
         $pediatre->date_debut_carriere=$data['date_debut_carriere'];
         $pediatre->specialite=$data['specialite'];
+        $pediatre->ville = $data['ville'];
         $pediatre->tel1=$data['tel1'];
         $pediatre->tel2=$data['tel2'];
         $pediatre->adresse_cabinet=$data['adresse_cabinet'];

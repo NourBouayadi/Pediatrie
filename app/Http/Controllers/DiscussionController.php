@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Mom;
 use App\Favori;
-
+use Illuminate\Support\Facades\DB;
 class DiscussionController extends Controller
 {
     public function index()
@@ -21,7 +21,6 @@ class DiscussionController extends Controller
 
         return view('forum', compact(['discussions']) );
 
-
     }
     public function indexParCategorie($id){
         $discussions = Discussion::where('categorie_id', '=', $id)->paginate(5);//->get();
@@ -30,14 +29,38 @@ class DiscussionController extends Controller
 
     public function indexParSujet(){
 
-          /*  $discussions = Discussion::where('user_id', '=', \Auth::user()->id )->orderBy('isRead', 'asc')->get();
-                                       ->where
-        >join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->join('orders', 'users.id', '=', 'orders.user_id')
-            ->select('users.*', 'contacts.phone', 'orders.price')
-            ->get();
-SELECT discussions.`*`,COUNT(messages.`id`) as num from `messages`,`discussions` WHERE messages.`discussion_id`= discussions.`id` group by messages.`discussion_id`
-        */return view('forum', compact(['discussions']));
+
+
+     /*   $discussions = DB::select('(SELECT discussions.`*`,COUNT(messages.`id`) AS num from `messages`,`discussions` WHERE messages.`discussion_id`= discussions.`id` group by messages.`discussion_id` )
+UNION ALL
+(SELECT discussions.`*`,0 AS favorisnum FROM `discussions` WHERE `id` NOT IN (SELECT DISTINCT `discussion_id` FROM `messages`) ) ORDER BY  `isRead` ASC , `num` DESC;
+');*/
+
+        $q1 = DB::select('SELECT DISTINCT `discussion_id` FROM `messages`');
+        $list=[];
+        foreach ($q1 as $discussion){
+            array_push($list,$discussion->discussion_id);
+        }
+        $q2 = DB::table('discussions')
+                    ->join('messages', 'discussions.id', "=", 'messages.discussion_id')
+                    ->selectRaw('discussions.*, count(messages.id) as num ')
+                    ->where('discussions.user_id','=',\Auth::user()->id)
+                    ->groupBy('messages.discussion_id');
+
+        $q3 = DB::table('discussions')
+                 ->selectRaw('discussions.*, 0 as num')
+                 ->whereNotIn('id',$list)
+                ->where('discussions.user_id','=',\Auth::user()->id)
+                 ->unionAll($q2)
+                ->orderBy('isRead','asc')
+                ->orderBy('num','desc');
+        $discussions=$q3->paginate(5);
+        /*(SELECT discussions.`*`,COUNT(messages.`id`) AS num from `messages`,`discussions` WHERE messages.`discussion_id`= discussions.`id` group by messages.`discussion_id` )
+        UNION ALL
+        (SELECT discussions.`*`,0 AS favorisnum FROM `discussions` WHERE `id` NOT IN (SELECT DISTINCT `discussion_id` FROM `messages`) ) ORDER BY  `isRead` ASC , `num` DESC;
+
+        */
+       return view('forum', compact(['discussions']));
     }
     public function indexParFavoris(){
         $favoris=Favori::where('user_id','=',\Auth::user()->id)
@@ -45,7 +68,6 @@ SELECT discussions.`*`,COUNT(messages.`id`) as num from `messages`,`discussions`
 
         return view('forum', compact(['discussions']));
     }
-
 
     public function create()
     {
@@ -158,6 +180,25 @@ SELECT discussions.`*`,COUNT(messages.`id`) as num from `messages`,`discussions`
             $discussion->isLocked=1;
         $discussion->save();
         return redirect()->back();
+
+    }
+
+    public function article(){
+
+        $discussions = DB::table('discussions')
+                       ->join('users' , 'discussions.user_id', 'users.id')
+                       ->where('isPediatre','=', 1)
+                       ->paginate(5);
+        return view('forum', compact(['discussions']));
+
+    }
+    public function discussion(){
+
+        $discussions = DB::table('discussions')
+            ->join('users' , 'discussions.user_id', 'users.id')
+            ->where('isPediatre','=', 0)
+            ->paginate(5);
+        return view('forum', compact(['discussions']));
 
     }
 }

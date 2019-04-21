@@ -17,9 +17,6 @@ Route::get('/', function () {
 Route::get('/forum', function () {
     return view('forum');
 });
-Route::get('/inscrire', function () {
-    return view('inscrire');
-});
 Route::get('/profile', function () {
     return view('profile');
 });
@@ -69,6 +66,10 @@ Route::get('/forum/categorie/{id}','DiscussionController@indexParCategorie')->mi
 Route::get('/forum/sujet/','DiscussionController@indexParSujet')->middleware('auth');
 /** Routes pour Mes Favoris**/
 Route::get('/forum/favoris','DiscussionController@indexParFavoris')->middleware('auth');
+/** Routes pour les article**/
+Route::get('/forum/article/','DiscussionController@article');
+/** Routes pour les discussions**/
+Route::get('/forum/discussion/','DiscussionController@discussion');
 Route::resource('forum', 'DiscussionController')->middleware('auth');
 
 /** Route pour la fiche Maladie**/
@@ -85,6 +86,12 @@ Route::delete('ficheMaladie/show/{id}', 'FicheController@destroy')->middleware('
 Route::get('/profile', function () {
     return view('profile');
 });
+
+/** Route pour annuaire des pédiatres **/
+Route::get('/annuaire', 'PediatreController@index');
+Route::get('/annuaire/search/', 'PediatreController@search');
+
+
 /*Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');

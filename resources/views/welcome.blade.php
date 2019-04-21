@@ -227,9 +227,6 @@ header section -->
                 <h4>Sur le 1ᵉʳ Forum algérienne des pédiatres, vous etes actuellement entouré d'une équipe des pédiatres</h4>
             </div>
 
-
-
-
             <div class="col-md-2 single-member col-sm-4">
                 <div class="person">
                     <img class="img-responsive" src="{{asset('assets/img/member1.jpg')}}" alt="member-1">
@@ -250,9 +247,6 @@ header section -->
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
                 </div>
             </div>
-
-
-
             <div class="col-md-2 single-member col-sm-4">
                 <div class="person-detail">
                     <div class="arrow-top"></div>
@@ -275,9 +269,6 @@ header section -->
                     <img class="img-responsive" src="{{asset('assets/img/member2.jpg')}}" alt="member-2">
                 </div>
             </div>
-
-
-
             <div class="col-md-2 single-member col-sm-4">
                 <div class="person">
                     <img class="img-responsive" src="{{asset('assets/img/member3.jpg')}}" alt="member-3">
@@ -299,11 +290,6 @@ header section -->
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
                 </div>
             </div>
-
-
-
-
-
             <div class="col-md-2 single-member col-sm-4">
                 <div class="person-detail">
                     <div class="arrow-top"></div>

@@ -86,9 +86,10 @@
             @yield('content')
         </main>
     </div>
+    <br>
     <footer class="footer">
         <div class="container">
-            Copyright &copy; Procoderr 2019 - All rights reserved
+            Copyright &copy; PediatrieDZ 2019
             <span class="pull-right"><a href="/contact">Contact Us</a></span>
         </div>
     </footer>
