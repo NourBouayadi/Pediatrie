@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 
 class PediatreController extends Controller
 {
+    //Method index to list all Pediatres
     public function index()
     {
 
@@ -23,6 +24,7 @@ class PediatreController extends Controller
         return view('pediatre.annuaire', compact(['pediatres']) );
 
     }
+    //Method search in Annuaire
     public function search (Request $request){
        /* $pediatres=Pediatre::where('specialite', 'like', '%' . $request->get('specialite') . '%')
             ->orWhere('ville', 'like', '%' . $request->get('ville') . '%')
@@ -45,5 +47,16 @@ class PediatreController extends Controller
             ->paginate(5);
          return view('pediatre.annuaire', compact(['pediatres']));
     }
+
+    //Method index($id) to list the pediatre with id
+    public function indexPediatre($id)
+    { $pediatre = Pediatre::find($id);
+
+
+        return view('profile', compact(['pediatre']) );
+
+
+    }
+
 
 }

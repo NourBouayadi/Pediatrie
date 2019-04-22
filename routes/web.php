@@ -91,7 +91,11 @@ Route::get('/profile', function () {
 Route::get('/annuaire', 'PediatreController@index');
 Route::get('/annuaire/search/', 'PediatreController@search');
 
-
+/**Route pour le profile pediatre*/
+Route::get('profile/{id}', 'PediatreController@indexPediatre')->middleware('auth');
+Route::get('editprofile/modify/{id}', 'PediatreController@modify')->middleware('auth');
+Route::put('profile/index/{id}', 'PediatreController@index')->middleware('auth');
+Route::get('profile/note/{id}', 'PediatreController@note')->middleware('auth');
 /*Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');

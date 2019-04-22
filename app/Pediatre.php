@@ -50,4 +50,5 @@ class Pediatre extends Authenticatable
         return $this->hasMany('App\Discussion');
     }
 
+
 }

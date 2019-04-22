@@ -154,8 +154,6 @@
             <div><a href=""> <i></i></a></div>
         </ul>
         <!--c'est ce bloque là qu'on va le boucler pour générer les réponses-->
-
-
         <ul class=" media-list forum ">
             @foreach($discussion->getMessages() as $message)
                 <div class="row"> <li class="media well  col-md-12">
@@ -244,9 +242,6 @@
         @else
     </div> <div class="row alert-danger"> <div class="col-md-offset-3 col-md-6"> <p>Vous ne pouvez pas répondre à cette discussion </p></div></div>
     @endif
-
-
-
 
     <div class="modal fade" id="reportPost">
         <div class="modal-dialog">

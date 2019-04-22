@@ -91,8 +91,6 @@
                     <td class="text-center"><?php $n=App\Message::where("discussion_id", "=", $discussion->id)->count();echo $n;?></td>
                     <td class="hidden-xs hidden-sm"><?php if($n>0) echo App\Message::where("discussion_id", "=", $discussion->id)->latest()->first()->created_at;
                                                             else echo $discussion->created_at;?></td>
-
-
                 </tr>
             @endforeach
             </tbody>

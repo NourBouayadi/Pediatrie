@@ -237,7 +237,7 @@
             </form>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-10">
             <table class="table forum table-striped">
                 <thead>
                 <tr>
@@ -270,31 +270,13 @@
 
     </div>
 
+@endsection
+<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>
 <script src="{{asset('assets/js/select2.js')}}"></script>
 
 <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script src="{{asset('assets/js/gmaps.js')}}"></script>
 <script src="{{asset('assets/js/smoothscroll.js')}}"></script>
-<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+
 <script src="{{asset('assets/js/custom.js')}}"></script>
-
-<script type="text/javascript">
-
-        $("#selectVille").select2({
-            allowClear: true,
-            placeholder: "selectionner la ville"
-        });
-</script>
-
-<script type="text/javascript">
-
-        $("#selectSpecialite").select2({
-            allowClear: true,
-            placeholder: "selectionner la specialité"
-
-
-        });
-    </script>
-
-@endsection

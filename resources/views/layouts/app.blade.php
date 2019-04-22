@@ -77,6 +77,7 @@
                                 </div>
                             </li>
                         @endguest
+
                     </ul>
                 </div>
             </div>
@@ -89,7 +90,7 @@
     <br>
     <footer class="footer">
         <div class="container">
-            Copyright &copy; PediatrieDZ 2019
+            Copyright &copy; PediatrieDZ2019
             <span class="pull-right"><a href="/contact">Contact Us</a></span>
         </div>
     </footer>
