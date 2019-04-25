@@ -50,13 +50,13 @@ class PediatreController extends Controller
 
     //Method index($id) to list the pediatre with id
     public function indexPediatre($id)
-    { $pediatre = Pediatre::find($id);
-
-
+    { 
+        $pediatre = Pediatre::find($id);
         return view('profile', compact(['pediatre']) );
-
-
     }
-
+    public function stars($id,Request $request){
+        \Debugbar::disable();
+        echo "pediatre id:".$id." value:".$request->value;
+    }
 
 }

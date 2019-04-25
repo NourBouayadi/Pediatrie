@@ -83,9 +83,9 @@ Route::delete('ficheMaladie/show/{id}', 'FicheController@destroy')->middleware('
 
 
 /** Profile Pediatre (Fiche Professionnelle)**/
-Route::get('/profile', function () {
+/*Route::get('/profile', function () {
     return view('profile');
-});
+});*/
 
 /** Route pour annuaire des pédiatres **/
 Route::get('/annuaire', 'PediatreController@index');
@@ -93,9 +93,10 @@ Route::get('/annuaire/search/', 'PediatreController@search');
 
 /**Route pour le profile pediatre*/
 Route::get('profile/{id}', 'PediatreController@indexPediatre')->middleware('auth');
+Route::get('profile/stars/{id}', 'PediatreController@stars')->middleware('auth');
 Route::get('editprofile/modify/{id}', 'PediatreController@modify')->middleware('auth');
 Route::put('profile/index/{id}', 'PediatreController@index')->middleware('auth');
-Route::get('profile/note/{id}', 'PediatreController@note')->middleware('auth');
+//Route::get('profile/note/{id}', 'PediatreController@note')->middleware('auth');
 /*Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');

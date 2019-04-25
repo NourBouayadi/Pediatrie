@@ -255,7 +255,10 @@
                                     </div>
                                 </form>
                             </div></div></div>
-                        @endsection
+        
+<script src="{{asset('assets/js/script2.js')}}"></script>
+<script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>
+<script src="{{asset('assets/js/scripts.js')}}"></script>                
 <script>
                                         $(document).ready(function () {
 
@@ -298,6 +301,18 @@
                                                 // JUST RESPONSE (Not needed)
                                                 var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
                                                 $.post("profile.php", ratingValue);
+                                                var xhttp = new XMLHttpRequest();
+                                                xhttp.onreadystatechange = function () {
+                                                    if (this.readyState == 4 && this.status == 200) {
+                                                        console.log(xhttp.responseText);
+                                                    }
+                                                };
+                                                xhttp.open("GET", "/profile/stars/"+{{$pediatre->id}}+"?value="+ratingValue, true);
+                                                xhttp.send();
+                                                //xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+                                                
+                                                //xhttp.send("id="+{{$pediatre->id}}+"&value="+ratingValue);
+
                                                 var msg = "";
                                                 if (ratingValue > 1) {
 
@@ -309,18 +324,14 @@
                                                 responseMessage(msg);
 
                                             });
-                                            /*
-                                             xhttp.open("GET", "profile/note/{id}" + not.getAttribute("id"), true);
-                                             xhttp.send();*/
-                                        });
+                                          
 
 
                                         function responseMessage(msg) {
                                             $('.success-box').fadeIn(200);
                                             $('.success-box div.text-message').html("<span>" + msg + "</span>");
                                         }
+                                    });
                                     </script>
  <!-- script pour la géolocalisation -->
-<script src="{{asset('assets/js/script2.js')}}"></script>
-<script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>
-<script src="{{asset('assets/js/scripts.js')}}"></script>
+@endsection
