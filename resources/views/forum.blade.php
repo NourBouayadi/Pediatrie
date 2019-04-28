@@ -19,6 +19,7 @@
             
             <a href="{{url('forum/create')}}"
                class=" list-group-item list-group-item-text list-group-item-success text-center"><i class="wb-plus"></i>
+                 
                   <?php
     
                     if (\Auth::user()->type() == "pediatre"){
@@ -30,6 +31,7 @@
                             
                             echo "Nouvelle Discussion";
                    ?>          
+            
             </a>
 
 

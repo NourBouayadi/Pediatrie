@@ -24,7 +24,9 @@ Route::get('/charte', function () {
     return view('charte');
 });
 
-
+Route::get('/editprofile', function () {
+    return view('editprofile');
+});
 /*Route::get('contact', function () {
     return view('contact');
 });
