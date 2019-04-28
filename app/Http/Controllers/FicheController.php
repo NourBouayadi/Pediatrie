@@ -33,11 +33,12 @@ class FicheController extends Controller
         $fiche = new Fiche();
         $fiche->titre = $request->input('titre');
         $fiche->description = $request->input('description');
-
+        
 
         $fiche->symptomes = $request->input('symptomes');
         $fiche->age = $request->input('age');
         $fiche->sexe = $request->input('sexe');
+        $fiche->categorie_id = $request->input('categorie_id');
         $fiche->traitementMedicaux = $request->input('traitementMedicaux');
         $fiche->traitementNonMedicaux = $request->input('traitementNonMedicaux');
         $fiche->recommendation = $request->input('recommendation');
@@ -63,7 +64,7 @@ class FicheController extends Controller
         $fiche->titre = $request->input('titre');
         $fiche->description = $request->input('description');
 
-
+        
         $fiche->symptomes = $request->input('symptomes');
         $fiche->age = $request->input('age');
         $fiche->sexe = $request->input('sexe');
@@ -72,7 +73,7 @@ class FicheController extends Controller
         $fiche->recommendation = $request->input('recommendation');
 
 
-        $fiche->user_id = \Auth::user()->id;
+        $fiche->pediatre_id = \Auth::user()->id;
         $fiche->save();
 
         return redirect('ficheMaladie')->with('success', ' mise à jour de la fiche');;
@@ -93,7 +94,7 @@ class FicheController extends Controller
         return view('fiche.show', compact(['fiche']));
 
     }
-
+   
 
     public function search (Request $request){
         $fiches=Fiche::where('titre', 'like', '%' . $request->get('search') . '%')
@@ -101,5 +102,5 @@ class FicheController extends Controller
             ->paginate(5);
         return view('ficheMaladie', compact( 'fiches'));
     }
-
+  
 }

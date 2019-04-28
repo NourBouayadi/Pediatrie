@@ -92,6 +92,11 @@
 
                                ped1
 
+
+                               <span class="label label-primary">
+                                    <?php echo App\Categorie::find($fiche->categorie_id)->name;?>
+                                        
+                                </span>
                               </small>
                         </h4>
                     </td>

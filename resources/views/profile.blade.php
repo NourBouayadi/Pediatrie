@@ -204,13 +204,8 @@
         </span>
     </div>
 <div class="row">
-                                        <div class="form-group col-md-12">
 
-                                            <textarea class="form-control fl flat" rows="5" id="reponse"
-                                                      name="description" cols="50"></textarea>
-                                            <input type="text" name="pediatre_id" hidden value="">
-
-                                        </div>
+             
 
                                         <div class="form-group">
                                             <input class="btn btn-primary btn btn-wide" type="submit" value="Reply">
