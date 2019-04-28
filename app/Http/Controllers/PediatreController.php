@@ -47,16 +47,47 @@ class PediatreController extends Controller
             ->paginate(5);
          return view('pediatre.annuaire', compact(['pediatres']));
     }
-
     //Method index($id) to list the pediatre with id
     public function indexPediatre($id)
     { 
         $pediatre = Pediatre::find($id);
         return view('profile', compact(['pediatre']) );
     }
+    
+    
+
+//fonction stars pr recuperer les notes données au pediatres //
     public function stars($id,Request $request){
         \Debugbar::disable();
+        
+
+
         echo "pediatre id:".$id." value:".$request->value;
+    
+
+         $query = DB::table('pediatres')
+
+            ->join('users', 'pediatres.id', '=','users.id')
+                    ->increment('users.points',$request->value)
+                    ->where('pediatres.id','=',$id)
+                    ->where('isActive','=',1)
+                    ->where('isPediatre','=',1);
+
+    
+
+    }
+
+
+    public function modify($id)
+    {
+
+
+        $pediatre = Pediatre::find($id);
+
+
+        return view('editprofile', compact(['pediatre']) );
+
+
     }
 
 }

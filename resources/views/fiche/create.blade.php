@@ -35,7 +35,21 @@
                       <input name="sexe" class="form-control"></input>
                     </div>
 
-                     
+                     <div class="form-group">
+                        <label for="">Catégorie</label>
+                        <select name="categorie_id" class="form-control">
+                            <option value="1" selected>Grossesse </option>
+                            <option value="2">Nouveau-Né </option>
+                            <option value="3">Vêtements</option>
+                            <option value="4">Jouets </option>
+                            <option value="5">Sommeil</option>
+                            <option value="6">Santé</option>
+                            <option value="7">Bien-être</option>
+                            <option value="8">Psychologie</option>
+                            <option value="9">Premières Marches</option>
+                        </select>
+                    </div>
+
                      <div class="form-group">
                         <label for="">Traitements Médicaux </label>
                         <textarea name="traitementMedicaux" class="form-control" rows="4"></textarea>

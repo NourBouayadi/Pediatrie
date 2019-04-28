@@ -20,6 +20,7 @@ Route::get('/forum', function () {
 Route::get('/profile', function () {
     return view('profile');
 });
+
 Route::get('/charte', function () {
     return view('charte');
 });
