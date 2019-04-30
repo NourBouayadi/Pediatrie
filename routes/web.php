@@ -98,6 +98,12 @@ Route::get('profile/{id}', 'PediatreController@indexPediatre')->middleware('auth
 Route::get('profile/stars/{id}', 'PediatreController@stars')->middleware('auth');
 Route::get('editprofile/modify/{id}', 'PediatreController@modify')->middleware('auth');
 Route::put('profile/index/{id}', 'PediatreController@index')->middleware('auth');
+
+
+/** route pr reponse profile **/
+
+//Route::get('profile/{id}', 'ReponseController@index')->middleware('auth');
+
 //Route::get('profile/note/{id}', 'PediatreController@note')->middleware('auth');
 /*Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
