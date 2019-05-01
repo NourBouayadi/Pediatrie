@@ -41,19 +41,21 @@ UNION ALL
         foreach ($q1 as $discussion){
             array_push($list,$discussion->discussion_id);
         }
+
         $q2 = DB::table('discussions')
                     ->join('messages', 'discussions.id', "=", 'messages.discussion_id')
                     ->selectRaw('discussions.*, count(messages.id) as num ')
                     ->where('discussions.user_id','=',\Auth::user()->id)
                     ->groupBy('messages.discussion_id');
 
+      
         $q3 = DB::table('discussions')
                  ->selectRaw('discussions.*, 0 as num')
                  ->whereNotIn('id',$list)
-                ->where('discussions.user_id','=',\Auth::user()->id)
+                 ->where('discussions.user_id','=',\Auth::user()->id)
                  ->unionAll($q2)
-                ->orderBy('isRead','asc')
-                ->orderBy('num','desc');
+                 ->orderBy('isRead','asc')
+                 ->orderBy('num','desc');
         $discussions=$q3->paginate(5);
         /*(SELECT discussions.`*`,COUNT(messages.`id`) AS num from `messages`,`discussions` WHERE messages.`discussion_id`= discussions.`id` group by messages.`discussion_id` )
         UNION ALL
@@ -136,9 +138,14 @@ UNION ALL
         }
         return "fa fa-star-o";
     }
+
     public function like ($id){
         \Debugbar::disable();
+        
+        
         $like=Likes_message::where('user_id','=',\Auth::user()->id)->where('message_id','=',$id)->first();
+        
+
         if($like==null) {
             $like = new Likes_message();
             $like->user_id = \Auth::user()->id;
@@ -151,6 +158,8 @@ UNION ALL
             return "fa fa-thumbs-o-up";
         }
     }
+
+
 
     public function search (Request $request){
         $discussions=Discussion::where('titre', 'like', '%' . $request->get('search') . '%')
