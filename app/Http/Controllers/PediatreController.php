@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pediatre;
-use App\Notation;
+use App\Evaluation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
@@ -68,19 +68,26 @@ class PediatreController extends Controller
          echo "pediatre id:".$id." value:".$request->value;
 
 
-     $note= new Notation;   
+     $note= new Evaluation;   
 
  
         $note->point = $request->value;
         $note->pediatre_id = $id;
         $note->user_id = \Auth::user()->id;
-
         $note->save();
 
 
+
+        
+        $moy= DB::table('evaluations')
+           ->groupBy('pediatre_id')
+           ->having('pediatre_id','=',$id)
+           ->AVG('point');
+    
+
          $query = DB::table('pediatres')
             ->join('users', 'pediatres.id', '=','users.id')
-                    ->increment('users.points',$request->value)
+                    ->increment('users.points',$moy)
                     ->where('pediatres.id','=',$id)
                     ->where('isActive','=',1)
                     ->where('isPediatre','=',1);
