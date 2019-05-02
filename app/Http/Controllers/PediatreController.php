@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Pediatre;
+use App\Evaluation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 
 class PediatreController extends Controller
 {
+
+
     //Method index to list all Pediatres
     public function index()
     {
@@ -56,24 +59,40 @@ class PediatreController extends Controller
     
     
 
+
 //fonction stars pr recuperer les notes données au pediatres //
     public function stars($id,Request $request){
         \Debugbar::disable();
         
+       
+         echo "pediatre id:".$id." value:".$request->value;
 
 
-        echo "pediatre id:".$id." value:".$request->value;
+     $note= new Evaluation;   
+
+ 
+        $note->point = $request->value;
+        $note->pediatre_id = $id;
+        $note->user_id = \Auth::user()->id;
+        $note->save();
+
+
+
+        
+        $moy= DB::table('evaluations')
+           ->groupBy('pediatre_id')
+           ->having('pediatre_id','=',$id)
+           ->AVG('point');
     
 
          $query = DB::table('pediatres')
-
             ->join('users', 'pediatres.id', '=','users.id')
-                    ->increment('users.points',$request->value)
+                    ->increment('users.points',$moy)
                     ->where('pediatres.id','=',$id)
                     ->where('isActive','=',1)
                     ->where('isPediatre','=',1);
-
     
+
 
     }
 
@@ -83,7 +102,6 @@ class PediatreController extends Controller
 
 
         $pediatre = Pediatre::find($id);
-
 
         return view('editprofile', compact(['pediatre']) );
 
