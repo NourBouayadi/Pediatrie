@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Pediatre;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 class RegisterController extends Controller
 {
     /*
@@ -28,7 +32,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -40,6 +44,34 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        return view('inscrire');
+    }
+
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+        //$this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
+
+
+    public function registerPediatre(Request $request)
+    {
+        $this->validatorPediatre($request->all())->validate();
+
+        event(new Registered($user = $this->createPediatre($request->all())));
+        //$this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
     /**
      * Get a validator for an incoming registration request.
      *
@@ -47,6 +79,15 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+    }
+
+    protected function validatorPediatre(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
@@ -67,7 +108,30 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-
         ]);
+    }
+    protected function createPediatre(array $data)
+    {
+        $user=new User();
+        $user->name=$data['name'];
+        $user->email= $data['email'];
+        $user->password = Hash::make($data['password']);
+        $user->isPediatre=true;
+        $user->save();
+        $pediatre=new Pediatre();
+        $pediatre->id=$user->id;
+        $pediatre->description=$data['description'];
+        $pediatre->date_debut_carriere=$data['date_debut_carriere'];
+        $pediatre->specialite=$data['specialite'];
+        $pediatre->ville = $data['ville'];
+        $pediatre->tel1=$data['tel1'];
+        $pediatre->tel2=$data['tel2'];
+        $pediatre->adresse_cabinet=$data['adresse_cabinet'];
+        $pediatre->latitude=$data['latitude'];
+        $pediatre->longitude=$data['longitude'];
+        $pediatre->save();
+        $file=Input::file('attestation');
+        $file->move("attestations","".$user->id.".pdf");
+        return $user;
     }
 }

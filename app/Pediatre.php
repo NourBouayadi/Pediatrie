@@ -16,6 +16,7 @@ class Pediatre extends Authenticatable
      * @var array
      */
 
+    protected $ville = [1=>"Adrar",  ];
     protected $fillable = [
             'name', 'email', 'password','description','date_debut_carriere', 'tel1', 'tel2','specialite','adresse_cabinet', 'longitude', 'latitude'
     ];
@@ -40,6 +41,13 @@ class Pediatre extends Authenticatable
     {
         $this->notify(new PediatreResetPassword($token));
     }
+
+   
+
+    public function reponses()
+    {
+        return $this->hasMany('App\Reponse');
+    }
     public function messages()
     {
         return $this->hasMany('App\Message');
@@ -48,4 +56,6 @@ class Pediatre extends Authenticatable
     {
         return $this->hasMany('App\Discussion');
     }
+
+
 }

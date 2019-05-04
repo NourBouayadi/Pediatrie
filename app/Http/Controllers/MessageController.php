@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Discussion;
+use App\Favori;
 use App\Message;
 use Illuminate\Http\Request;
 
@@ -13,17 +14,23 @@ class MessageController extends Controller
         $message = new Message();
         $message->description = $request->input('description');
         $message->discussion_id = $request->input('discussion_id');
-        $message->mom_id = \Auth::guard('mom')->user()->id();
-        $mom_name = \Auth::guard('mom')->user()->id();
+        $message->user_id = \Auth::user()->id;
+
         $message->save();
-        // récupérer les discussions ayant une nvl notif
+        // récupérer les discussions ayant une nvl notif (veririfer que l'auth connecté n'est pas celui qui a ecrit la discussion
         $discussion = Discussion::find($message->discussion_id);
-        if(\Auth::guard('mom')->user()->id()!=$discussion->mom_id) {
+        if(\Auth::user()->id !=$discussion->user_id) {
             $discussion->isRead = 0;
             $discussion->save();
+            $fav=Favori::where ('discussion_id','=',$message->discussion_id)->where('user_id', '!=',\Auth::user()->id )
+                ->update(['isRead' => 0]);
+
+
+            
+
         }
         session()->flash('success', 'la message a été bien enregistrée');
-
+        //TODO notify favoris
         return redirect()->back();
 
     }
@@ -41,9 +48,7 @@ class MessageController extends Controller
         $message->description = $request->input('description');
 
         $message->categorie_id = $request->input('categorie_id');
-        $message->pediatre_id = $request->input('pediatre_id');
-        $message->admin_id = $request->input('admin_id');
-        $message->mom_id = $request->input('admin_id');
+       $message->user_id= \Auth::user()->id;
 
         $message->save();
         return redirect('messages')->with('success', ' mise à jour étudiant');

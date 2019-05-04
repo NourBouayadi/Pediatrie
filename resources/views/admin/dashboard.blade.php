@@ -418,7 +418,7 @@
 
                                 <td>{{$pediatre->name}}</td>
                                 <td>{{$pediatre->email}}</td>
-                                <td><a class="btn btn-primary" target="_blank" href="/attestations/<?php echo str_replace('@','.',$pediatre->email).'.pdf' ?>">attestation</a></td>
+                                <td><a class="btn btn-primary" target="_blank" href="/attestations/{{$pediatre->id}}.pdf' ?>">attestation</a></td>
                                 <td>{{$pediatre->created_at}}</td>
                                 <td>
                                     <button class="btn btn-secondary" aria-hidden="true">
@@ -432,7 +432,7 @@
                                      </button>
 
 
-                                    <form action="{{url('admin/dashboard/'.$pediatre->id)}}" method="post">
+                                    <form action="{{url('dashboard/'.$pediatre->id)}}" method="post">
                                         {{csrf_field()}}
                                         {{method_field('DELETE')}}
                                      <button type ="submit" class="btn btn-danger" onclick="return myFunction();"> <i class="fa fa-times" aria-hidden="true"></i></button>

@@ -13,7 +13,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Description</label>
-                        <input type="text" name="description" class="form-control">
+                        <textarea name="description" class="form-control" rows="4"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="">Catégorie</label>
@@ -28,22 +28,6 @@
                             <option value="8">Psychologie</option>
                             <option value="9">Premières Marches</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-
-                        <input type="text" name="user_id" class="form-control" hidden>
-                    </div>
-                    <div class="form-group">
-
-                        <input type="text" name="admin_id" class="form-control" hidden>
-                    </div>
-                    <div class="form-group">
-
-                        <input type="text" name="pediatre_id" class="form-control" hidden>
-                    </div>
-                    <div class="form-group">
-
-                        <input type="text" name="mom_id" class="form-control" hidden>
                     </div>
 
                     <div class="form-group">

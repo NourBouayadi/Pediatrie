@@ -34,7 +34,7 @@
                             <td>{{$discussion->description}}</td>
                             <td>{{$discussion->created_at}}</td>
                             <td><?php echo App\Categorie::find($discussion->categorie_id)->name;?></td>
-                            <td><?php echo App\Mom::find($discussion->mom_id)->name;?></td>
+                            <td><?php echo App\User::find($discussion->user_id)->name;?></td>
 
                             <td>
 
