@@ -100,9 +100,36 @@ Route::get('editprofile/modify/{id}', 'PediatreController@modify')->middleware('
 Route::put('profile/index/{id}', 'PediatreController@index')->middleware('auth');
 
 
-/** route pr reponse profile **/
 
-//Route::get('profile/{id}', 'ReponseController@index')->middleware('auth');
+
+
+
+
+/** route pr reponse profile **/
+Route::get('profile/indexReponse/{id}', 'ReponseController@indexReponse')->middleware('auth');
+//Route::get('profile/{id}', 'ReponseController@store')->middleware('auth');
+Route::delete('profile/{id}', 'MessageController@destroy')->middleware('auth');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Route::get('profile/note/{id}', 'PediatreController@note')->middleware('auth');
 /*Route::group(['prefix' => 'admin'], function () {
