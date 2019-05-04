@@ -41,6 +41,13 @@ class Pediatre extends Authenticatable
     {
         $this->notify(new PediatreResetPassword($token));
     }
+
+   
+
+    public function reponses()
+    {
+        return $this->hasMany('App\Reponse');
+    }
     public function messages()
     {
         return $this->hasMany('App\Message');

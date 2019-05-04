@@ -12,11 +12,12 @@ class Reponse extends Model
         return $this->belongsTo('App\Pediatre');
     }
 
-    public function getAuthor(){
-        return User::find($this->profil_id)->name;
-    }
-      public function getProfil()
+    public function getAuthor()
     {
-        return Reponse::where("profil_id","=",$this->id)->get();
+        return User::find($this->user_id)->name;
+    }
+      public function getReponse()
+    {
+        return Reponse::where("pediatre_id","=",$this->id)->get();
     }
 }
