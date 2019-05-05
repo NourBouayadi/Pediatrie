@@ -62,38 +62,20 @@ class PediatreController extends Controller
 
 //fonction stars pr recuperer les notes données au pediatres //
     public function stars($id,Request $request){
-        \Debugbar::disable();
-        
-       
-         echo "pediatre id:".$id." value:".$request->value;
-
-
-     $note= new Evaluation;   
-
- 
+        echo "pediatre id:".$id." value:".$request->value;
+        $note= new Evaluation;
         $note->point = $request->value;
         $note->pediatre_id = $id;
         $note->user_id = \Auth::user()->id;
         $note->save();
 
-
-
-        
-        $moy= DB::table('evaluations')
-           ->groupBy('pediatre_id')
-           ->having('pediatre_id','=',$id)
-           ->AVG('point');
-    
-
-         $query = DB::table('pediatres')
-            ->join('users', 'pediatres.id', '=','users.id')
-                    ->increment('users.points',$moy)
-                    ->where('pediatres.id','=',$id)
-                    ->where('isActive','=',1)
-                    ->where('isPediatre','=',1);
-    
-
-
+        $points= DB::table('evaluations')
+            ->groupBy('pediatre_id')
+            ->having('pediatre_id','=',$id)
+            ->AVG('point');
+        DB::table('users')
+            ->where('id', $id)
+            ->update(['points' => $points]);
     }
 
 
