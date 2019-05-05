@@ -9,20 +9,22 @@ use Illuminate\Http\Request;
 class ReponseController extends Controller
 {
 
+ public function index($id)
+    {
 
-    public function indexReponse($id)
-    { 
         $reponse = Reponse::find($id);
-        return view('profile', compact(['reponse']) );
-    }
-    
 
+
+        return view('profile', compact(['reponse']) );
+
+
+    }
 
     public function store(Request $request)
     {
         $reponse = new Reponse();
         $reponse->description = $request->input('description');
-        $reponse->pediatre_id = $request->input('pediatre_id');
+        $reponse->profil_id = $request->input('profil_id');
         $reponse->user_id = \Auth::user()->id;
 
         $reponse->save();
@@ -57,11 +59,8 @@ class ReponseController extends Controller
     public function destroy($id)
     {
         $reponse = Reponse::find($id);
-        $pediatre_id=$reponse->pediatre_id;
+        $profil_id=$reponse->profil_id;
         $reponse->delete();
-        return redirect('profile/'.$pediatre_id);
+        return redirect('forum/show/'.$profil_id);
     }
 }
-
-
-
