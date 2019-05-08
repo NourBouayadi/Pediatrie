@@ -19,12 +19,16 @@ class PediatreController extends Controller
     //table annuaire des pediatres pour afficher les champs: nom, date_carriere, specialite, ville & feedback
         $pediatres = DB::table('pediatres')
             ->join('users', 'pediatres.id', '=','users.id')
-            ->select('users.name','users.points', 'pediatres.specialite', 'pediatres.ville', 'pediatres.date_debut_carriere')
+            ->select('users.id','users.name','users.points', 'pediatres.specialite', 'pediatres.ville', 'pediatres.date_debut_carriere')
             ->where('isActive','=',1)
             ->where('isPediatre','=',1)->orderBy('users.points', 'desc')->paginate(5);
 
-
-        return view('pediatre.annuaire', compact(['pediatres']) );
+        $tops=  DB::table('pediatres')
+            ->join('users', 'pediatres.id', '=','users.id')
+            ->select('users.id','users.name','users.points', 'pediatres.specialite', 'pediatres.ville', 'pediatres.date_debut_carriere')
+            ->where('isActive','=',1)
+            ->where('isPediatre','=',1)->orderBy('users.points', 'desc')->limit(5);
+        return view('pediatre.annuaire', compact(['pediatres', 'tops']) );
 
     }
     //Method search in Annuaire
@@ -36,7 +40,7 @@ class PediatreController extends Controller
       $query = DB::table('pediatres')
 
           ->join('users', 'pediatres.id', '=','users.id')
-                    ->select('users.name', 'users.points', 'pediatres.specialite', 'pediatres.ville', 'pediatres.date_debut_carriere')
+                    ->select('users.id','users.name', 'users.points', 'pediatres.specialite', 'pediatres.ville', 'pediatres.date_debut_carriere')
                     ->where('isActive','=',1)
                     ->where('isPediatre','=',1);
         if($request->get('specialite')!==null && !empty($request->get('specialite'))){
@@ -44,7 +48,7 @@ class PediatreController extends Controller
         }if($request->get('ville')!==null && !empty($request->get('ville'))){
             $query->Where('pediatres.ville', 'like', '%' . $request->get('ville') . '%');
         }if($request->get('name')!==null && !empty($request->get('name'))){
-            $query->Where('users.name', 'like', '%'.$request->get('name'));
+            $query->Where('users.name', 'like', '%'.$request->get('name').'%');
         }
         $pediatres =$query->orderBy('users.points', 'desc')
             ->paginate(5);

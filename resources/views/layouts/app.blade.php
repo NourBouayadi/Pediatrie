@@ -22,6 +22,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap-select.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
@@ -96,5 +97,13 @@
     </footer>
 </body>
 <script src="{{asset('assets/js/scripts.js')}}"></script>
+<script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>
+
+<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+
+<script src="{{asset('assets/js/bootstrap-select.js')}}"></script>
+<script src="{{asset('assets/js/defaults-fr_FR.min.js')}}"></script>
+
+
 
 </html>

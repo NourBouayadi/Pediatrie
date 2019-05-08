@@ -25,6 +25,7 @@
     <div class="container col-md-12">
         <br>
         <!-- team section -->
+            @isset($tops)
         <section class="team" id="Annuaire">
             <div class="container">
                 <div class="row">
@@ -163,13 +164,17 @@
                 </div>
             </div>
         </section>
+            @endisset
         <div class="sidebar col-md-10 col-md-offset-2">
             <form role="search" method="get" action="/annuaire/search">
-                <div class="input-group"name="search" id="search">
-                    <input type="text" name="name" value="" class="col-md-3 form-control" placeholder="Rechercher par Nom" >
-                    <!--Blue select-->
-                    <select name="ville" id ="selectVille" class="col-md-3 form-control mdb-select" >
-                        <option selected>choisir une ville</option>
+                <div class="input-group  row" name="search" id="search">
+                    <div class="form-group col-md-3">
+                        <input type="text" name="name" value="" class=" form-control" placeholder="Rechercher par Nom" >
+                    </div>
+                    <!--Blue selectcol-md-3 form-control mdb-select-->
+                    <div class="form-group col-md-3">
+                    <select name="ville" id ="selectVille" class=" form-control mdb-select"  >
+                        <option selected value="">choisir une ville</option>
                         <option value="ADRAR">ADRAR</option>
                         <option value="AIN DEFLA">AIN DEFLA</option>
                         <option value="AIN TEMOUCHENT">AIN TEMOUCHENT</option>
@@ -218,21 +223,20 @@
                         <option value="TISSEMSILT">TISSEMSILT</option>
                         <option value="TIZI.OUZOU" >TIZI.OUZOU</option>
                         <option value="TLEMCEN" >TLEMCEN</option>
-
-
-
                     </select>
-                    <select name="specialite" id="selectSpecialite" class="col-md-3 form-control mdb-select">
-                        <option selected>choisir une spécialité</option>
+                    </div>
+                    <div class="form-group col-md-3">
+                    <select name="specialite" id="selectSpecialite" class=" form-control mdb-select">
+                        <option selected value="">choisir une spécialité</option>
                         <option value="Pédiatrie Générale">Pédiatrie Générale</option>
                         <option value="Gynécologie">Gynécologie</option>
                         <option value="Néonatologie et médecine du nouveau-né">Néonatologie et médecine du nouveau-né</option>
                         <option value="Psychologie de l'Enfant">Psychologie de l'Enfant</option>
                         <option value="Cardiologie Pédiatrique">Cardiologie Pédiatrique</option>
                     </select>
-
+                    </div>
                     <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-
+                </div>
                 </div>
             </form>
         </div>
@@ -241,8 +245,8 @@
             <table class="table forum table-striped">
                 <thead>
                 <tr>
-                    <th>Spécialité</th>
                     <th>Nom</th>
+                    <th>Spécialité</th>
                     <th class=" hidden-xs hidden-sm">Date du Début de Carrière</th>
                     <th>Ville</th>
                     <th>Feedback(/5)</th>
@@ -250,17 +254,13 @@
                 </thead>
                 <tbody>
                 @foreach ($pediatres as $pediatre)
-
-
-                    <tr>
-                        <td>{{$pediatre->specialite}}</td>
-                        <td>{{$pediatre->name}}</td>
-                        <td>{{$pediatre->date_debut_carriere}}</td>
-                        <td>{{$pediatre->ville}}</td>
+                   <tr>
+                          <td><a href="/profile/{{$pediatre->id}}">{{$pediatre->name}}</a></td>
+                       <td>{{$pediatre->specialite}}</td>
+                       <td>{{$pediatre->date_debut_carriere}}</td>
+                       <td>{{$pediatre->ville}}</td>
                         <td>
-
-
-                                   @if ($pediatre->points <1 )
+                                @if ($pediatre->points <1 )
                                        <i class="fa fa-star "></i>
                                        <i class="fa fa-star "></i>
                                        <i class="fa fa-star "></i>

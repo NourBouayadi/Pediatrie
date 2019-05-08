@@ -79,10 +79,10 @@ Route::get('/ficheMaladie', function () {
     return view('ficheMaladie');
 });
 
-Route::resource('ficheMaladie', 'FicheController')->middleware('auth');
-Route::post('ficheMaladie/show/{id}', 'FicheController@store')->middleware('auth');
-Route::delete('ficheMaladie/show/{id}', 'FicheController@destroy')->middleware('auth');
-
+Route::get('ficheMaladie/create', 'FicheController@create');
+Route::post('ficheMaladie/create', 'FicheController@store');
+Route::get('ficheMaladie/show/{id}', 'FicheController@show');
+Route::delete('ficheMaladie/{id}', 'FicheController@delete');
 
 /** Profile Pediatre (Fiche Professionnelle)**/
 /*Route::get('/profile', function () {
@@ -98,6 +98,8 @@ Route::get('profile/{id}', 'PediatreController@indexPediatre')->middleware('auth
 Route::get('profile/stars/{id}', 'PediatreController@stars')->middleware('auth');
 Route::get('editprofile/modify/{id}', 'PediatreController@modify')->middleware('auth');
 Route::put('profile/index/{id}', 'PediatreController@index')->middleware('auth');
+
+
 
 
 /** route pr reponse profile **/
