@@ -53,7 +53,7 @@ class FicheController extends Controller
     }
 
     public function edit( $id)
-    {
+    {   
         $fiche = Fiche::find($id);
         return view('fiche.edit', ['fiche' => $fiche]);
     }
@@ -72,11 +72,9 @@ class FicheController extends Controller
         $fiche->traitementNonMedicaux = $request->input('traitementNonMedicaux');
         $fiche->recommendation = $request->input('recommendation');
 
-
-        $fiche->pediatre_id = \Auth::user()->id;
         $fiche->save();
 
-        return redirect('ficheMaladie')->with('success', ' mise à jour de la fiche');;
+        return redirect('ficheMaladie/show{id}')->with('success', ' mise à jour de la fiche');;
     }
 
     public function destroy($id)
@@ -85,10 +83,12 @@ class FicheController extends Controller
         $fiche->delete();
         return redirect('ficheMaladie');
     }
+
     public function show($id) {
         $fiche = Fiche::find($id);
+       
         if (\Auth::user()->id==$fiche->user_id){
-            $fiche->isRead=1;
+           
             $fiche->save();
         }
         return view('fiche.show', compact(['fiche']));

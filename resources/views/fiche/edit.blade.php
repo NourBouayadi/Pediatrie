@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{url('forum/'.$fiche->id)}}" method="post" >
+                <form action="{{url('ficheMaladie/'.$fiche->id)}}" method="post" >
                     <input type="hidden" name="_method" value="PUT">
                     <!--generer les tokens, pour les cles publiques pour passer les données-->
                     {{csrf_field()}}
@@ -48,7 +48,7 @@
                        <div class="form-group">
                         <label for="">Traitements Médicaux</label>
                         <!--value : pour l'auto remplissage car ici on modifie le contenu-->
-                        <input type="text" name="tMédicaux" class="form-control" value="{{ $fiche->traitementMedicaux }}">
+                        <input type="text" name="traitementMedicaux" class="form-control" value="{{ $fiche->traitementMedicaux }}">
                        </div>
 
 
@@ -56,7 +56,7 @@
                        <div class="form-group">
                         <label for="">Traitements Non Médicaux</label>
                         <!--value : pour l'auto remplissage car ici on modifie le contenu-->
-                        <input type="text" name="tNonMédicaux" class="form-control" value="{{ $fiche->traitementNonMedicaux }}">
+                        <input type="text" name="traitementNonMedicaux" class="form-control" value="{{ $fiche->traitementNonMedicaux }}">
                        </div>
 
 

@@ -28,7 +28,7 @@ class MessageController extends Controller
 
             
 
-        }
+    }
         session()->flash('success', 'la message a été bien enregistrée');
         //TODO notify favoris
         return redirect()->back();

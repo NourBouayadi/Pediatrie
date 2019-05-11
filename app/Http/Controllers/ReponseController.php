@@ -47,6 +47,7 @@ class ReponseController extends Controller
         $reponse = Reponse::find($id);
       
        
+       
         $reponse->description = $request->input('description');
         $reponse->user_id= \Auth::user()->id;
 

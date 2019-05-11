@@ -87,10 +87,10 @@ class PediatreController extends Controller
 
          $query = DB::table('pediatres')
             ->join('users', 'pediatres.id', '=','users.id')
-                    ->increment('users.points',$moy)
                     ->where('pediatres.id','=',$id)
                     ->where('isActive','=',1)
-                    ->where('isPediatre','=',1);
+                    ->where('isPediatre','=',1)
+                    ->update(['users.points'=>$moy]);
     
 
 

@@ -35,9 +35,7 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     PédiatrieDZ
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -78,8 +76,61 @@
                             </li>
                         @endguest
 
+
+
                     </ul>
+               
+                
                 </div>
+             <ul class="nav navbar-nav navbar-right">
+
+                                <li><a class="menu active" href="#home" >Acceuil</a></li>
+                                <li  class="dropdown ">
+
+
+                                    <a href="#service" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        Catégories
+                                        <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li >
+                                            <a href="#Gro">
+                                                <strong>Grossesse</strong>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#NV"> <strong>Nouveau-Né</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="#Vet"><strong>Vêtements</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="#J"><strong> Jouets</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="#So"><strong>Sommeil</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="#Sa"><strong>Santé</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="#Be"><strong>Bien-être</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="#Ps"><strong>Psychologie</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="#Pm"><strong>Premières Marches</strong></a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li><a class="menu" href="#Annuaire">Annuaire </a></li>
+                                <li><a class="menu" href="#FAQ">FAQ</a></li>
+                                <li><a class="menu" href="#forum"> Forum</a></li>
+                                <li><a class="menu" href="#prédir">Prédir</a></li>
+                            </ul>
             </div>
         </nav>
 

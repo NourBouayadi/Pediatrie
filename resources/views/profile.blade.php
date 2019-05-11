@@ -205,13 +205,6 @@
     </div>
 <div class="row">
 
-           <div class="form-group">
-
-                <textarea class="form-control fl flat" rows="5" id="reponse" name="description" cols="50"></textarea>
-                <input type="text" name="profil_id" hidden value="{{$reponse->pediatre_id}}">
-            
-      
-            </div>
 
                                         <div class="form-group">
                                             <input class="btn btn-primary btn btn-wide" type="submit" value="Reply">

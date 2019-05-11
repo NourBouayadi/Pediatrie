@@ -240,7 +240,8 @@
                 </div>
             </form>
         @else
-    </div> <div class="row alert-danger"> <div class="col-md-offset-3 col-md-6"> <p>Vous ne pouvez pas répondre à cette discussion </p></div></div>
+    </div> 
+    <div class="row alert-danger"> <div class="col-md-offset-3 col-md-6"> <p>Vous ne pouvez pas répondre à cette discussion </p></div></div>
     @endif
 
     <div class="modal fade" id="reportPost">
