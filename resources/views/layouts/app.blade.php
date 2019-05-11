@@ -84,7 +84,7 @@
                 </div>
              <ul class="nav navbar-nav navbar-right">
 
-                                <li><a class="menu active" href="#home" >Acceuil</a></li>
+                                <li><a href="#home" >Acceuil</a></li>
                                 <li  class="dropdown ">
 
 
