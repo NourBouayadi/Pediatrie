@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pediatre;
 use App\Evaluation;
+use App\Reponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
@@ -28,7 +29,7 @@ class PediatreController extends Controller
             ->select('users.id','users.name','users.points', 'pediatres.specialite', 'pediatres.ville', 'pediatres.date_debut_carriere')
             ->where('isActive','=',1)
             ->where('isPediatre','=',1)->orderBy('users.points', 'desc')->limit(5);
-        return view('pediatre.annuaire', compact(['pediatres', 'tops']) );
+        return view('pediatre.annuaire', compact(['pediatres', 'tops','reponses']) );
 
     }
     //Method search in Annuaire
@@ -58,11 +59,15 @@ class PediatreController extends Controller
     public function indexPediatre($id)
     { 
         $pediatre = Pediatre::find($id);
-        return view('profile', compact(['pediatre']) );
-    }
-    
-    
+        //tables des commentaire sur un profile
 
+        $reponses = DB::table('reponses')
+            ->join('users', 'reponses.user_id', '=', 'users.id')
+            ->select('reponses.description', 'users.name')
+            ->where('reponses.pediatre_id', '=', $id)->get();
+
+        return view('profile', compact(['pediatre', 'reponses']) );
+    }
 
 //fonction stars pr recuperer les notes données au pediatres //
     public function stars($id,Request $request){
@@ -85,13 +90,18 @@ class PediatreController extends Controller
 
     public function modify($id)
     {
-
-
         $pediatre = Pediatre::find($id);
-
         return view('editprofile', compact(['pediatre']) );
 
-
+    }
+    public function storeCommentaire($id, Request $request)
+    {
+        $reponses = new Reponse();
+        $reponses->description= $request->input('description');
+        $reponses->pediatre_id= $id;
+        $reponses->user_id= \Auth::user()->id;
+        $reponses->save();
+            return redirect('profile/'.$id);
     }
 
 }

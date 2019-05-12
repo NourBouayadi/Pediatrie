@@ -32,8 +32,9 @@
                       <div class="form-group">
                        <label for="">Sexe</label>
                           <select name="sexe" id="">
-                              <option value="femme">femme</option>
-                              <option value="homme">homme</option>
+                              <option value="fille">fille</option>
+                              <option value="garcon">garçon</option>
+                              <option value="indifferent">indifferent</option>
                           </select>
                     </div>
 

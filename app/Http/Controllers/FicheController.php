@@ -20,10 +20,10 @@ class FicheController extends Controller
     {
 
 
-        $fiches = Maladie::paginate(5);
+        $symptomes = Symptome::all();
+        $fiches = Maladie::all();
 
-
-        return view('ficheMaladie', compact(['fiches']) );
+        return view('fiche.index', compact(['fiches', 'symptomes']) );
 
     }
 
@@ -40,15 +40,11 @@ class FicheController extends Controller
         $fiche = new Maladie();
         $fiche->nom = $request->input('nom');
         $fiche->description = $request->input('description');
-
-
-        $fiche->sexe = $request->input('sexe')=='femme'?true:false;
-        //$fiche->categorie_id = $request->input('categorie_id');
+        $fiche->sexe = $request->input('sexe');
+        $fiche->categorie_id = $request->input('categorie_id');
         $fiche->traitement_medical = $request->input('traitement_medical');
         $fiche->traitement_nonmedical = $request->input('traitement_nonmedical');
         //$fiche->recommendation = $request->input('recommendation');
-
-
         $fiche->pediatre_id = \Auth::user()->id;
         $fiche->save();
 /*la selection des symptomes peut etre multiple donc une boucle pour récuperer tous les choix, puis persister dans la table
@@ -69,8 +65,6 @@ maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
         return view('fiche.edit', ['fiche' => $fiche]);
     }
 
-
-
     public function destroy($id)
     {
         $fiche = Maladie::find($id);
@@ -84,17 +78,24 @@ maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
             ->join('symptomes', 'maladies_symptomes.symptome_id', '=','symptomes.id')
             ->select('symptomes.nom','maladies_symptomes.symptome_id')->where('maladie_id', '=',$id)->get();
 
+        $fiche->vue++;
+        $fiche->save();
         return view('fiche.show', compact(['fiche','symptomes']));
 
     }
-   
-
     public function search (Request $request){
-        $fiches=Maladie::where('titre', 'like', '%' . $request->get('search') . '%')
-            ->orWhere('description', 'like', '%' . $request->get('search') . '%')
-            ->paginate(5);
-        return view('ficheMaladie', compact( 'fiches'));
-    }
+        $query = DB::table('maladies');
+
+        if($request->get('nom')!==null && !empty($request->get('nom'))){
+            $query->where('nom', 'like', '%' . $request->get('nom') . '%');
+        }if($request->get('sexe')!==null && !empty($request->get('sexe'))) {
+            $query->Where('sexe', '=', '"' . $request->get('sexe') . '"');
+        }
+        $fiches =$query->orderBy('vue', 'desc')->get();
+
+        $symptomes = Symptome::all();
+
+        return view('fiche.index', compact(['fiches','symptomes']));}
 
     public function indexSymptomes(Request $request)
     {

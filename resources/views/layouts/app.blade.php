@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/simplemde.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/select2.min.css')}}">
 
 </head>
 <body>
@@ -89,12 +90,12 @@
         </main>
     </div>
     <br>
-    <footer class="footer">
+ <!--   <footer class="footer">
         <div class="container">
             Copyright &copy; PediatrieDZ2019
             <span class="pull-right"><a href="/contact">Contact Us</a></span>
         </div>
-    </footer>
+    </footer>-->
 </body>
 <script src="{{asset('assets/js/scripts.js')}}"></script>
 <script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>
@@ -103,6 +104,7 @@
 
 <script src="{{asset('assets/js/bootstrap-select.js')}}"></script>
 <script src="{{asset('assets/js/defaults-fr_FR.min.js')}}"></script>
+<script src="{{asset('assets/js/select2.min.js')}}"></script>
 
 
 

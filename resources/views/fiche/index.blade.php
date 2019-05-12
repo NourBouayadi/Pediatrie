@@ -1,60 +1,87 @@
 @extends('layouts.app')
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{{asset('assets/fonts/web-icons/web-icons.css')}}">
+<link rel="stylesheet" href="{{asset('assets/fonts/font-awesome/font-awesome.css')}}">
+<!-- Styles -->
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/simplemde.min.css')}}">
+
+<link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/notationEtoile.css')}}">
+<!-- links for slider num2 -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick-theme.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
 @section('content')
 
-    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/simplemde.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/fonts/web-icons/web-icons.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/fonts/font-awesome/font-awesome.css')}}">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-
-
-                <h1>La liste des Patients</h1>
-                <div class="pull-right">
-                    <a href="{{url('ficheMaladie/create')}}" class="btn btn-success">Nouvelle Fiche</a>
+    <div class="container col-md-12">
+        <br>
+        <!-- team section -->
+        <table class="table forum table-striped">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Sexe</th>
+                <th>Vue</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($fiches as $fiche)
+                <tr>
+                    <td> {{$fiche->nom}}</td>
+                    <td>{{$fiche->sexe}}
+                    <td> {{$fiche->vue}}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>        <div class="sidebar col-md-10 col-md-offset-2">
+            <form role="search" method="get" action="/ficheMaladie/search">
+                <div class="input-group  row" name="search" id="search">
+                    <div class="form-group col-md-3">
+                        <input type="text" name="nom" value="" class=" form-control" placeholder="Rechercher par Nom" >
+                    </div>
+                    <!--Blue selectcol-md-3 form-control mdb-select-->
+                    <div class="form-group col-md-3">
+                        <select name="sexe" class=" form-control mdb-select">
+                            <option  value="fille">Fille</option>
+                            <option  value="garcon">Garçon</option>
+                            <option value="indifferent">indifferent</option>
+                         </select>
+                    </div>
+                    <div class="form-group col-md-3">  <select id="selectSymptome" name="" class=" form-control mdb-select" >
+                            @foreach($symptomes as $symptome)
+                                <option value="{{$symptome->id}}">{{$symptome->nom}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                 </div>
-                <br>
-                <table class="table forum table-striped">
-                    <head>
-                        <tr>
-                            <th>Titre</th>
-                            <th>Description</th>
-                            <th>date pub</th>
-                            <th>Categorie</th>
-                            <th>Auteur</th>
-                            <th>Action</th>
-                        </tr>
-                    </head>
-                    <body>
-                    @foreach($fiches as $fiche)
-                        <tr>
-                            <td>{{$fiche->titre}}</td>
-                            <td>{{$fiche->description}}</td>
-                            <td>{{$fiche->created_at}}</td>
-                            <td><?php echo App\Categorie::find($fiche->categorie_id)->name;?></td>
-                            <td><?php echo App\User::find($fiche->user_id)->name;?></td>
-
-                            <td>
-
-                                <form action="{{url('ficheMaladie/'.$fiche->id)}}" method="post">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-                                    <a href="" class="btn btn-primary">Details</a>
-                                    <a href="{{url('ficheMaladie/'.$fiche->id.'/edit')}}" class="btn btn-default">Editer</a>
-
-                                    @can('delete', $fiche)
-                                        <button type="submit" class="btn btn-danger">Supprimer</button>
-                                    @endcan
-                                </form>
-
-                            </td>
-                        </tr>
-                    @endforeach
-                    </body>
-                </table>
-            </div>
-        </div>
+            </form></div>
+        </form>
     </div>
+    </div>
+
+<script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>
+
+<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/js/select2.min.js')}}"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        jQuery.noConflict();
+        $('#selectSymptome').select2();
+
+
+        //jQuery.noConflict();$('#my-select').searchableOptionList();
+    });
+</script>
 @endsection

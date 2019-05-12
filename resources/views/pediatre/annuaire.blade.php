@@ -31,15 +31,17 @@
                 <div class="row">
                     <div class="team-heading text-center">
                         <h2>Bienvenue</h2>
-                        <h4>Sur le 1ᵉʳ Forum algérienne des pédiatres, vous etes actuellement entouré d'une équipe des pédiatres</h4>
+                        <h4>Sur le 1ᵉʳ Forum algérien des pédiatres, vous etes actuellement entouré d'une équipe des pédiatres</h4>
                     </div>
+                        @foreach($pediatres as $pediatre)
                     <div class="col-md-2 single-member col-sm-4">
                         <div class="person">
-                            <img class="img-responsive" src="{{asset('assets/img/member1.jpg')}}" alt="member-1">
+                        <!--    <img class="img-responsive" src="{{asset('assets/img/member1.jpg')}}" alt="member-1">-->
+                            <p>{{$pediatre->specialite}}</p>
                         </div>
                         <div class="person-detail">
                             <div class="arrow-bottom"></div>
-                            <h3>Dr.Allal, M.D.</h3>
+                            <h4><a href="/profile/{{$pediatre->id}}">{{$pediatre->name}}</a></h4>
                             <div class="rating">
                                 <div class="stars">
                                     <i class="fa fa-star gold"></i>
@@ -48,119 +50,12 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 single-member col-sm-4">
-                        <div class="person-detail">
-                            <div class="arrow-top"></div>
-                            <h3>Dr. Benkalfat, M.D.</h3>
-
-                            <div class="rating">
-                                <div class="stars">
-                                    <i class="fa fa-star gold"></i>
-                                    <i class="fa fa-star gold"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-
+                                <p>{{$pediatre->ville}}</p>
                             </div>
 
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                        </div>
-                        <div class="person">
-                            <img class="img-responsive" src="{{asset('assets/img/member2.jpg')}}" alt="member-2">
                         </div>
                     </div>
-                    <div class="col-md-2 single-member col-sm-4">
-                        <div class="person">
-                            <img class="img-responsive" src="{{asset('assets/img/member3.jpg')}}" alt="member-3">
-                        </div>
-                        <div class="person-detail">
-                            <div class="arrow-bottom"></div>
-                            <h3>Dr. Mansour, M.D.</h3>
-                            <div class="rating">
-                                <div class="stars">
-                                    <i class="fa fa-star gold"></i>
-                                    <i class="fa fa-star gold"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-
-                            </div>
-
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 single-member col-sm-4">
-                        <div class="person-detail">
-                            <div class="arrow-top"></div>
-                            <h3>Dr. BenAllal, M.D.</h3>
-                            <div class="rating">
-                                <div class="stars">
-                                    <i class="fa fa-star gold"></i>
-                                    <i class="fa fa-star gold"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-
-                            </div>
-
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                        </div>
-                        <div class="person">
-                            <img class="img-responsive" src="{{asset('assets/img/member4.jpg')}}" alt="member-4">
-                        </div>
-                    </div>
-                    <div class="col-md-2 single-member col-sm-4">
-                        <div class="person">
-                            <img class="img-responsive" src="{{asset('assets/img/member5.jpg')}}" alt="member-5">
-                        </div>
-                        <div class="person-detail">
-                            <div class="arrow-bottom"></div>
-                            <h3>Dr. Mohamed, M.D.</h3>
-
-                            <div class="rating">
-                                <div class="stars">
-                                    <i class="fa fa-star gold"></i>
-                                    <i class="fa fa-star gold"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 single-member col-sm-4">
-
-                        <div class="person-detail">
-                            <div class="arrow-top"></div>
-                            <h3>Dr. Hasina, M.D.</h3>
-
-                            <div class="rating">
-                                <div class="stars">
-                                    <i class="fa fa-star gold"></i>
-                                    <i class="fa fa-star gold"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                        </div>
-
-                        <div class="person">
-                            <img class="img-responsive" src="{{asset('assets/img/member6.jpg')}}" alt="member-5">
-                        </div>
-                    </div>
+                        @endforeach
                 </div>
             </div>
         </section>
@@ -168,12 +63,12 @@
         <div class="sidebar col-md-10 col-md-offset-2">
             <form role="search" method="get" action="/annuaire/search">
                 <div class="input-group  row" name="search" id="search">
-                    <div class="form-group col-md-3">
-                        <input type="text" name="name" value="" class=" form-control" placeholder="Rechercher par Nom" >
-                    </div>
+                    <div class="form-group col-md-10">
+                        <input type="text" name="name" value="" class="col-md-3 form-control" placeholder="Rechercher par Nom" >
+
                     <!--Blue selectcol-md-3 form-control mdb-select-->
-                    <div class="form-group col-md-3">
-                    <select name="ville" id ="selectVille" class=" form-control mdb-select"  >
+                    <div class="col-md-3 form-control mdb-select">
+                    <select name="ville" id ="selectVille" class=""  >
                         <option selected value="">choisir une ville</option>
                         <option value="ADRAR">ADRAR</option>
                         <option value="AIN DEFLA">AIN DEFLA</option>
@@ -221,12 +116,12 @@
                         <option value="TINDOUF" >TINDOUF</option>
                         <option value="TIPAZA" >TIPAZA</option>
                         <option value="TISSEMSILT">TISSEMSILT</option>
-                        <option value="TIZI.OUZOU" >TIZI.OUZOU</option>
+                        <option value="TIZIOUZOU" >TIZIOUZOU</option>
                         <option value="TLEMCEN" >TLEMCEN</option>
                     </select>
                     </div>
-                    <div class="form-group col-md-3">
-                    <select name="specialite" id="selectSpecialite" class=" form-control mdb-select">
+                    <div class="col-md-3 form-control mdb-select">
+                    <select name="specialite" id="selectSpecialite" class="">
                         <option selected value="">choisir une spécialité</option>
                         <option value="Pédiatrie Générale">Pédiatrie Générale</option>
                         <option value="Gynécologie">Gynécologie</option>
@@ -235,9 +130,10 @@
                         <option value="Cardiologie Pédiatrique">Cardiologie Pédiatrique</option>
                     </select>
                     </div>
-                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                    <button class="col-md-1 btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                 </div>
                 </div>
+
             </form>
         </div>
 
@@ -314,13 +210,15 @@
 
     </div>
 
-@endsection
-<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+
 <script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>
-<script src="{{asset('assets/js/select2.js')}}"></script>
 
-<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script src="{{asset('assets/js/gmaps.js')}}"></script>
-<script src="{{asset('assets/js/smoothscroll.js')}}"></script>
-
-<script src="{{asset('assets/js/custom.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        jQuery.noConflict();
+        $('#selectVille').select2();
+        $('#selectSpecialite').select2();
+        //jQuery.noConflict();$('#my-select').searchableOptionList();
+    });
+</script>
+@endsection

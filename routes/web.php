@@ -75,14 +75,15 @@ Route::get('/forum/discussion/','DiscussionController@discussion');
 Route::resource('forum', 'DiscussionController')->middleware('auth');
 
 /** Route pour la fiche Maladie**/
-Route::get('/ficheMaladie', function () {
-    return view('ficheMaladie');
-});
+Route::get('ficheMaladie', 'FicheController@index');
 
 Route::get('ficheMaladie/create', 'FicheController@create');
 Route::post('ficheMaladie/create', 'FicheController@store');
 Route::get('ficheMaladie/show/{id}', 'FicheController@show');
+Route::get('ficheMaladie/search', 'FicheController@search');
+
 Route::delete('ficheMaladie/{id}', 'FicheController@delete');
+
 
 /** Profile Pediatre (Fiche Professionnelle)**/
 /*Route::get('/profile', function () {
@@ -98,6 +99,7 @@ Route::get('profile/{id}', 'PediatreController@indexPediatre')->middleware('auth
 Route::get('profile/stars/{id}', 'PediatreController@stars')->middleware('auth');
 Route::get('editprofile/modify/{id}', 'PediatreController@modify')->middleware('auth');
 Route::put('profile/index/{id}', 'PediatreController@index')->middleware('auth');
+Route::post('profile/{id}', 'PediatreController@storeCommentaire')->middleware('auth');
 
 
 

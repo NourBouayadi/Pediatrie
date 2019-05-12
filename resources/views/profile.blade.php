@@ -116,9 +116,7 @@
                         </div>
 
                     </div>
-                    <div class="widget-footer">
 
-                    </div>
                 </div>
             </div>
         </div>
@@ -228,72 +226,54 @@
 
                                     </tr-->
                                 </table>
-
-                                <div id="mapouter" class="row">
-                                    <div class="gmap_canvas"><iframe width="500" height="250" id="gmap_canvas"
-                                                                      src="https://maps.google.com/maps?q={{$pediatre->latitude}}%2C{{$pediatre->longitude}}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-                                </div></div>
-
-
-<div class="container">
-<div class="row">
-    <div class="col-md-12">
-        <span class="help-block">
-           Laissez un Commentaire 
-        </span>
-    </div>
-<div class="row">
-
-             
-
-
-         
-
-
-
-                                        <div class="form-group">
-                                            <input class="btn btn-primary btn btn-wide" type="submit" value="Reply">
-                                        </div>
-                                    </div>
-
-                                </form>
                             </div>
+
+
                         </div>
                     </div>
+                </div>
+                <div id="mapouter" class="row col-md-offset-2">
+                    <div class="gmap_canvas"><iframe width="500" height="250" id="gmap_canvas"
+                                                     src="https://maps.google.com/maps?q={{$pediatre->latitude}}%2C{{$pediatre->longitude}}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                    </div></div>
+                <div class="col-md-8">
 
-                    <div class="modal fade" id="give_feedback" role="dialog">
-                        <div class="modal-dialog  modal-center">
+                    <div class="col-md-8">
+                        <h3>Les commentaires</h3>
+                        <table>
+                            @foreach($reponses as $reponse)
+                                <tr>{{$reponse->description}} -{{$reponse->name}}</tr>
+                                <br>
+                                <hr>
+                            @endforeach
+                        </table>
+                        <br>
+                    </div>
+                    <div class="col-md-12">
+                        <form action="" method="post">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <span class="help-block">Laissez un Commentaire</span>
+                                <textarea type="text" value="description" name="description" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input class="btn btn-primary btn btn-wide" type="submit" value="Reply">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                            <div class="modal-content">
 
-                                <div class="modal-header">
 
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                                    <h4 class="modal-title">Feedback for Pédiatre</h4>
-                                </div>
+</div>
+</div>
 
-                                <form method="POST" action="http://demo.procoderr.tech/profile/admin/feedback"
-                                      accept-charset="UTF-8">
 
-                                    <input name="_token" type="hidden" value="bubVJ7cqwd2z9dmEUWihJBHpXC0KRE7atP0sdpwX">
-                                    <div class="modal-body">
-                                        <label for="points">Points</label>
-                                        <select class="form-control" id="points" name="points">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
 
-                                        <label for="text">Feedback</label>
-                                        <textarea class="form-control" rows="2" placeholder="Enter your feedback"
-                                                  name="text" cols="50" id="text">
-                                         </textarea>
-                                    </div>
-                                </form>
-                            </div></div></div>
+
         
 <script src="{{asset('assets/js/script2.js')}}"></script>
 <script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>

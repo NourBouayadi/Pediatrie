@@ -28,11 +28,7 @@
                     <div class="col-md-10">
                         <table class="table" >
                        <tr><th class="col-md-2">Sexe</th>
-                           @if ($fiche->sexe==1)
-                               <td>Fille</td>
-                           @else
-                               <td>Garçon</td>
-                           @endif
+                           <td>{{$fiche->sexe}}</td>
 
                        </tr>
                        <tr><th>Descrition</th><td> {{$fiche->description}}</td></tr>
