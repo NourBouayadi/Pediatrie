@@ -245,146 +245,41 @@ header section -->
         </div>
     </section>
 <!-- team section -->
-<section class="team" id="Annuaire">
-    <div class="container">
-        <div class="row">
-            <div class="team-heading text-center">
-                <h2>Bienvenue</h2>
-                <h4>Sur le 1ᵉʳ Forum algérienne des pédiatres, vous etes actuellement entouré d'une équipe des pédiatres</h4>
-            </div>
+@isset($tops)
+    <section class="team" id="Annuaire">
+        <div class="container">
+            <div class="row">
+                <div class="team-heading text-center col-md-12">
 
-            <div class="col-md-2 single-member col-sm-4">
-                <div class="person">
-                    <img class="img-responsive" src="{{asset('assets/img/member1.jpg')}}" alt="member-1">
+                    <h3 >Annuaire des pédiatres Algériens</h3>
+                    <br>
+                    <h4>La liste des 5 tops pédiatres du Forum</h4>
+
+
                 </div>
-                <div class="person-detail">
-                    <div class="arrow-bottom"></div>
-                    <h3>Dr.Allal, M.D.</h3>
-                    <div class="rating">
-                        <div class="stars">
-                            <i class="fa fa-star gold"></i>
-                            <i class="fa fa-star gold"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                <hr>
+                @foreach($pediatres as $pediatre)
+                    <div class="col-md-3 single-member col-sm-4">
+
+                        <div class="person-detail">
+                            <div class="arrow-bottom" ></div>
+                            <div  style="display: inline-block; text-align: center;"><h5><a href="/profile/{{$pediatre->id}}" style="color: white; text-align: center;" class="col-md-2">{{$pediatre->name}}</a></h5> </div>
+                            <br>
+                            <div>
+                                <p>Spécialité: {{$pediatre->specialite}}</p>
+
+                                <p>Ville: {{$pediatre->ville}}</p>
+                                <b class=""><a href="/profile/{{$pediatre->id}}">>>voir le profile</a></b>
+
+                            </div>
+
                         </div>
-
                     </div>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                </div>
-            </div>
-            <div class="col-md-2 single-member col-sm-4">
-                <div class="person-detail">
-                    <div class="arrow-top"></div>
-                    <h3>Dr. Benkalfat, M.D.</h3>
-
-                    <div class="rating">
-                        <div class="stars">
-                            <i class="fa fa-star gold"></i>
-                            <i class="fa fa-star gold"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-
-                    </div>
-
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                </div>
-                <div class="person">
-                    <img class="img-responsive" src="{{asset('assets/img/member2.jpg')}}" alt="member-2">
-                </div>
-            </div>
-            <div class="col-md-2 single-member col-sm-4">
-                <div class="person">
-                    <img class="img-responsive" src="{{asset('assets/img/member3.jpg')}}" alt="member-3">
-                </div>
-                <div class="person-detail">
-                    <div class="arrow-bottom"></div>
-                    <h3>Dr. Mansour, M.D.</h3>
-                    <div class="rating">
-                        <div class="stars">
-                            <i class="fa fa-star gold"></i>
-                            <i class="fa fa-star gold"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-
-                    </div>
-
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                </div>
-            </div>
-            <div class="col-md-2 single-member col-sm-4">
-                <div class="person-detail">
-                    <div class="arrow-top"></div>
-                    <h3>Dr. BenAllal, M.D.</h3>
-                    <div class="rating">
-                        <div class="stars">
-                            <i class="fa fa-star gold"></i>
-                            <i class="fa fa-star gold"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-
-                    </div>
-
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                </div>
-                <div class="person">
-                    <img class="img-responsive" src="{{asset('assets/img/member4.jpg')}}" alt="member-4">
-                </div>
-            </div>
-            <div class="col-md-2 single-member col-sm-4">
-                <div class="person">
-                    <img class="img-responsive" src="{{asset('assets/img/member5.jpg')}}" alt="member-5">
-                </div>
-                <div class="person-detail">
-                    <div class="arrow-bottom"></div>
-                    <h3>Dr. Mohamed, M.D.</h3>
-
-                    <div class="rating">
-                        <div class="stars">
-                            <i class="fa fa-star gold"></i>
-                            <i class="fa fa-star gold"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-
-                    </div>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                </div>
-            </div>
-            <div class="col-md-2 single-member col-sm-4">
-
-                <div class="person-detail">
-                    <div class="arrow-top"></div>
-                    <h3>Dr. Hasina, M.D.</h3>
-
-                    <div class="rating">
-                        <div class="stars">
-                            <i class="fa fa-star gold"></i>
-                            <i class="fa fa-star gold"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-
-                    </div>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-                </div>
-
-                <div class="person">
-                    <img class="img-responsive" src="{{asset('assets/img/member6.jpg')}}" alt="member-5">
-                </div>
+                @endforeach
             </div>
         </div>
-    </div>
-</section><!-- end of team section -->
-
+    </section>
+@endisset
 
 <!-- Discussions les plus populaires -->
 <section class="about text-center" id="FAQ">

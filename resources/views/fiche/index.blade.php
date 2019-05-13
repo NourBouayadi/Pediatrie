@@ -51,12 +51,12 @@
                     <!--Blue selectcol-md-3 form-control mdb-select-->
                     <div class="form-group col-md-3">
                         <select name="sexe" class=" form-control mdb-select">
+                            <option value="indifferent">indifferent</option>
                             <option  value="fille">Fille</option>
                             <option  value="garcon">Garçon</option>
-                            <option value="indifferent">indifferent</option>
                          </select>
                     </div>
-                    <div class="form-group col-md-3">  <select id="selectSymptome" name="" class=" form-control mdb-select" >
+                    <div class="form-group col-md-3">  <select id="selectSymptome" name="symptomes[]" class=" form-control mdb-select" multiple>
                             @foreach($symptomes as $symptome)
                                 <option value="{{$symptome->id}}">{{$symptome->nom}}</option>
                             @endforeach

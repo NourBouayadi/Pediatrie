@@ -32,6 +32,22 @@ class PediatreController extends Controller
         return view('pediatre.annuaire', compact(['pediatres', 'tops','reponses']) );
 
     }
+    public function indexAccueil()
+    {
+        //table annuaire des pediatres pour afficher les champs: nom, date_carriere, specialite, ville & feedback
+        $pediatres = DB::table('pediatres')
+            ->join('users', 'pediatres.id', '=','users.id')
+            ->select('users.id','users.name','users.points', 'pediatres.specialite', 'pediatres.ville', 'pediatres.date_debut_carriere')
+            ->where('isActive','=',1)
+            ->where('isPediatre','=',1)->orderBy('users.points', 'desc')->paginate(5);
+        $tops=  DB::table('pediatres')
+            ->join('users', 'pediatres.id', '=','users.id')
+            ->select('users.id','users.name','users.points', 'pediatres.specialite', 'pediatres.ville', 'pediatres.date_debut_carriere')
+            ->where('isActive','=',1)
+            ->where('isPediatre','=',1)->orderBy('users.points', 'desc')->limit(5);
+        return view('welcome', compact(['pediatres','tops']) );
+
+    }
     //Method search in Annuaire
     public function search (Request $request){
        /* $pediatres=Pediatre::where('specialite', 'like', '%' . $request->get('specialite') . '%')

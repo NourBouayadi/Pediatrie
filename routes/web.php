@@ -94,6 +94,9 @@ Route::delete('ficheMaladie/{id}', 'FicheController@delete');
 Route::get('/annuaire', 'PediatreController@index');
 Route::get('/annuaire/search/', 'PediatreController@search');
 
+/**Route pour l'acceuil**/
+Route::get('/', 'PediatreController@indexAccueil');
+
 /**Route pour le profile pediatre*/
 Route::get('profile/{id}', 'PediatreController@indexPediatre')->middleware('auth');
 Route::get('profile/stars/{id}', 'PediatreController@stars')->middleware('auth');
