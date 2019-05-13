@@ -386,7 +386,7 @@ header section -->
 </section><!-- end of team section -->
 
 
-<!-- about section -->
+<!-- Discussions les plus populaires -->
 <section class="about text-center" id="FAQ">
     <div class="container">
         <div class="row">
@@ -453,7 +453,7 @@ header section -->
 <br>
 <br>
 
-
+<!--Système de Prédiction-->
 <section class="team" id="Annuaire">
     <div class="container">
         <div class="row">
@@ -476,7 +476,7 @@ header section -->
 <br>
 
 
-
+<!--Articles les plus populaires-->
 <section class="about text-center" id="FAQ">
     <div class="container">
         <div class="row">

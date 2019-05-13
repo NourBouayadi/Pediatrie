@@ -87,7 +87,6 @@ class PediatreController extends Controller
             ->update(['points' => $points]);
     }
 
-
     public function modify($id)
     {
         $pediatre = Pediatre::find($id);

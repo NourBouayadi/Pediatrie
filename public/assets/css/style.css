@@ -388,7 +388,7 @@ li a.active {
 }
 .team h2 {
     font-size: 90px;
-    color: #42b3e5;
+    color: #1abc9c;
     margin-top: 50px;
     margin-bottom: 0;
 }
@@ -407,7 +407,7 @@ li a.active {
 }
 .person-detail {
     padding: 10px;
-    background: #3a9cc8;
+    background: #80cebf;
     position: relative;
     transition: all .7s ease 0s;
     -webkit-transition: all .7s ease 0s;
@@ -419,7 +419,7 @@ li a.active {
     position: absolute;
     width: 20px;
     height: 20px;
-    background: #3ba0cc;
+    background: #eeeeee;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
@@ -437,7 +437,7 @@ li a.active {
     position: absolute;
     width: 20px;
     height: 20px;
-    background: #3ba0cc;
+    background: #80cebf;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);

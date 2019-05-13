@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap-select.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
+
     <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/simplemde.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/select2.min.css')}}">
@@ -43,12 +45,34 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto col-md-10">
+                        <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link"class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Catégories <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/forum/categorie/1">Grossesse</a>
+                                <a class="dropdown-item" href="/forum/categorie/2">Nouveau-Né</a>
+                                <a class="dropdown-item" href="/forum/categorie/3">Vêtements</a>
+                                <a class="dropdown-item" href="/forum/categorie/4">Jouets</a>
+                                <a class="dropdown-item" href="/forum/categorie/5">Sommeil</a>
+                                <a class="dropdown-item" href="/forum/categorie/6">Santé</a>
+                                <a class="dropdown-item" href="/forum/categorie/7">Bien-Etre</a>
+                                <a class="dropdown-item" href="/forum/categorie/8">Psychologie</a>
+                                <a class="dropdown-item" href="/forum/categorie/9">Premières-Marches</a>
+
+                            </div>
+                        </li>
+                        <li class="nav-item"><a href="/annuaire" class="nav-link">Annuaire</a></li>
+                        <li class="nav-item"><a href="/forum" class="nav-link">FAQ</a></li>
+                        <li class="nav-item"><a href="/forum" class="nav-link">Forum</a></li>
+                        <li class="nav-item"><a href="/ficheMaladie" class="nav-link">Prédire</a></li>
+
 
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto col-md-2">
 
                         <!-- Authentication Links -->
                         @guest

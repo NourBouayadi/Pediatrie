@@ -29,28 +29,28 @@
         <section class="team" id="Annuaire">
             <div class="container">
                 <div class="row">
-                    <div class="team-heading text-center">
-                        <h2>Bienvenue</h2>
-                        <h4>Sur le 1ᵉʳ Forum algérien des pédiatres, vous etes actuellement entouré d'une équipe des pédiatres</h4>
+                    <div class="team-heading text-center col-md-12">
+
+                        <h3 >Annuaire des pédiatres Algériens</h3>
+                        <br>
+                        <h4>La liste des 5 tops pédiatres du Forum</h4>
+
+
                     </div>
+                    <hr>
                         @foreach($pediatres as $pediatre)
-                    <div class="col-md-2 single-member col-sm-4">
-                        <div class="person">
-                        <!--    <img class="img-responsive" src="{{asset('assets/img/member1.jpg')}}" alt="member-1">-->
-                            <p>{{$pediatre->specialite}}</p>
-                        </div>
+                    <div class="col-md-3 single-member col-sm-4">
+
                         <div class="person-detail">
-                            <div class="arrow-bottom"></div>
-                            <h4><a href="/profile/{{$pediatre->id}}">{{$pediatre->name}}</a></h4>
-                            <div class="rating">
-                                <div class="stars">
-                                    <i class="fa fa-star gold"></i>
-                                    <i class="fa fa-star gold"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <p>{{$pediatre->ville}}</p>
+                            <div class="arrow-bottom" ></div>
+                            <div  style="display: inline-block; text-align: center;"><h5><a href="/profile/{{$pediatre->id}}" style="color: white; text-align: center;" class="col-md-2">{{$pediatre->name}}</a></h5> </div>
+                            <br>
+                            <div>
+                                <p>Spécialité: {{$pediatre->specialite}}</p>
+
+                                <p>Ville: {{$pediatre->ville}}</p>
+                                <b class=""><a href="/profile/{{$pediatre->id}}">>>voir le profile</a></b>
+
                             </div>
 
                         </div>
@@ -137,7 +137,7 @@
             </form>
         </div>
 
-        <div class="col-md-10">
+        <div class="col-md-8 col-md-offset-2">
             <table class="table forum table-striped">
                 <thead>
                 <tr>
