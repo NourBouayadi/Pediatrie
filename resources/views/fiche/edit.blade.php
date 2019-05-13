@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{url('ficheMaladie/'.$fiche->id)}}" method="post" >
-                    <input type="hidden" name="_method" value="PUT">
+                <form action="{{url('ficheMaladie/edit/'.$fiche->id)}}" method="post" >
+                    
                     <!--generer les tokens, pour les cles publiques pour passer les données-->
                     {{csrf_field()}}
                     <div class="form-group">

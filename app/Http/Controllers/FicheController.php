@@ -74,7 +74,7 @@ class FicheController extends Controller
 
         $fiche->save();
 
-        return redirect('ficheMaladie/show{id}')->with('success', ' mise à jour de la fiche');;
+        return redirect('ficheMaladie/show/'.$id)->with('success', ' mise à jour de la fiche');;
     }
 
     public function destroy($id)
@@ -87,10 +87,6 @@ class FicheController extends Controller
     public function show($id) {
         $fiche = Fiche::find($id);
        
-        if (\Auth::user()->id==$fiche->user_id){
-           
-            $fiche->save();
-        }
         return view('fiche.show', compact(['fiche']));
 
     }

@@ -85,7 +85,7 @@ Route::post('ficheMaladie/show/{id}', 'FicheController@store')->middleware('auth
 Route::get('ficheMaladie/show/{id}', 'FicheController@show')->middleware('auth');
 Route::delete('ficheMaladie/show/{id}', 'FicheController@destroy')->middleware('auth');
 Route::get('ficheMaladie/edit/{id}', 'FicheController@edit')->middleware('auth');
-Route::post('ficheMaladie/edit/{id}', 'FicheController@edit')->middleware('auth');
+Route::post('ficheMaladie/edit/{id}', 'FicheController@update')->middleware('auth');
 
 
 /** Profile Pediatre (Fiche Professionnelle)**/

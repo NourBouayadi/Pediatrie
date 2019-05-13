@@ -85,8 +85,10 @@
                 <tr>
                   <td></td>
                     
+
+
                      <td>
-                         <h4><a href="ficheMaladie/show/{{$fiche->id}}">{{$fiche->titre}}</a>
+                         <h4><a href="{{url('ficheMaladie/show/'.$fiche->id)}}">{{$fiche->titre}}</a>
                              <br>
                               <small class="help-block"> Par
 
@@ -124,7 +126,7 @@
 
         <div class="list-group">
            
-            <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="#fiche"> Ma fiche professionnelle
+            <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#fichepro')}}"> Ma fiche professionnelle
              <span id="favoris" class="badge badge-info"></span>
              
 

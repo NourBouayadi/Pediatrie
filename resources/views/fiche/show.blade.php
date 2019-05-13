@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Pediatre-DZ</title>
+    <title>PediatreDZ</title>
 
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets//css/app.css')}}">
@@ -21,7 +20,6 @@
         <div class="navbar-header">
 
 
-            
             <!-- Collapsed Hamburger -->
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#app-navbar-collapse">
@@ -80,11 +78,8 @@
         </div>
     </div>
 </nav>
-
 <div class="container">
-
-
-    <h3><a href="{{url('ficheMaladie')}}"> << ficheMaladie </a></h3>
+<h3><a href="{{url('ficheMaladie')}}"> << ficheMaladie </a></h3>
 
     <div class="col-md-12" style="background-color: #f5f5f5 ; border: #000000;">
         <h2 class="col-md-offset-3"><a href="http://demo.procoderr.tech/forums/thread/1">{{$fiche->titre}}</a></h2>
@@ -207,7 +202,6 @@
   
    
 </div>
-
 <footer class="footer">
     <div class="container">
         Copyright &copy; Procoderr 2019 - All rights reserved
@@ -222,10 +216,6 @@
 </script>
 
 <script src="/js/dist/simplemde.min.js"></script>
-
-
-
-
 <script>
     $(document).ready(function () {
         new SimpleMDE({
@@ -243,12 +233,39 @@
         height: 200px;
     }
 </style>
+
+
+<script>
+    $(document).on("click", ".report-post", function (e) {
+        e.preventDefault();
+        var _self = $(this);
+        var threadID = _self.data('threadid');
+        var postID = _self.data('postid');
+        $("#reason").text('');
+        $(".report-post-form").attr("action", "/forums/thread/" + threadID + "/" + postID);
+        $(_self.attr('href')).modal('show');
+    });
+</script>
+<script>
+
+    function likes(like) {
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              
+                like.setAttribute("class", xhttp.response);
+            }
+        };
+        xhttp.open("GET", "/forum/like/" + like.getAttribute("id"), true);
+        xhttp.send();
+    }
+</script>
 <script>
     function supprimer() {
         if (!confirm("Voulez-vous supprimer ?"))
             event.preventDefault();
     }
 </script>
-
 </body>
 </html>
