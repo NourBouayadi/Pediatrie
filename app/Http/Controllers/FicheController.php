@@ -22,6 +22,15 @@ class FicheController extends Controller
 
     }
 
+
+
+
+
+    public function indexParFiche($id){
+        $fiches = Fiche::where('user_id', '=', $id)->paginate(5);//->get();
+       return view('ficheMaladie', compact(['fiches']) );
+    }
+
     public function create()
     {
         return view('fiche.create');

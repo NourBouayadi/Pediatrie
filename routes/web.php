@@ -88,6 +88,9 @@ Route::get('ficheMaladie/edit/{id}', 'FicheController@edit')->middleware('auth')
 Route::post('ficheMaladie/edit/{id}', 'FicheController@update')->middleware('auth');
 
 
+/**Routes pour les fiches maladies d'un seul pediatre */
+Route::get('/ficheMaladie/fiche/{id}','FicheController@indexParFiche')->middleware('auth');
+
 /** Profile Pediatre (Fiche Professionnelle)**/
 /*Route::get('/profile', function () {
     return view('profile');

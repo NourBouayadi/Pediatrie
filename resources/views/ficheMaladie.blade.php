@@ -123,10 +123,12 @@
 
     <div class="sidebar col-md-2">
 
-
+ <?php 
+     $id=\Auth::user()->id;
+ ?>
         <div class="list-group">
            
-            <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#fichepro')}}"> Ma fiche professionnelle
+            <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('profile/'.$id)}}"> Ma fiche professionnelle
              <span id="favoris" class="badge badge-info"></span>
              
 
@@ -140,8 +142,12 @@
             
 
             </a>
+ 
 
-            <a class="list-group-item list-group-item-text list-group-item-success text-center">Mes Fiches Maladies 
+
+      
+      <a class="list-group-item list-group-item-text list-group-item-success text-center" href="{{url('ficheMaladie/fiche/'.$id)}}">
+                Mes Fiches Maladies 
                 <span id="favoris" class="badge badge-info"></span>
               
             </a>
