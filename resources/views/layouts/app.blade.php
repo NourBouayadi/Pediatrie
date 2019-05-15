@@ -35,9 +35,7 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     PédiatrieDZ
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -78,8 +76,66 @@
                             </li>
                         @endguest
 
+
+
                     </ul>
+               
+                
                 </div>
+
+
+
+
+
+             <ul class="nav navbar-nav navbar-right">
+
+                                <li><a href="{{ url('/') }}" >Acceuil</a></li>
+                                <li  class="dropdown">
+
+
+                                    <a href="#service" class="dropdown" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        Catégories
+                                        <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li >
+                                            <a href="{{url('forum/categorie/1')}}">
+                                                <strong>Grossesse</strong>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('forum/categorie/2')}}"> <strong>Nouveau-Né</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('forum/categorie/3')}}"><strong>Vêtements</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('forum/categorie/4')}}"><strong> Jouets</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('forum/categorie/5')}}"><strong>Sommeil</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('forum/categorie/6')}}"><strong>Santé</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('forum/categorie/7')}}"><strong>Bien-être</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('forum/categorie/8')}}"><strong>Psychologie</strong></a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('forum/categorie/9')}}"><strong>Premières Marches</strong></a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li><a class="menu" href="#Annuaire">Annuaire </a></li>
+                                <li><a class="menu" href="#FAQ">FAQ</a></li>
+                                <li><a class="menu" href="{{url('forum')}}"> Forum</a></li>
+                                <li><a class="menu" href="#prédir">Prédir</a></li>
+                            </ul>
             </div>
         </nav>
 

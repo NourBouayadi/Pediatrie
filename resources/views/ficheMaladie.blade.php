@@ -80,19 +80,23 @@
             
             <tbody>
                @foreach($fiches as $fiche)
-
+                 
              
                 <tr>
                   <td></td>
                     
+
+
                      <td>
-                         <h4><a href="ficheMaladie/show/{{$fiche->id}}">{{$fiche->titre}}</a>
+                         <h4><a href="{{url('ficheMaladie/show/'.$fiche->id)}}">{{$fiche->titre}}</a>
                              <br>
                               <small class="help-block"> Par
+                               
+                               <a href="{{url('profile/'.$fiche->user_id)}}">
+                               <?php echo App\User::find($fiche->user_id)->name;?>
 
-                               ped1
-
-
+                               </a>
+                               
                                <span class="label label-primary">
                                     <?php echo App\Categorie::find($fiche->categorie_id)->name;?>
                                         
@@ -121,10 +125,12 @@
 
     <div class="sidebar col-md-2">
 
-
+ <?php 
+     $id=\Auth::user()->id;
+ ?>
         <div class="list-group">
            
-            <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="#fiche"> Ma fiche professionnelle
+            <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('profile/'.$id)}}"> Ma fiche professionnelle
              <span id="favoris" class="badge badge-info"></span>
              
 
@@ -138,8 +144,12 @@
             
 
             </a>
+ 
 
-            <a class="list-group-item list-group-item-text list-group-item-success text-center">Mes Fiches Maladies 
+
+      
+      <a class="list-group-item list-group-item-text list-group-item-success text-center" href="{{url('ficheMaladie/fiche/'.$id)}}">
+                Mes Fiches Maladies 
                 <span id="favoris" class="badge badge-info"></span>
               
             </a>

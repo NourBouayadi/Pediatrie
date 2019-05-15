@@ -20,13 +20,12 @@ Route::get('/forum', function () {
 Route::get('/profile', function () {
     return view('profile');
 });
+
 Route::get('/charte', function () {
     return view('charte');
 });
 
-Route::get('/editprofile', function () {
-    return view('editprofile');
-});
+
 /*Route::get('contact', function () {
     return view('contact');
 });
@@ -52,7 +51,6 @@ Route::get('/forum/lock/{id}','DiscussionController@cloturer')->middleware('auth
 
 Route::get('/dashboard', 'AdminController@index')->middleware('auth');
 Route::get('/dashboard/{id}', ['as' => 'dashboard', 'uses' => 'AdminController@approve'])->middleware('auth');
-
 Route::delete('dashboard/{id}', 'AdminController@destroy')->middleware('auth');
 Route::get('forum/show/{id}','DiscussionController@show')->middleware('auth');
 Route::get('forum/fav/{id}', 'DiscussionController@fav')->middleware('auth');
@@ -82,14 +80,8 @@ Route::get('/ficheMaladie', function () {
 
 Route::resource('ficheMaladie', 'FicheController')->middleware('auth');
 Route::post('ficheMaladie/show/{id}', 'FicheController@store')->middleware('auth');
-Route::get('ficheMaladie/show/{id}', 'FicheController@show')->middleware('auth');
 Route::delete('ficheMaladie/show/{id}', 'FicheController@destroy')->middleware('auth');
-Route::get('ficheMaladie/edit/{id}', 'FicheController@edit')->middleware('auth');
-Route::post('ficheMaladie/edit/{id}', 'FicheController@update')->middleware('auth');
 
-
-/**Routes pour les fiches maladies d'un seul pediatre */
-Route::get('/ficheMaladie/fiche/{id}','FicheController@indexParFiche')->middleware('auth');
 
 /** Profile Pediatre (Fiche Professionnelle)**/
 /*Route::get('/profile', function () {
@@ -101,30 +93,10 @@ Route::get('/annuaire', 'PediatreController@index');
 Route::get('/annuaire/search/', 'PediatreController@search');
 
 /**Route pour le profile pediatre*/
-
 Route::get('profile/{id}', 'PediatreController@indexPediatre')->middleware('auth');
 Route::get('profile/stars/{id}', 'PediatreController@stars')->middleware('auth');
 Route::get('editprofile/modify/{id}', 'PediatreController@modify')->middleware('auth');
 Route::put('profile/index/{id}', 'PediatreController@index')->middleware('auth');
-
-
-
-
-
-/** route pr reponse profile **/
-Route::get('profile/indexReponse/{id}', 'ReponseController@indexReponse')->middleware('auth');
-//Route::get('profile/{id}', 'ReponseController@store')->middleware('auth');
-Route::delete('profile/{id}', 'MessageController@destroy')->middleware('auth');
-
-
-
-
-
-/** route pr reponse profile **/
-
-//Route::get('profile/{id}', 'ReponseController@index')->middleware('auth');
-
-
 //Route::get('profile/note/{id}', 'PediatreController@note')->middleware('auth');
 /*Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');

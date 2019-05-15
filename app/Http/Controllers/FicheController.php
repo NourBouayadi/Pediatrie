@@ -22,6 +22,15 @@ class FicheController extends Controller
 
     }
 
+
+
+
+
+    public function indexParFiche($id){
+        $fiches = Fiche::where('user_id', '=', $id)->paginate(5);//->get();
+       return view('ficheMaladie', compact(['fiches']) );
+    }
+
     public function create()
     {
         return view('fiche.create');
@@ -36,7 +45,6 @@ class FicheController extends Controller
         
 
         $fiche->symptomes = $request->input('symptomes');
-        $fiche->age = $request->input('age');
         $fiche->sexe = $request->input('sexe');
         $fiche->categorie_id = $request->input('categorie_id');
         $fiche->traitementMedicaux = $request->input('traitementMedicaux');
@@ -53,7 +61,7 @@ class FicheController extends Controller
     }
 
     public function edit( $id)
-    {
+    {   
         $fiche = Fiche::find($id);
         return view('fiche.edit', ['fiche' => $fiche]);
     }
@@ -66,17 +74,14 @@ class FicheController extends Controller
 
         
         $fiche->symptomes = $request->input('symptomes');
-        $fiche->age = $request->input('age');
         $fiche->sexe = $request->input('sexe');
         $fiche->traitementMedicaux = $request->input('traitementMedicaux');
         $fiche->traitementNonMedicaux = $request->input('traitementNonMedicaux');
         $fiche->recommendation = $request->input('recommendation');
 
-
-        $fiche->pediatre_id = \Auth::user()->id;
         $fiche->save();
 
-        return redirect('ficheMaladie')->with('success', ' mise à jour de la fiche');;
+        return redirect('ficheMaladie/show/'.$id)->with('success', ' mise à jour de la fiche');;
     }
 
     public function destroy($id)
@@ -85,12 +90,10 @@ class FicheController extends Controller
         $fiche->delete();
         return redirect('ficheMaladie');
     }
+
     public function show($id) {
         $fiche = Fiche::find($id);
-        if (\Auth::user()->id==$fiche->user_id){
-            $fiche->isRead=1;
-            $fiche->save();
-        }
+       
         return view('fiche.show', compact(['fiche']));
 
     }

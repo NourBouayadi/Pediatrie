@@ -192,10 +192,10 @@
          <?php
     
                     if (\Auth::user()->type() == "pediatre"){
-            
+                   
                     
             ?> 
-                          <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="profile"> Ma Fiche Professionnelle
+                          <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="#"> Ma Fiche Professionnelle
        
 
       <?php        
@@ -204,12 +204,7 @@
 
   ?>  
 
-</a>
-
-
-
-
-           
+</a>           
            <?php
        
                     if (\Auth::user()->type() == "pediatre"){
@@ -257,8 +252,9 @@
             <?php
        
                     if (\Auth::user()->type() == "pediatre"){
+                        $id=\Auth::user()->id;
             ?> 
-                      <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('ficheMaladie')}}">Mes Fiches Maladies</a>
+                      <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('ficheMaladie/fiche/'.$id)}}">Mes Fiches Maladies</a>
              
  
             <?php  } ?> 
@@ -279,13 +275,6 @@
                 @endforeach
 
                  </a>
-        
-
-
-       
-    
-
-
 
         </div>
     </div>

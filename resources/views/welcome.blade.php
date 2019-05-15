@@ -8,18 +8,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Pédiatre-Dz</title>
+    <title>Pédiatrie-Dz</title>
     <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/notationEtoile.css')}}">
 
 
-
-    <!-- links for slider num2 -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick-theme.min.css">
 
 
     <style>
@@ -52,7 +47,7 @@ header section -->
             <div class="col-xs-5 header-logo">
                 <br>
 
-                <a href="#"><h1>Pédiatre-Dz</h1></a>
+                <a href="#"><h1>Pédiatrie-Dz</h1></a>
             </div>
 
             <div class="col-md-7">
@@ -75,7 +70,8 @@ header section -->
 
                             <ul class="nav navbar-nav navbar-right">
 
-                                <li><a class="menu active" href="#home" >Acceuil</a></li>
+                                <li><a class="menu active" href="{{ url('/') }}" >Acceuil</a></li>
+                                
                                 <li  class="dropdown ">
 
 
@@ -86,40 +82,40 @@ header section -->
 
                                     <ul class="dropdown-menu" role="menu">
                                         <li >
-                                            <a href="#Gro">
+                                            <a href="{{url('forum/categorie/1')}}">
                                                 <strong>Grossesse</strong>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#NV"> <strong>Nouveau-Né</strong></a>
+                                            <a href="{{url('forum/categorie/2')}}"> <strong>Nouveau-Né</strong></a>
                                         </li>
                                         <li>
-                                            <a href="#Vet"><strong>Vêtements</strong></a>
+                                            <a href="{{url('forum/categorie/3')}}"><strong>Vêtements</strong></a>
                                         </li>
                                         <li>
-                                            <a href="#J"><strong> Jouets</strong></a>
+                                            <a href="{{url('forum/categorie/4')}}"><strong> Jouets</strong></a>
                                         </li>
                                         <li>
-                                            <a href="#So"><strong>Sommeil</strong></a>
+                                            <a href="{{url('forum/categorie/5')}}"><strong>Sommeil</strong></a>
                                         </li>
                                         <li>
-                                            <a href="#Sa"><strong>Santé</strong></a>
+                                            <a href="{{url('forum/categorie/6')}}"><strong>Santé</strong></a>
                                         </li>
                                         <li>
-                                            <a href="#Be"><strong>Bien-être</strong></a>
+                                            <a href="{{url('forum/categorie/7')}}"><strong>Bien-être</strong></a>
                                         </li>
                                         <li>
-                                            <a href="#Ps"><strong>Psychologie</strong></a>
+                                            <a href="{{url('forum/categorie/8')}}"><strong>Psychologie</strong></a>
                                         </li>
                                         <li>
-                                            <a href="#Pm"><strong>Premières Marches</strong></a>
+                                            <a href="{{url('forum/categorie/9')}}"><strong>Premières Marches</strong></a>
                                         </li>
 
                                     </ul>
                                 </li>
                                 <li><a class="menu" href="#Annuaire">Annuaire </a></li>
                                 <li><a class="menu" href="#FAQ">FAQ</a></li>
-                                <li><a class="menu" href="#forum"> Forum</a></li>
+                                <li><a class="menu" href="{{url('forum')}}"> Forum</a></li>
                                 <li><a class="menu" href="#prédir">Prédir</a></li>
                             </ul>
                         </div><!-- /navbar-collapse -->

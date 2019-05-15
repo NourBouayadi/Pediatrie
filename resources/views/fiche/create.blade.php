@@ -15,21 +15,15 @@
                     
                     <div class="form-group">
                         <label for="">Description</label>
-                        <textarea name="description" class="form-control" rows="4"></textarea>
+                        <textarea name="description" class="form-control"  rows="2" maxlength="255" required></textarea>
                     </div>
 
 
                      <div class="form-group">
                         <label for="">Symptomes</label>
-                        <textarea name="symptomes" class="form-control" rows="4"></textarea>
+                        <textarea name="symptomes" class="form-control" rows="2" maxlength="255" required></textarea>
                     </div>
-                    
-                      <div class="form-group">
-                        <label for="">Age</label>
-                        <input name="age" class="form-control"></input>
-                    </div>
-
-
+                  
                       <div class="form-group">
                        <label for="">Sexe</label>
                       <input name="sexe" class="form-control"></input>

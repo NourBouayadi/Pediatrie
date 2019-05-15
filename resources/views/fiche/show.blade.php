@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Pediatre-DZ</title>
+    <title>PediatreDZ</title>
 
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets//css/app.css')}}">
@@ -20,7 +20,6 @@
         <div class="navbar-header">
 
 
-            
             <!-- Collapsed Hamburger -->
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#app-navbar-collapse">
@@ -79,200 +78,126 @@
         </div>
     </div>
 </nav>
-
 <div class="container">
+<h3><a href="{{url('ficheMaladie')}}"> << ficheMaladie </a></h3>
 
-    <h3><a href="{{url('forum')}}"> << Forum </a></h3>
-    <h3><a href="http://demo.procoderr.tech/forums/thread/1">{{$fiche->titre}}</a></h3>
+    <div class="col-md-12" style="background-color: #f5f5f5 ; border: #000000;">
+        <h2 class="col-md-offset-3"><a href="http://demo.procoderr.tech/forums/thread/1">{{$fiche->titre}}</a></h2>
 
-    <!-- le bloc ul concerne la discussion avec l'ID cliqué-->
-    <ul class="media-list forum">
-        <li class="media well">
-            <div class="pull-left user-info" href="#">
-                <img class="avatar img-circle img-thumbnail" src="{{asset('assets/img/avatar.jpg')}}"
-                     width="64" alt="Avatar">
-                <strong>
-                    <a href="http://demo.procoderr.tech/profile/admin">
-                        {{$fiche->getAuthor()}}
-                    </a>
-                </strong>
-                <br>
 
-                <small class="btn-group btn-group-xs">
-                    <a class="btn btn-default"
-                       href="">0 Feedback Points
-                    </a>
-                </small>
-            </div>
-            
-            <div class="media-body">
+
+
+ <div class="forum-post-panel btn-group btn-group-xs">
+                        <form action="{{url('ficheMaladie/'.$fiche->id)}}" method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+
+                            <a href="{{url('ficheMaladie/edit/'.$fiche->id)}}" ><i
+                                        class="wb-pencil btn btn-info btn-xs"></i>
+                                <span class="hidden-xs">
+          </span>
+                            </a>
+
+                            <button type="submit" class="wb-trash btn btn-danger btn-xs" onclick="supprimer();"></button>
+                            <span class="hidden-xs"></span>
+
+                        </form>
+                    </div>
+
+
+        <!-- le bloc ul concerne la fiche avec l'ID cliqué-->
+        <ul class="media-list forum">
+
+            <li class="media well" style ="background-color: #ffffff ; border: none";>
+                
                
-                <div class="forum-post-panel btn-group btn-group-xs">
-                    
-                    <form action="{{url('forum/'.$discussion->id)}}" method="post">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
 
-                        <a
-                                class="btn btn-default btn-sm" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i
-                                    class="fa fa-clock-o"></i> {{$fiche->created_at}}
-                        </a>
-                        <a data-postid="1" data-threadid="1" data-toggle="modal"
-                           class="btn btn-warning report-post btn-sm" href="#reportPost"><i class="fa fa-warning"></i> <span
-                                    class="hidden-xs">Report post</span>
-                        </a>
+                <div class="media-body">
 
-                        <a href="http://demo.procoderr.tech/forums/post/1/edit" class="btn btn-info btn-sm"><i
-                                    class="wb-pencil"></i> Editer
-                            <span class="hidden-xs">
-                            </span>
-                        </a>
+                    <center><p>{{$fiche->description}}</p></center>
 
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="supprimer();">
-
-                            <i class="wb-trash"></i> Supprimer
-                            <span class="hidden-xs"></span></button>
-
-                    </form>
                 </div>
-
-                <p>
-                <p>{{$fiche->description}}</p>
-                </p>
-
-
-            </div>
-
-        </li>
-    </ul>
-    <!--c'est ce bloque là qu'on va le boucler pour générer les réponses-->
-
-
-
-
-    <ul class="media-list forum">
-       
-
-        @foreach($fiche->getMessages() as $message)
-                        
-                  
-                <li class="media well">
-                    <div class="pull-left user-info" href="#">
-                        <img class="avatar img-circle img-thumbnail" src="{{asset('assets/img/avatar.jpg')}}"
-                             width="64" alt="Avatar">
-                        <strong>
-                            <a href="#profile">
-                                {{$message->getAuthor()}}
-                            </a>
-                        </strong>
+             
+                <hr>   <hr>
+               <div class="media-body">
+                     
+                    <p> Symptomes :
                         <br>
+                        {{$fiche->symptomes}}</p>
 
-                        <small class="btn-group btn-group-xs">
-                            <a class="btn btn-default" href="">0 Feedback Points
-                            </a>
-                        </small>
-                    </div>
-                    
-                    <div class="media-body">
-                        <div class="forum-post-panel btn-group btn-group-xs">
-                            <form action="{{url('ficheMaladie/show/'.$message->id)}}" method="post">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                            <a class="btn btn-default btn-xs" href="#"><i
-                                        class="fa fa-clock-o"></i> {{$message->created_at}}
-                            </a>
-                           
-                            <a href="#" class="btn btn-info btn-xs"><i
-                                        class="wb-pencil"></i> Editer
-                                 <span class="hidden-xs">
-                                 </span>
-                            </a>
-
-                            <button type="submit" class="btn btn-danger btn-xs">
-
-                                <i class="wb-trash"></i> Supprimer
-                                <span class="hidden-xs"></span>
-                            
-                            </button>
-                            
-
-                            <a href="#" class="btn btn-info btn-xs"> 
-                             
-                                <i class="{{$class}}" id="{{$message->id}}"
-                                               onclick="aimer(this)">J'aime 
-                                </i>
-                            
-                                 <span class="hidden-xs">
-                                 </span>
-                            </a>
-
-                          
-
-                            </form>
-                            
-                            <p> {{$message->description}} </p>
-
-
-                        </div>
-
-
-                    </div>
-
-                </li>
-    
-        @endforeach
-    </ul>
-
-    <form method="POST" action="" accept-charset="UTF-8">
-        {{csrf_field()}}
-        <div class="tile">
-        <span class="help-block">
-           Commenter cette Fiche
-        </span>
-
-
-
-            <div class="form-group">
-
-                <textarea class="form-control fl flat" rows="5" id="message" name="description" cols="50"></textarea>
-                <input type="text" name="discussion_id" hidden value="{{$discussion->id}}">
-                <span class="help-block pull-right">
-      You may use Markdown - <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">Basic writing and formatting syntax</a>
-    </span>
-            </div>
-
-            <div class="form-group">
-                <input class="btn btn-primary btn btn-wide" type="submit" value="Reply">
-            </div>
-        </div>
-    </form>
-
-    <div class="modal fade" id="reportPost">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Report Post</h4>
                 </div>
-                <form method="POST" action="http://demo.procoderr.tech/forums/thread" accept-charset="UTF-8"
-                      class="report-post-form"><input name="_token" type="hidden"
-                                                      value="SsNhKTepziN0DGedgF6Vu9BZ2qkSUTDHeexzaXfu">
-                   
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Report Post</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+              <hr>
+
+              <hr>
+               <div class="media-body">
+
+
+                    <p>Sexe :
+                        <br>
+                        {{$fiche->sexe}}</p>
+
+                </div>
+            
+<hr>
+               <div class="media-body">
+
+                    <p>Traitement Médicaux :
+                        <br>{{$fiche->traitementMedicaux}}</p>
+
+                </div>
+
+
+<hr>
+               <div class="media-body">
+
+                    <p>Traitement Non Médicaux :
+                        <br>{{$fiche->traitementNonMedicaux}}</p>
+
+                </div>
+         
+
+<hr>
+               <div class="media-body">
+
+                    <p>
+                        <br>
+                         pédiatres recommandées :
+                        {{$fiche->recommendation}}</p>
+
+                </div>
+
+
+            </li>
+            <div class="container">
+
+<div  class="col-md-8">
+                  <strong>
+                       <p>Publié par  :
+                        <br>
+                        <a href="http://demo.procoderr.tech/profile/admin">
+                            {{$fiche->getAuthor()}}
+                        </a>
+                    </p>
+                    </strong>
+ 
 
 </div>
+  
 
+
+                </div>
+        
+
+
+        </ul>
+  
+   
+</div>
 <footer class="footer">
     <div class="container">
         Copyright &copy; Procoderr 2019 - All rights reserved
         <span class="pull-right"><a href="/contact">Contact Us</a></span>
+
     </div>
 </footer>
 
@@ -283,10 +208,6 @@
 </script>
 
 <script src="/js/dist/simplemde.min.js"></script>
-
-
-
-
 <script>
     $(document).ready(function () {
         new SimpleMDE({
@@ -304,6 +225,8 @@
         height: 200px;
     }
 </style>
+
+
 <script>
     $(document).on("click", ".report-post", function (e) {
         e.preventDefault();
@@ -314,6 +237,21 @@
         $(".report-post-form").attr("action", "/forums/thread/" + threadID + "/" + postID);
         $(_self.attr('href')).modal('show');
     });
+</script>
+<script>
+
+    function likes(like) {
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              
+                like.setAttribute("class", xhttp.response);
+            }
+        };
+        xhttp.open("GET", "/forum/like/" + like.getAttribute("id"), true);
+        xhttp.send();
+    }
 </script>
 <script>
     function supprimer() {

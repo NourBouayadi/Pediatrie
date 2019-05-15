@@ -18,6 +18,8 @@ class DropColumnIdUsers extends Migration
             $table->dropForeign(['admin_id']);
             $table->dropForeign(['mom_id']);
             $table->dropColumn(['pediatre_id', 'admin_id', 'mom_id']);
+             $table->addUnique(['pediatre_id', 'admin_id', 'mom_id']);
+
 
         });
     }

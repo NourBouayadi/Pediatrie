@@ -25,7 +25,8 @@ class Fiche extends Model
     {
         return Fiche::where("fiche_id","=",$this->id)->get();
     }
-    public function getAuthor(){
+    public function getAuthor()
+    {
         return User::find($this->user_id)->name;
     }
 }

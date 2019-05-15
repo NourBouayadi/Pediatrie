@@ -42,16 +42,24 @@ class Pediatre extends Authenticatable
         $this->notify(new PediatreResetPassword($token));
     }
 
-   
 
+   
+    public function fiches()
+    {
+        return $this->hasMany('App\Fiche');
+    }
+    
     public function reponses()
     {
         return $this->hasMany('App\Reponse');
     }
+    
+
     public function messages()
     {
         return $this->hasMany('App\Message');
     }
+    
     public function discussions()
     {
         return $this->hasMany('App\Discussion');

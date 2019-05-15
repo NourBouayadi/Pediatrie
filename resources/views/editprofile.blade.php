@@ -22,15 +22,7 @@
                         <input type="text" name="adresse_cabinet" class="form-control" value="{{ $pediatre->adresse_cabinet}}">
                     </div>
                    
-                    <div class="form-group">
-                        <label for=""> latitude</label>
-                        <input type="text" name="latitude" class="form-control" value="{{ $pediatre->latitude}}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">longitude</label>
-                        <input type="text" name="longitude" class="form-control" value="{{ $pediatre->longitude}}">
-                    </div>
+                
                     
                          <div class="form-group">
                 
@@ -100,6 +92,11 @@
                     <input type="submit" value="Modifier" class="form-control btn btn-danger">
 
                 </form>
+         
+  <div id="mapouter" class="row">
+                                    <div class="gmap_canvas"><iframe width="500" height="250" id="gmap_canvas"
+                                                                      src="https://maps.google.com/maps?q={{$pediatre->latitude}}%2C{{$pediatre->longitude}}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                                </div>
             </div>
         </div>
     </div>
