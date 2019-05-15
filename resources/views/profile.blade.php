@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{{asset('assets/fonts/web-icons/web-icons.css')}}">
 <link rel="stylesheet" href="{{asset('assets/fonts/font-awesome/font-awesome.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/rating.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/notationEtoile.css')}}">
 @section('content')
 
 
@@ -43,6 +44,53 @@
 
 
                                 <!-- Rating Stars Box -->
+                                <!-- if auth user is owner of profile, or auth user has already given feedback then show avg -->
+                                <?php $points= App\User::find($pediatre->id)->points;\Debugbar::info($points);?>
+                                 @if(\Auth::user()->id ==$pediatre->id || \App\Evaluation::where('pediatre_id','=',$pediatre->id)->where('user_id','=',\Auth::user()->id)->exists())
+                                  <div class="rating-stars text-center">
+                                    @if ($points <1 )
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                    @endif
+                                    @if ($points >=1 && $points <2 )
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                    @endif @if ($points >=2 && $points <3 )
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        @endif @if ($points >=3 && $points <4 )
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                    @endif
+                                    @if ($points >=4 && $points <5  )
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold "></i>
+                                        <i class="fa fa-star "></i>
+                                    @endif
+                                    @if ($points ==5)
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                    @endif
+                             ({{$points}})
+                                  </div>
+                                @else
                                 <div class='rating-stars text-center'>
                                     <ul id='stars'>
                                         <li class='star' title='Poor' data-value='1'>
@@ -62,23 +110,14 @@
                                         </li>
                                     </ul>
                                 </div>
+                                @endif
 
-                                <div class='success-box'>
-                                    <div class='clearfix'></div>
-                                    <img alt='tick image' width='32'
-                                         src='data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0MjYuNjY3IDQyNi42NjciIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQyNi42NjcgNDI2LjY2NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiM2QUMyNTk7IiBkPSJNMjEzLjMzMywwQzk1LjUxOCwwLDAsOTUuNTE0LDAsMjEzLjMzM3M5NS41MTgsMjEzLjMzMywyMTMuMzMzLDIxMy4zMzMgIGMxMTcuODI4LDAsMjEzLjMzMy05NS41MTQsMjEzLjMzMy0yMTMuMzMzUzMzMS4xNTcsMCwyMTMuMzMzLDB6IE0xNzQuMTk5LDMyMi45MThsLTkzLjkzNS05My45MzFsMzEuMzA5LTMxLjMwOWw2Mi42MjYsNjIuNjIyICBsMTQwLjg5NC0xNDAuODk4bDMxLjMwOSwzMS4zMDlMMTc0LjE5OSwzMjIuOTE4eiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K'/>
-                                    <div class='text-message'></div>
-                                    <div class='clearfix'></div>
-                                </div>
                             </tr>
                         </div>
 
                     </div>
                     <div class="widget-footer">
-                        <div>
-                            <strong class="profile-stat-count text-success"> 1 </strong>
-                            <span> Feedback Points </span>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -206,6 +245,7 @@
 <div class="row">
 
 
+
                                         <div class="form-group">
                                             <input class="btn btn-primary btn btn-wide" type="submit" value="Reply">
                                         </div>
@@ -253,7 +293,6 @@
 <script src="{{asset('assets/js/script2.js')}}"></script>
 <script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>
 <script src="{{asset('assets/js/scripts.js')}}"></script>                
-
 <script>
                                         $(document).ready(function () {
 

@@ -257,7 +257,51 @@
                         <td>{{$pediatre->name}}</td>
                         <td>{{$pediatre->date_debut_carriere}}</td>
                         <td>{{$pediatre->ville}}</td>
-                        <td>{{$pediatre->points}}</td>
+                        <td>
+
+
+                                   @if ($pediatre->points <1 )
+                                       <i class="fa fa-star "></i>
+                                       <i class="fa fa-star "></i>
+                                       <i class="fa fa-star "></i>
+                                       <i class="fa fa-star "></i>
+                                       <i class="fa fa-star "></i>
+                                   @endif
+                                   @if ($pediatre->points >=1 && $pediatre->points <2 )
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star "></i>
+                                       <i class="fa fa-star "></i>
+                                       <i class="fa fa-star "></i>
+                                       <i class="fa fa-star "></i>
+                                   @endif @if ($pediatre->points >=2 && $pediatre->points <3 )
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star "></i>
+                                       <i class="fa fa-star "></i>
+                                       <i class="fa fa-star "></i>
+                                   @endif @if ($pediatre->points >=3 && $pediatre->points <4  )
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star "></i>
+                                       <i class="fa fa-star "></i>
+                                   @endif
+                                   @if ($pediatre->points >=4 && $pediatre->points <5  )
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star gold "></i>
+                                       <i class="fa fa-star "></i>
+                                   @endif
+                                   @if ($pediatre->points ==5)
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star gold"></i>
+                                       <i class="fa fa-star gold"></i>
+                                   @endif
+                            ({{$pediatre->points}})
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

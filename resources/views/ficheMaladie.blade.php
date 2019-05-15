@@ -80,7 +80,7 @@
             
             <tbody>
                @foreach($fiches as $fiche)
-
+                 
              
                 <tr>
                   <td></td>
@@ -91,10 +91,12 @@
                          <h4><a href="{{url('ficheMaladie/show/'.$fiche->id)}}">{{$fiche->titre}}</a>
                              <br>
                               <small class="help-block"> Par
+                               
+                               <a href="{{url('profile/'.$fiche->user_id)}}">
+                               <?php echo App\User::find($fiche->user_id)->name;?>
 
-                               ped1
-
-
+                               </a>
+                               
                                <span class="label label-primary">
                                     <?php echo App\Categorie::find($fiche->categorie_id)->name;?>
                                         

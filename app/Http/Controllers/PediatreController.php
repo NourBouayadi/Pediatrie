@@ -62,20 +62,12 @@ class PediatreController extends Controller
 
 //fonction stars pr recuperer les notes données au pediatres //
     public function stars($id,Request $request){
-        \Debugbar::disable();
-        
-       
-         echo "pediatre id:".$id." value:".$request->value;
-
-
-     $note= new Evaluation;   
-
- 
+        echo "pediatre id:".$id." value:".$request->value;
+        $note= new Evaluation;
         $note->point = $request->value;
         $note->pediatre_id = $id;
         $note->user_id = \Auth::user()->id;
         $note->save();
-
 
 
         
@@ -92,6 +84,7 @@ class PediatreController extends Controller
                     ->where('isPediatre','=',1)
                     ->update(['users.points'=>$moy]);
     
+
 
 
     }
