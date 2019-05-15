@@ -21,7 +21,7 @@
 
                      <div class="form-group">
                         <label for="">Symptomes</label>
-                         <select name="symptomes[]" class="selectpicker " data-live-search="true" multiple>
+                         <select name="symptomes[]" id="selectSymptome" class="js-states form-control mdb-select" multiple="multiple">
                              @foreach($symptomes as $symptome)
                                  <option value="{{$symptome->id}}">{{$symptome->nom}}</option>
                              @endforeach
@@ -77,6 +77,21 @@
     </div>
 
 
+    <script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>
+
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/js/select2.min.js')}}"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            jQuery.noConflict();
+            $('#selectSymptome').select2();
+
+
+            //jQuery.noConflict();$('#my-select').searchableOptionList();
+        });
+    </script>
 
 
 @endsection

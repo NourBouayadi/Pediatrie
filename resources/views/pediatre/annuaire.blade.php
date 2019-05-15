@@ -69,7 +69,7 @@
                     <!--Blue selectcol-md-3 form-control mdb-select-->
                     <div class="col-md-3 form-group ">
                     <select name="ville" id ="selectVille" class=" form-control mdb-select">
-                        <optgroup label="choisir une ville">
+                        <option value="">choisir une ville</option>
                         <option value="ADRAR">ADRAR</option>
                         <option value="AIN DEFLA">AIN DEFLA</option>
                         <option value="AIN TEMOUCHENT">AIN TEMOUCHENT</option>
@@ -118,18 +118,18 @@
                         <option value="TISSEMSILT">TISSEMSILT</option>
                         <option value="TIZIOUZOU" >TIZIOUZOU</option>
                         <option value="TLEMCEN" >TLEMCEN</option>
-                        </optgroup>
+
                     </select>
                     </div>
                     <div class="col-md-3 form-group ">
                     <select name="specialite" id="selectSpecialite" class=" form-control mdb-select">
-                        <optgroup  label= "choisir une spécialité">
+                        <option value="" >choisir une spécialité</option>
                         <option value="Pédiatrie Générale">Pédiatrie Générale</option>
                         <option value="Gynécologie">Gynécologie</option>
                         <option value="Néonatologie et médecine du nouveau-né">Néonatologie et médecine du nouveau-né</option>
                         <option value="Psychologie de l'Enfant">Psychologie de l'Enfant</option>
                         <option value="Cardiologie Pédiatrique">Cardiologie Pédiatrique</option>
-                        </optgroup>
+
                     </select>
                     </div>
                     <button class="col-md-1 btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
