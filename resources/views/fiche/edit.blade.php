@@ -27,15 +27,7 @@
                         <!--value : pour l'auto remplissage car ici on modifie le contenu-->
                         <input type="text" name="symptomes" class="form-control" value="{{ $fiche->symptomes }}">
                        </div>
-              
-
-                       <div class="form-group">
-                        <label for="">Age</label>
-                        <!--value : pour l'auto remplissage car ici on modifie le contenu-->
-                        <input type="text" name="age" class="form-control" value="{{ $fiche->age }}">
-                       </div>
-
-
+            
         
                        <div class="form-group">
                         <label for="">Sexe</label>

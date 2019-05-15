@@ -128,15 +128,6 @@
                 </div>
               <hr>
 
-               <div class="media-body">
-
-                    <p> Age :
-                        <br>
-                        {{$fiche->age}}</p>
-
-                </div>
-
-
               <hr>
                <div class="media-body">
 
@@ -206,6 +197,7 @@
     <div class="container">
         Copyright &copy; Procoderr 2019 - All rights reserved
         <span class="pull-right"><a href="/contact">Contact Us</a></span>
+
     </div>
 </footer>
 

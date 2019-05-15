@@ -45,7 +45,6 @@ class FicheController extends Controller
         
 
         $fiche->symptomes = $request->input('symptomes');
-        $fiche->age = $request->input('age');
         $fiche->sexe = $request->input('sexe');
         $fiche->categorie_id = $request->input('categorie_id');
         $fiche->traitementMedicaux = $request->input('traitementMedicaux');
@@ -75,7 +74,6 @@ class FicheController extends Controller
 
         
         $fiche->symptomes = $request->input('symptomes');
-        $fiche->age = $request->input('age');
         $fiche->sexe = $request->input('sexe');
         $fiche->traitementMedicaux = $request->input('traitementMedicaux');
         $fiche->traitementNonMedicaux = $request->input('traitementNonMedicaux');
