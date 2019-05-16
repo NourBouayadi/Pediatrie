@@ -60,8 +60,30 @@ maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
 
     public function edit( $id)
     {
-        $fiche = Fiche::find($id);
-        return view('fiche.edit', ['fiche' => $fiche]);
+        $fiche = Maladie::find($id);
+        $symptomes = Symptome::all();
+        $selectSymptome=Maladies_symptome::select('symptome_id')->where('maladie_id','=',$id)->get();
+        \Debugbar::info($selectSymptome);
+        return view('fiche.edit', ['fiche' => $fiche,'symptomes'=>$symptomes,'selectSymptome'=>$selectSymptome]);
+    }
+    public function update(Request $request){
+
+        $fiche = Maladie::find($request->input('id'));
+        $fiche->nom= $request->input('nom');
+        $fiche->description= $request->input('description');
+        $fiche->sexe = $request->input('sexe');
+        $fiche->categorie_id = $request->input('categorie_id');
+        $fiche->traitement_medical= $request->input('traitement_medical');
+        $fiche->traitement_nonmedical= $request->input('traitement_nonmedical');
+        $fiche->save();
+        DB::table('maladies_symptomes')->where('maladies_symptomes.maladie_id','=',$request->input('id'))->delete();
+        foreach ($request->input('symptomes') as $id_symprome){
+            $symptome=new Maladies_symptome();
+            $symptome->maladie_id=$fiche->id;
+            $symptome->symptome_id=$id_symprome;
+            $symptome->save();
+        }
+        return redirect('ficheMaladie/show/'.$request->input('id'));
     }
 
     public function destroy($id)

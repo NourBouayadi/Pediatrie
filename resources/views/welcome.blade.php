@@ -251,44 +251,62 @@ header section -->
             <div class="row">
                 <div class="team-heading text-center col-md-12">
 
-                    <h3 >Annuaire des pédiatres Algériens</h3>
-                    <br>
-                    <h4>La liste des 5 tops pédiatres du Forum</h4>
+
+                    <section class="col-md-12 about text-center" id="FAQ">
+                        <div class="container">
+                            <div class="row">
+                                <br>
+                                <h2>Les 5 top pédiatres</h2>
+                                <h4>Les cinq pédiatres les plus notés grace à notre <a href="/annuaire">annuaire des pédiatres Algériens</a></h4>
+                                <br>
+
+                                @foreach($pediatres as $pediatre)
+                                    @if($loop->first)
+                                        <div class="col-md-2 col-md-offset-1 col-sm-6">
+                                    @else
+                                        <div class="col-md-2  col-sm-6">
+                                    @endif
+                                        <div class="single-about-detail clearfix">
+                                            <div class="about-img">
+                                                <img class="img-responsive" src="{{asset('assets/img/family.png')}}" alt="">
+                                            </div>
+                                            <div class="about-details">
+
+                                                <h4 style="color:#FFFFFF; ">{{$pediatre->name}}</h4>
+                                                <p style="color:#FFFFFF; ">ville: {{$pediatre->ville}}</p>
+                                                <p style="color:#FFFFFF; text-align: left; ">Spécialité:{{$pediatre->specialite}}</p>
+                                                <b class="" style="color:#FFFFFF; "><a href="/profile/{{$pediatre->id}}">>>voir le profile</a></b>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+
+                        </div>
+                            </div>
+                    </section><!-- end of about section -->
 
 
                 </div>
                 <hr>
-                @foreach($pediatres as $pediatre)
-                    <div class="col-md-3 single-member col-sm-4">
 
-                        <div class="person-detail">
-                            <div class="arrow-bottom" ></div>
-                            <div  style="display: inline-block; text-align: center;"><h5><a href="/profile/{{$pediatre->id}}" style="color: white; text-align: center;" class="col-md-2">{{$pediatre->name}}</a></h5> </div>
-                            <br>
-                            <div>
-                                <p>Spécialité: {{$pediatre->specialite}}</p>
-
-                                <p>Ville: {{$pediatre->ville}}</p>
-                                <b class=""><a href="/profile/{{$pediatre->id}}">>>voir le profile</a></b>
-
-                            </div>
-
-                        </div>
-                    </div>
-                @endforeach
             </div>
         </div>
     </section>
 @endisset
 
 <!-- Discussions les plus populaires -->
+
+<br><br>
 <section class="about text-center" id="FAQ">
     <div class="container">
         <div class="row">
             <br>
             <h2>discussions plus populaires</h2>
-            <h4>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</h4>
+            <h4>Les cinq discussions les plus visitées sur le <a href="/forum">forum</a></h4>
             <br>
+            @foreach($discussions as $discussion)
             <div class="col-md-4 col-sm-6">
                 <div class="single-about-detail clearfix">
                     <div class="about-img">
@@ -297,49 +315,15 @@ header section -->
                     <div class="about-details">
                         <div class="pentagon-text">
                             <br>
-                            <b>
-                                Discussion</b>
+                            <b></b>
                         </div>
-                        <h3>Titre</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
+                        <h3>{{$discussion->titre}}</h3>
+                        <p>{{$discussion->views}}</p>
+
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="single-about-detail">
-                    <div class="about-img">
-                        <img class="img-responsive" src="{{asset('assets/img/discu2.jpg')}}" alt="">
-                    </div>
-                    <div class="about-details">
-
-                        <div class="pentagon-text">
-                            <br>
-
-                            <b>Discussion</b>
-
-                        </div>
-
-                        <h3>Titre</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="single-about-detail">
-                    <div class="about-img">
-                        <img class="img-responsive" src="{{asset('assets/img/discu3.jpg')}}" alt="">
-                    </div>
-                    <div class="about-details">
-                        <div class="pentagon-text">
-                            <br>
-                            <b>
-                                Discussion</b>
-                        </div>
-                        <h3>Titre</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section><!-- end of about section -->

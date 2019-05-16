@@ -81,6 +81,8 @@ Route::get('ficheMaladie/create', 'FicheController@create');
 Route::post('ficheMaladie/create', 'FicheController@store');
 Route::get('ficheMaladie/show/{id}', 'FicheController@show');
 Route::get('ficheMaladie/search', 'FicheController@search');
+Route::get('ficheMaladie/edit/{id}', 'FicheController@edit');
+Route::post('ficheMaladie/update', 'FicheController@update');
 
 Route::delete('ficheMaladie/{id}', 'FicheController@delete');
 
