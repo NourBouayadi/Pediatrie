@@ -39,13 +39,30 @@ class PediatreController extends Controller
             ->join('users', 'pediatres.id', '=','users.id')
             ->select('users.id','users.name','users.points', 'pediatres.specialite', 'pediatres.ville', 'pediatres.date_debut_carriere')
             ->where('isActive','=',1)
-            ->where('isPediatre','=',1)->orderBy('users.points', 'desc')->paginate(5);
+            ->where('isPediatre','=',1)->orderBy('users.points', 'desc')->limit(3)->get();
+
         $tops=  DB::table('pediatres')
             ->join('users', 'pediatres.id', '=','users.id')
             ->select('users.id','users.name','users.points', 'pediatres.specialite', 'pediatres.ville', 'pediatres.date_debut_carriere')
             ->where('isActive','=',1)
-            ->where('isPediatre','=',1)->orderBy('users.points', 'desc')->limit(5);
-        return view('welcome', compact(['pediatres','tops']) );
+            ->where('isPediatre','=',1)->orderBy('users.points', 'desc')->limit(3)->get();
+
+        $discussions= DB::table('discussions')
+            ->join('categories', 'discussions.categorie_id', '=', 'categories.id')
+            ->join('users', 'discussions.user_id', '=','users.id')
+
+            ->select('discussions.id','discussions.titre', 'discussions.views', 'categories.name')
+            ->where('isPediatre','=','0')
+            ->limit(3)->get();
+
+        $articles= DB::table('discussions')
+            ->join('categories', 'discussions.categorie_id', '=', 'categories.id')
+            ->join('users', 'discussions.user_id', '=','users.id')
+
+            ->select('discussions.id','discussions.titre', 'discussions.views', 'categories.name')
+            ->where('isPediatre','!=','0')
+            ->limit(3)->get();
+        return view('welcome', compact(['pediatres','tops', 'discussions', 'articles']) );
 
     }
     //Method search in Annuaire

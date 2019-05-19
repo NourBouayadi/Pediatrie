@@ -37,6 +37,7 @@
                        <tr><th>Descrition</th><td> {{$fiche->traitement_nonmedical}}</td></tr>
 
                    </table>
+                       <div> <button class="btn btn-primary col-md-offset-12"><a href="/ficheMaladie/edit/{{$fiche->id}}" style="color: white;">Modifier</a></button></div>
                     </div>
 
 

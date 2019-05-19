@@ -86,7 +86,8 @@ Route::post('ficheMaladie/update', 'FicheController@update');
 
 Route::delete('ficheMaladie/{id}', 'FicheController@delete');
 
-
+/**mail admin**/
+Route::get('/mail', function(){Mail::to('nour.bouayadi@gmail.com')->send(new \App\Mail\adminMail());echo ".";});
 /** Profile Pediatre (Fiche Professionnelle)**/
 /*Route::get('/profile', function () {
     return view('profile');

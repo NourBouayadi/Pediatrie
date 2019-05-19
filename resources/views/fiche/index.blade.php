@@ -6,8 +6,6 @@
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-
-
 <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/simplemde.min.css')}}">
@@ -21,53 +19,250 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
 @section('content')
-
     <div class="container col-md-12">
-        <br>
-        <!-- team section -->
-        <table class="table forum table-striped">
-            <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Sexe</th>
-                <th>Vue</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($fiches as $fiche)
-                <tr>
-                    <td> {{$fiche->nom}}</td>
-                    <td>{{$fiche->sexe}}
-                    <td> {{$fiche->vue}}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>        <div class="sidebar col-md-10 col-md-offset-2">
-            <form role="search" method="get" action="/ficheMaladie/search">
-                <div class="input-group  row" name="search" id="search">
-                    <div class="form-group col-md-3">
-                        <input type="text" name="nom" value="" class=" form-control" placeholder="Rechercher par Nom" >
-                    </div>
-                    <!--Blue selectcol-md-3 form-control mdb-select-->
-                    <div class="form-group col-md-3">
-                        <select name="sexe" class=" form-control mdb-select">
-                            <option value="">choisir le sexe</option>
+
+        <div class="sidebar col-md-2">
+            <br><br>            <br><br>
+
+
+
+            <div class="list-group">
+
+                <a href="{{url('ficheMaladie/create')}}"
+                   class=" list-group-item list-group-item-text list-group-item-success text-center"><i class="wb-plus"></i>
+
+                   Nouvelle Fiche
+                </a>
+
+
+                <a href="{{url('ficheMaladie')}}" class="list-group-item">Toutes les Catégories</a>
+
+                <a href="{{url('ficheMaladie/categorie/1')}}" class="list-group-item ">Grossesse
+                    <span class="badge badge-info"><?php echo App\Maladie::where("categorie_id", "=", 1)->count();?>
+                </span>
+                </a>
+
+                <a href="{{url('ficheMaladie/categorie/2')}}"
+                   class="list-group-item ">Nouveau-Né
+                    <span class="badge badge-info"><?php echo App\Maladie::where("categorie_id", "=", 2)->count();?>
+                </span>
+                </a>
+
+                <a href="{{url('ficheMaladie/categorie/3')}}"
+                   class="list-group-item ">Vetements
+                    <span class="badge badge-info"><?php echo App\Maladie::where("categorie_id", "=", 3)->count();?>
+                </span>
+                </a>
+
+                <a href="{{url('ficheMaladie/categorie/4')}}"
+                   class="list-group-item ">Jouets
+                    <span class="badge badge-info"><?php echo App\Maladie::where("categorie_id", "=", 4)->count();?>
+                </span>
+                </a>
+
+                <a href="{{url('ficheMaladie/categorie/5')}}"
+                   class="list-group-item ">Sommeil
+                    <span class="badge badge-info"><?php echo App\Maladie::where("categorie_id", "=", 5)->count();?>
+                </span>
+                </a>
+
+                <a href="{{url('ficheMaladie/categorie/6')}}"
+                   class="list-group-item ">Santé
+                    <span class="badge badge-info"><?php echo App\Maladie::where("categorie_id", "=", 6)->count();?>
+                </span>
+                </a>
+
+                <a href="{{url('ficheMaladie/categorie/7')}}"
+                   class="list-group-item ">Bien-etre
+                    <span class="badge badge-info"><?php echo App\Maladie::where("categorie_id", "=", 7)->count();?>
+                </span>
+                </a>
+
+                <a href="{{url('ficheMaladie/categorie/8')}}"
+                   class="list-group-item ">Psychologie
+                    <span class="badge badge-info"><?php echo App\Maladie::where("categorie_id", "=", 8)->count();?>
+                </span>
+                </a>
+
+                <a href="{{url('ficheMaladie/categorie/9')}}"
+                   class="list-group-item ">Première-Marche
+                    <span class="badge badge-info"><?php echo App\Maladie::where("categorie_id", "=", 9)->count();?>
+                </span>
+                </a>
+
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="sidebar col-md-10 col-md-offset-2">
+                <form role="search" method="get" action="/ficheMaladie/search">
+                    <div class="input-group  row" name="search" id="search">
+                        <div class="form-group col-md-3">
+                            <input type="text" name="nom" value="" class=" form-control" placeholder="Rechercher par Nom" >
+                        </div>
+                        <!--Blue selectcol-md-3 form-control mdb-select-->
+                        <div class="form-group col-md-3">
+                            <select name="sexe" class=" form-control mdb-select">
+                                <option value="">choisir le sexe</option>
                                 <option value="indifferent">indifferent</option>
                                 <option  value="fille">Fille</option>
                                 <option  value="garcon">Garçon</option>
 
-                         </select>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">  <select id="selectSymptome" name="symptomes[]" class="js-states form-control mdb-select" multiple>
+                                @foreach($symptomes as $symptome)
+                                    <option value="{{$symptome->id}}">{{$symptome->nom}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                     </div>
-                    <div class="form-group col-md-3">  <select id="selectSymptome" name="symptomes[]" class="js-states form-control mdb-select" multiple>
-                            @foreach($symptomes as $symptome)
-                                <option value="{{$symptome->id}}">{{$symptome->nom}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-                </div>
-            </form></div>
-        </form>
+                </form></div>
+            <table class="table forum table-striped">
+
+                <thead>
+                <tr>
+                    <th class="cell-stat"></th>
+                    <th>Nom</th>
+                    <th>Sexe</th>
+                    <th class=" hidden-xs hidden-sm">Nombre de Vues</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach($fiches as $fiche)
+              <tr><td></td>
+                  <td>
+
+                            <h4><a href="/ficheMaladie/show/{{$fiche->id}}">{{$fiche->nom}}</a>
+                                <br>
+
+                                <small class="help-block"> Par
+                                    <a href="forum/profile">
+                                        <!--?php echo App\User::find($fiche->user_id)->name;?>-->UserName</a>
+
+                                    <span class="label label-primary">
+                                    <?php echo App\Categorie::find($fiche->categorie_id)->name;?>
+
+                                </span>
+                                </small>
+
+                            </h4>
+                        </td>
+                        <td class="">{{$fiche->sexe}}</td>
+                        <td class="hidden-xs hidden-sm">{{$fiche->vue}}</td>
+
+
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+
+
+        </div>
+        <br><br>
+        <br><br>
+        <div class="sidebar col-md-2">
+
+
+            <div class="list-group">
+
+
+                <?php
+
+                if (\Auth::user()->type() == "pediatre"){
+
+
+                ?>
+                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="profile"> Ma Fiche Professionnelle
+
+
+                    <?php
+                    }
+
+
+                    ?>
+
+                </a>
+
+
+
+
+
+                <?php
+
+                if (\Auth::user()->type() == "pediatre"){
+                ?>
+
+                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#MesArticles')}}">
+
+                    Mes Articles
+
+                    <?php  } ?>
+
+
+
+                    <?php
+                    if(\Auth::user()->type() == "mom"){
+
+                    ?>
+
+                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#MesSujets')}}">Mes Sujets
+
+                        <?php  } ?>
+
+                        <span id="sujets" class="badge badge-info"></span><br>
+                        <!--Script pour compte le nombre de discussions crées par l'user auth (notification)-->
+                        <!--if(!$discussion->isRead && \Auth::user()->id == $discussion->user_id){-->
+                        <!-- </?php App\Discussion::where("user_id", "=", \Auth::user()->id )->count();?>-->
+                        @foreach(App\Maladie::all() as $fiche)
+                            <?php
+
+
+
+                            if(\Auth::user()->id == 1/*$fiche->user_id*/){
+
+
+                            ?>
+
+
+                            <a href="ficheMaladie/show/{{$fiche->id}}" class="list-group-item sujet"> {{$fiche->nom}}</a>
+                            <?php } ?>
+
+                        @endforeach
+
+                    </a>
+
+                    <?php
+
+                    if (\Auth::user()->type() == "pediatre"){
+                    ?>
+                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('ficheMaladie')}}">Mes Fiches Maladies</a>
+
+
+                    <?php  } ?>
+
+
+
+                    <?php
+                    if(\Auth::user()->type() == "mom"){
+                    ?>
+                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#MesFavoris')}}">Mes Favoris                    <span id="favoris" class="badge badge-info"></span>
+                    </a>
+                    <?php  } ?>
+
+
+
+                </a>
+            </div>
+        </div>
+    </div>
+
+  <!--  <div class="container col-md-12">-->
+        <br>
+        <!-- team section -->
+
     </div>
     </div>
 
@@ -86,4 +281,9 @@
         //jQuery.noConflict();$('#my-select').searchableOptionList();
     });
 </script>
+
+    <script>
+        document.getElementById("sujets").innerHTML = document.getElementsByClassName("sujet").length;
+        document.getElementById("favoris").innerHTML = document.getElementsByClassName("favoris").length;
+    </script>
 @endsection

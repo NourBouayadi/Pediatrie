@@ -23,14 +23,7 @@ class DiscussionController extends Controller
 
     }
     //TODO
-    public function discussionAcceuil(){
-            $discussions= DB::table('discussions')
-                            ->join('categories', 'discussions.categorie_id', '=', 'categories.id')
-                            ->select('discussions.titre', 'discussions.views', 'categories.name');
-                            where('discussions.categorie_id', '=', 'categories.id');
 
-        return view ('welcome', compact(['discussions']));
-    }
     public function indexParCategorie($id){
         $discussions = Discussion::where('categorie_id', '=', $id)->paginate(5);//->get();
         return view('forum', compact(['discussions']));
