@@ -179,7 +179,7 @@ UNION ALL
             $unread=true;
         }
         $discussion->save();
-        \Debugbar::info($unread);
+        \Debugbar::info($discussion->views);
         return view('discussion.show', compact(['discussion','unread']));
 
     }

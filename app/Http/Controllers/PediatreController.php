@@ -53,7 +53,7 @@ class PediatreController extends Controller
 
             ->select('discussions.id','discussions.titre', 'discussions.views', 'categories.name')
             ->where('isPediatre','=','0')
-            ->limit(3)->get();
+            ->orderBy('discussions.views', 'desc')->limit(3)->get();
 
         $articles= DB::table('discussions')
             ->join('categories', 'discussions.categorie_id', '=', 'categories.id')
@@ -61,7 +61,7 @@ class PediatreController extends Controller
 
             ->select('discussions.id','discussions.titre', 'discussions.views', 'categories.name')
             ->where('isPediatre','!=','0')
-            ->limit(3)->get();
+            ->orderBy('discussions.views', 'desc')->limit(3)->get();
         return view('welcome', compact(['pediatres','tops', 'discussions', 'articles']) );
 
     }

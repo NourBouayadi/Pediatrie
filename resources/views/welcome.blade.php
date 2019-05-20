@@ -346,7 +346,7 @@ header section -->
         <div class="row">
             <br>
             <h2>Articles Plus populaires</h2>
-            <h4>Les trois articles les plus visitées sur le <a href="/forum">forum</a></h4>
+            <h4>Les trois articles les plus visités sur le <a href="/forum">forum</a></h4>
             <br>
             @foreach($articles as $article)
                 <div class="col-md-4 col-sm-6">
@@ -360,8 +360,8 @@ header section -->
                                    <b>{{$article->name}}</b>
                             </div>
                             <h3>{{$article->titre}}</h3>
-                            <p>{{$article->views}} vues </p>
-                            <p> <a href="/forum/show/{{$discussion->id}}">>>lire l'article </a></p>
+                            <p>{{$article->views}} vue(s) </p>
+                            <p> <a href="/forum/show/{{$article->id}}">>>lire l'article </a></p>
 
 
                         </div>
