@@ -20,11 +20,28 @@ class FicheController extends Controller
     {
 
         $symptomes = Symptome::all();
-        $fiches = Maladie::all();
 
+        //$fiches = Maladie::all();
+          $fiches = DB::table('maladies')
+                    ->join('users', 'maladies.pediatre_id','=','users.id')
+                    ->select('maladies.*', 'users.name')->get();
         return view('fiche.index', compact(['fiches', 'symptomes']) );
 
     }
+    //afficher les fiches crées par chaque pediatre
+        public function indexParFiche()
+        {
+            $symptomes = Symptome::all();
+            $fiches = DB::table('maladies')
+                ->join('users','maladies.pediatre_id','=','users.id')
+                ->select('maladies.*', 'users.*')
+                ->where('maladies.pediatre_id','=',\Auth::user()->id)
+                ->orderBy('maladies.vue','desc')
+                ->orderBy('maladies.created_at','desc')
+                ->paginate(5);
+            return view('fiche.index', compact(['fiches','symptomes']) );
+
+        }
 
     public function create()
     {
@@ -98,8 +115,9 @@ maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
         $symptomes = DB::table('maladies_symptomes')
             ->join('symptomes', 'maladies_symptomes.symptome_id', '=','symptomes.id')
             ->select('symptomes.nom','maladies_symptomes.symptome_id')->where('maladie_id', '=',$id)->get();
+        if($fiche->pediatre_id != \Auth::user()->id)
 
-        $fiche->vue++;
+        {$fiche->vue++;}
         $fiche->save();
         return view('fiche.show', compact(['fiche','symptomes']));
 
@@ -108,13 +126,11 @@ maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
     public function search (Request $request){
         $symptomes=$request->get('symptomes');
         $query = DB::table('maladies')
-            ->selectRaw('maladies.*');
-
+            ->join('users', 'maladies.pediatre_id','=','users.id')
+            ->selectRaw('maladies.*,users.name');
 
         if($request->get('nom')!==null && !empty($request->get('nom'))){
             $query->where('nom', 'like', '%' . $request->get('nom') . '%');
-        }if($request->get('sexe')!==null && !empty($request->get('sexe'))) {
-            $query->Where('sexe', '=',   $request->get('sexe') );
         }if($request->get('symptomes')!==null && sizeof($request->get('symptomes'))>0){
             $query
                 ->join('maladies_symptomes', 'maladies.id', '=', 'maladies_symptomes.maladie_id')
@@ -125,8 +141,6 @@ maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
         $fiches =$query->orderBy('vue', 'desc')->get();
 
         $symptomes = Symptome::all();
-
-
 
         return view('fiche.index', compact(['fiches','symptomes']));}
 

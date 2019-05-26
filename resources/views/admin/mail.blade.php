@@ -1,1 +1,1 @@
-<p>fzf </p>
+{{$pediatre->name}}

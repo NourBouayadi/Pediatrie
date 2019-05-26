@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Pédiatre-Dz</title>
+    <title>PédiatrieDz</title>
     <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
@@ -75,52 +75,46 @@ header section -->
 
                             <ul class="nav navbar-nav navbar-right">
 
-                                <li><a class="menu active" href="#home" >Acceuil</a></li>
-                                <li  class="dropdown ">
+                                <li><a class="menu active" href="#home" >Accueil</a></li>
+                                <li  class="dropdown nav-item">
 
 
-                                    <a href="#service" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                        Catégories
-                                        <span class="caret"></span>
-                                    </a>
+                                    <a class="nav-link"class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        FAQ <i class="fa fa-caret-down" aria-hidden="true"></i></a>
 
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li >
-                                            <a href="#Gro">
-                                                <strong>Grossesse</strong>
-                                            </a>
+                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" role="menu">
+                                        <li>
+                                            <a class="dropdown-item" href="/forum/categorie/1">Grossesse</a>
                                         </li>
                                         <li>
-                                            <a href="#NV"> <strong>Nouveau-Né</strong></a>
+                                            <a class="dropdown-item" href="/forum/categorie/2">Nouveau-Né</a>
                                         </li>
                                         <li>
-                                            <a href="#Vet"><strong>Vêtements</strong></a>
+                                            <a class="dropdown-item" href="/forum/categorie/3">Vêtements</a>
                                         </li>
                                         <li>
-                                            <a href="#J"><strong> Jouets</strong></a>
+                                            <a class="dropdown-item" href="/forum/categorie/4">Jouets</a>
                                         </li>
                                         <li>
-                                            <a href="#So"><strong>Sommeil</strong></a>
+                                            <a class="dropdown-item" href="/forum/categorie/5">Sommeil</a>
                                         </li>
                                         <li>
-                                            <a href="#Sa"><strong>Santé</strong></a>
+                                            <a class="dropdown-item" href="/forum/categorie/6">Santé</a>
                                         </li>
                                         <li>
-                                            <a href="#Be"><strong>Bien-être</strong></a>
+                                            <a class="dropdown-item" href="/forum/categorie/7">Bien-Etre</a>
                                         </li>
                                         <li>
-                                            <a href="#Ps"><strong>Psychologie</strong></a>
+                                            <a class="dropdown-item" href="/forum/categorie/8">Psychologie</a>
                                         </li>
                                         <li>
-                                            <a href="#Pm"><strong>Premières Marches</strong></a>
+                                            <a class="dropdown-item" href="/forum/categorie/9">Premières-Marches</a>
                                         </li>
 
                                     </ul>
                                 </li>
-                                <li><a class="menu" href="#Annuaire">Annuaire </a></li>
-                                <li><a class="menu" href="#FAQ">FAQ</a></li>
-                                <li><a class="menu" href="#forum"> Forum</a></li>
-                                <li><a class="menu" href="#prédir">Prédir</a></li>
+                                <li><a class="menu" href="#Annuaire">Pédiatres </a></li>
+                                <li><a class="menu" href="#predir">Annuaire de Maladies</a></li>
                             </ul>
                         </div><!-- /navbar-collapse -->
                     </div><!-- / .container-fluid -->
@@ -197,20 +191,13 @@ header section -->
         </div>
     </div>
 </section>
-<br>
-<br>
-<br>
-<br>
-
-
-
 
 
 <!-- service section starts here -->
-  <section class="slider" id="service">
+  <section class="slider" id="">
         <div class="container-fluid">
             <div class="row">
-            
+
                  <div id="carouselHacked" class="carousel slide carousel-fade" data-ride="carousel">
                      <div class="header-backup"></div>
                          <!-- Wrapper for slides -->
@@ -247,7 +234,7 @@ header section -->
 
 
 <br><br>
-<section class="about text-center" id="FAQ">
+<section class="about text-center" id="Annuaire">
     <div class="container">
         <div class="row">
             <br>
@@ -260,6 +247,7 @@ header section -->
                         <div class="about-img">
                             <img class="img-responsive" src="{{asset('assets/img/pediatre.jpeg')}}" alt="">
                         </div>
+                        <a href="/profile/{{$pediatre->id}}">
                         <div class="about-details">
                             <div class="pentagon-text">
                                 <br>
@@ -267,9 +255,51 @@ header section -->
                             </div>
                             <h3>{{$pediatre->name}}</h3>
                             <p>{{$pediatre->ville}}</p>
+                            <p>@if ($pediatre->points <1 )
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                @endif
+                                @if ($pediatre->points >=1 && $pediatre->points <2 )
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                @endif @if ($pediatre->points >=2 && $pediatre->points <3 )
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                @endif @if ($pediatre->points >=3 && $pediatre->points <4  )
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star "></i>
+                                    <i class="fa fa-star "></i>
+                                @endif
+                                @if ($pediatre->points >=4 && $pediatre->points <5  )
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star gold "></i>
+                                    <i class="fa fa-star "></i>
+                                @endif
+                                @if ($pediatre->points ==5)
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star gold"></i>
+                                    <i class="fa fa-star gold"></i>
+                                @endif
+                         ({{$pediatre->points}})</p>
                             <a href="/profile/{{$pediatre->id}}">>>voir le profile</a>
 
                         </div>
+                        </a>
                     </div>
                 </div>
             @endforeach
@@ -282,7 +312,7 @@ header section -->
 <!-- Discussions les plus populaires -->
 
 <br><br>
-<section class="about text-center" id="FAQ">
+<section class="about text-center" id="forum">
     <div class="container">
         <div class="row">
             <br>
@@ -295,15 +325,17 @@ header section -->
                     <div class="about-img">
                         <img class="img-responsive" src="{{asset('assets/img/itemDiscu1.jpg')}}" alt="">
                     </div>
+                    <a href="/forum/show/{{$discussion->id}}">
                     <div class="about-details">
                         <div class="pentagon-text">
                             <br>
                             <b>{{$discussion->name}}</b>
                         </div>
                         <h3>{{$discussion->titre}}</h3>
-                        <p>{{$discussion->views}} vue(s)</p>
+                        <p>{{$discussion->views}} vues</p>
                        <p> <a href="/forum/show/{{$discussion->id}}">>>lire la discussion</a></p>
                     </div>
+                    </a>
                 </div>
             </div>
             @endforeach
@@ -316,7 +348,7 @@ header section -->
 <br>
 
 <!--Système de Prédiction-->
-<section class="about text-center" id="Annuaire">
+<section class="about text-center" id="predir">
     <div class="container">
         <div class="row">
             <div class="team-heading text-center">
@@ -354,17 +386,19 @@ header section -->
                         <div class="about-img">
                             <img class="img-responsive" src="{{asset('assets/img/itemDiscu1.jpg')}}" alt="">
                         </div>
+                        <a href="/forum/show/{{$article->id}}">
                         <div class="about-details">
                             <div class="pentagon-text">
                                 <br>
                                    <b>{{$article->name}}</b>
                             </div>
                             <h3>{{$article->titre}}</h3>
-                            <p>{{$article->views}} vue(s) </p>
+                            <p>{{$article->views}} vues </p>
                             <p> <a href="/forum/show/{{$article->id}}">>>lire l'article </a></p>
 
 
                         </div>
+                        </a>
                     </div>
                 </div>
             @endforeach
@@ -416,13 +450,11 @@ header section -->
     =========================== "{{asset('assets/js/scripts.js')}}"-->
 
 <script src="{{asset('assets/js/jquery-2.1.1.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+
 <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script src="{{asset('assets/js/gmaps.js')}}"></script>
 <script src="{{asset('assets/js/smoothscroll.js')}}"></script>
-<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/js/custom.js')}}"></script>
-
-
 <!--links for slider num 2   :   le slider 2 ndir fiih les catégories (9 catégories) divisées usr 3 -->
 <!--script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.min.js"></script>

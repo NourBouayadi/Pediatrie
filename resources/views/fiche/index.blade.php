@@ -19,6 +19,11 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
 @section('content')
+    <div class="col-md-offset-4" style="padding-top: 0rem; padding-bottom: 0rem;">
+        <h3><a href="/forum">Prédiction de Maladies</a></h3>
+
+    </div>
+    <div class="col-md-offset-1"><p><a href="/"> << Accueil</a> > <a href="/ficheMaladie"> Annuaires des Maladies</a></p></div><br>
     <div class="container col-md-12">
 
         <div class="sidebar col-md-2">
@@ -97,19 +102,12 @@
             <div class="sidebar col-md-10 col-md-offset-2">
                 <form role="search" method="get" action="/ficheMaladie/search">
                     <div class="input-group  row" name="search" id="search">
-                        <div class="form-group col-md-3">
+                        <p>Saisir le nom de la maladies ou les symptomes de votre enfant et notre système prédit la maladie</p>
+                        <div class="form-group col-md-4">
                             <input type="text" name="nom" value="" class=" form-control" placeholder="Rechercher par Nom" >
                         </div>
                         <!--Blue selectcol-md-3 form-control mdb-select-->
-                        <div class="form-group col-md-3">
-                            <select name="sexe" class=" form-control mdb-select">
-                                <option value="">choisir le sexe</option>
-                                <option value="indifferent">indifferent</option>
-                                <option  value="fille">Fille</option>
-                                <option  value="garcon">Garçon</option>
 
-                            </select>
-                        </div>
                         <div class="form-group col-md-3">  <select id="selectSymptome" name="symptomes[]" class="js-states form-control mdb-select" multiple>
                                 @foreach($symptomes as $symptome)
                                     <option value="{{$symptome->id}}">{{$symptome->nom}}</option>
@@ -139,8 +137,9 @@
                                 <br>
 
                                 <small class="help-block"> Par
-                                    <a href="forum/profile">
-                                        <!--?php echo App\User::find($fiche->user_id)->name;?>-->UserName</a>
+
+                                    @if(App\User::find($fiche->pediatre_id)->isPediatre==1) <a href="/profile/{{$fiche->pediatre_id}}"> @endif
+                                      {{$fiche->name}}</a>
 
                                     <span class="label label-primary">
                                     <?php echo App\Categorie::find($fiche->categorie_id)->name;?>
@@ -153,12 +152,10 @@
                         <td class="">{{$fiche->sexe}}</td>
                         <td class="hidden-xs hidden-sm">{{$fiche->vue}}</td>
 
-
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-
 
         </div>
         <br><br>
@@ -175,7 +172,7 @@
 
 
                 ?>
-                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="profile"> Ma Fiche Professionnelle
+                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="profile/{{$fiche->pediatre_id}}"> Ma Fiche Professionnelle
 
 
                     <?php
@@ -195,7 +192,7 @@
                 if (\Auth::user()->type() == "pediatre"){
                 ?>
 
-                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#MesArticles')}}">
+                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/forum/sujet')}}">
 
                     Mes Articles
 
@@ -208,7 +205,7 @@
 
                     ?>
 
-                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#MesSujets')}}">Mes Sujets
+                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/forum/sujet')}}">Mes Sujets
 
                         <?php  } ?>
 
@@ -234,25 +231,8 @@
 
                     </a>
 
-                    <?php
 
-                    if (\Auth::user()->type() == "pediatre"){
-                    ?>
-                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('ficheMaladie')}}">Mes Fiches Maladies</a>
-
-
-                    <?php  } ?>
-
-
-
-                    <?php
-                    if(\Auth::user()->type() == "mom"){
-                    ?>
-                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#MesFavoris')}}">Mes Favoris                    <span id="favoris" class="badge badge-info"></span>
-                    </a>
-                    <?php  } ?>
-
-
+                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/ficheMaladie/fiche')}}">Mes Fiches Maladies</a>
 
                 </a>
             </div>

@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')
+<div class="col-md-offset-4" style="padding-top: 0rem; padding-bottom: 0rem;">
+    <h3><a href="/forum">Premier Forum Algérien de Pédiatrie</a></h3>
 
+</div>
+<div class="col-md-offset-1"><p><a href="/"> << Accueil</a> > <a href="/forum"> Forum</a></p></div><br>
 <div class="container col-md-12">
 
     <div class="sidebar col-md-2">
@@ -156,7 +160,7 @@
                             <br>
 
                             <small class="help-block"> Par
-                                <a href="forum/profile/{{$discussion->user_id}}">
+                               @if(App\User::find($discussion->user_id)->isPediatre==1) <a href="/profile/{{$discussion->user_id}}">@endif
                                     <?php echo App\User::find($discussion->user_id)->name;?></a>
 
                                 <span class="label label-primary">
@@ -182,7 +186,6 @@
         </ul>
     </div>
     <br><br>
-    <br><br>
     <div class="sidebar col-md-2">
 
 
@@ -206,16 +209,12 @@
 
 </a>
 
-
-
-
-           
            <?php
        
                     if (\Auth::user()->type() == "pediatre"){
             ?> 
             
-              <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#MesArticles')}}">
+              <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/forum/sujet')}}">
                 
                Mes Articles
           
@@ -228,7 +227,7 @@
             
              ?>
               
-               <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#MesSujets')}}">Mes Sujets
+               <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/forum/sujet')}}">Mes Sujets
               
               <?php  } ?>              
                 

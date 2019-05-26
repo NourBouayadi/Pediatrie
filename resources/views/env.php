@@ -40,3 +40,14 @@ PUSHER_APP_CLUSTER=mt1
 
 MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+MAIL_DRIVER=smtp
+Mail_SENDMAIL='C:\laragon\bin\sendmail\sendmail.exe -bs'
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USERNAME=pediatrie13dz@gmail.com
+MAIL_PASSWORD=pediatrie-dz123456
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=pediatrie13dz@gmail.com
+MAIL_FROM_NAME=Pediatrie-DZ
+

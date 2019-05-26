@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Pediatre;
 use App\Evaluation;
 use App\Reponse;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 
 class PediatreController extends Controller
 {
-
 
     //Method index to list all Pediatres
     public function index()
@@ -23,7 +23,6 @@ class PediatreController extends Controller
             ->select('users.id','users.name','users.points', 'pediatres.specialite', 'pediatres.ville', 'pediatres.date_debut_carriere')
             ->where('isActive','=',1)
             ->where('isPediatre','=',1)->orderBy('users.points', 'desc')->paginate(5);
-
         $tops=  DB::table('pediatres')
             ->join('users', 'pediatres.id', '=','users.id')
             ->select('users.id','users.name','users.points', 'pediatres.specialite', 'pediatres.ville', 'pediatres.date_debut_carriere')
@@ -32,6 +31,7 @@ class PediatreController extends Controller
         return view('pediatre.annuaire', compact(['pediatres', 'tops','reponses']) );
 
     }
+
     public function indexAccueil()
     {
         //table annuaire des pediatres pour afficher les champs: nom, date_carriere, specialite, ville & feedback
@@ -65,6 +65,7 @@ class PediatreController extends Controller
         return view('welcome', compact(['pediatres','tops', 'discussions', 'articles']) );
 
     }
+
     //Method search in Annuaire
     public function search (Request $request){
        /* $pediatres=Pediatre::where('specialite', 'like', '%' . $request->get('specialite') . '%')
@@ -126,6 +127,18 @@ class PediatreController extends Controller
         return view('editprofile', compact(['pediatre']) );
 
     }
+    public function update(Request $request, $id)
+    {
+        $pediatre = Pediatre::find($id);
+        $pediatre->description= $request->input('description');
+        $pediatre->tel1 = $request->input('tel1');
+        $pediatre->adresse = $request->input('adresse');
+        $pediatre->ville = $request->input('ville');
+        $pediatre->latitude = $request->input('latitude');
+        $pediatre->longitude = $request->input('longitude');
+        $pediatre->save();
+        return redirect('/profile/'.$id);
+    }
     public function storeCommentaire($id, Request $request)
     {
         $reponses = new Reponse();
@@ -135,5 +148,10 @@ class PediatreController extends Controller
         $reponses->save();
             return redirect('profile/'.$id);
     }
-
+    public function mail($id)
+    {
+        $pediatre=User::find($id);
+        \Mail::to($pediatre->email)->send(new \App\Mail\adminMail($pediatre));
+        return redirect('/dashboard');
+    }
 }

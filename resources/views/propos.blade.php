@@ -48,7 +48,7 @@
                 <div class="col-xs-5 header-logo">
                     <br>
                     
-                    <a href="#"><h1>Pédiatre-Dz</h1></a>
+                    <a href="/"><h1>Pédiatre-Dz</h1></a>
                 </div>
 
                    <div class="col-md-7">
@@ -67,60 +67,53 @@
                         </div>
                         <!-- Collect the nav links, forms, and other content for toggling -->
 
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                          
-                          <ul class="nav navbar-nav navbar-right">
-                           
-                            <li><a class="menu active" href="#home" >Acceuil</a></li>
-                         <li  class="dropdown ">
+                          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                              <ul class="nav navbar-nav navbar-right">
+
+                                  <li><a class="menu active" href="/" >Accueil</a></li>
+                                  <li  class="dropdown nav-item">
 
 
-                        <a href="#service" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Catégories
-                        <span class="caret"></span>
-                        </a>
+                                      <a class="nav-link"class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                          FAQ <i class="fa fa-caret-down" aria-hidden="true"></i></a>
 
-                      <ul class="dropdown-menu" role="menu">
-                        <li >
-                            <a href="#Gro">
-                                <strong>Grossesse</strong>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#NV"> <strong>Nouveau-Né</strong></a>
-                        </li>
-                        <li>
-                            <a href="#Vet"><strong>Vêtements</strong></a>
-                        </li>
-                        <li>
-                            <a href="#J"><strong> Jouets</strong></a>
-                        </li>
-                        <li>
-                            <a href="#So"><strong>Sommeil</strong></a>
-                        </li>
-                        <li>
-                            <a href="#Sa"><strong>Santé</strong></a>
-                        </li>
-                        <li>
-                            <a href="#Be"><strong>Bien-être</strong></a>
-                        </li>
-                        <li>
-                            <a href="#Ps"><strong>Psychologie</strong></a>
-                        </li>
-                        <li>
-                            <a href="#Pm"><strong>Premières Marches</strong></a>
-                        </li>
+                                      <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" role="menu">
+                                          <li>
+                                              <a class="dropdown-item" href="/forum/categorie/1">Grossesse</a>
+                                          </li>
+                                          <li>
+                                              <a class="dropdown-item" href="/forum/categorie/2">Nouveau-Né</a>
+                                          </li>
+                                          <li>
+                                              <a class="dropdown-item" href="/forum/categorie/3">Vêtements</a>
+                                          </li>
+                                          <li>
+                                              <a class="dropdown-item" href="/forum/categorie/4">Jouets</a>
+                                          </li>
+                                          <li>
+                                              <a class="dropdown-item" href="/forum/categorie/5">Sommeil</a>
+                                          </li>
+                                          <li>
+                                              <a class="dropdown-item" href="/forum/categorie/6">Santé</a>
+                                          </li>
+                                          <li>
+                                              <a class="dropdown-item" href="/forum/categorie/7">Bien-Etre</a>
+                                          </li>
+                                          <li>
+                                              <a class="dropdown-item" href="/forum/categorie/8">Psychologie</a>
+                                          </li>
+                                          <li>
+                                              <a class="dropdown-item" href="/forum/categorie/9">Premières-Marches</a>
+                                          </li>
 
-                    </ul>
-
-
-                              </li>
-                            <li><a class="menu" href="#Annuaire">Annuaire </a></li>
-                            <li><a class="menu" href="#FAQ">FAQ</a></li>
-                            <li><a class="menu" href="#forum"> Forum</a></li>
-                            <li><a class="menu" href="#prédir">Prédir</a></li>
-                          </ul>
-                        </div><!-- /navbar-collapse -->
+                                      </ul>
+                                  </li>
+                                  <li><a class="menu" href="/Annuaire">Pédiatres </a></li>
+                                  <li><a class="menu" href="/ficheMaladie">Maladies</a></li>
+                                  <li><a class="menu" href="/ficheMaladie">Prédir</a></li>
+                              </ul>
+                          </div><!-- /navbar-collapse --><!-- /navbar-collapse -->
                       </div><!-- / .container-fluid -->
                     </nav>
                 </div>
@@ -129,88 +122,27 @@
     </header> <!-- end of header area -->
 
 
-<section class="slider" id="home">
-        <div class="container-fluid">
-            <div class="row">
-                 <div id="carouselHacked" class="carousel slide carousel-fade" data-ride="carousel">
-                     <div class="header-backup"></div>
-                         <!-- Wrapper for slides -->
-                     <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="{{asset('assets/img/babby1.jpg')}}" alt="">
-                            <div class="carousel-caption">
-                                <h1>Pédiatre-Dz</h1>
-                                <p>Faites nous confiance</p>
-                                <button href='/inscrire'">S'inscrire</button>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="{{asset('assets/img/babby5.jpg')}}" alt="">
-                            <div class="carousel-caption">
-                                <h1>Pédiatre-Dz</h1>
-                                <p>Faites nous confiance</p>
-                                <button onclick="window.location='/inscrire'">S'inscrire</button>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="{{asset('assets/img/babby4.jpg')}}" alt="">
-                            <div class="carousel-caption">
-                                <h1>Pédiatre-Dz</h1>
-                                <p>Faites nous confiance</p>
-                                <button onclick="window.location='/inscrire'">S'inscrire</button>
-                            </div>
-                        </div>
-                        
-                        <div class="item">
-                            
-                            <img src="{{asset('assets/img/babby3.jpg')}}" alt="">
-                          
-                            <div class="carousel-caption">
-                              
-                                <h1>Pédiatre-Dz</h1>
-                                
-                                <p>Faites nous confiance</p>
-                                
-                                <button onclick="window.location='/inscrire'">S'inscrire</button>
-                            
-                            </div>
-                      
-                        </div>
-
-                    </div>
-        
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#carouselHacked" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-
-                    <a class="right carousel-control" href="#carouselHacked" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-
-                </div>
-            </div>
-        </div>
-    </section>
-<br>
-<br>
-
-
-    <!-- service section starts here -->
-    
+    <br><br>    <!-- service section starts here -->
 
 
 
+
+    <br> <br><br> <br>
+
+    <div >
+        <div class="col-md-offset-5" style="color:#3c9dc8;"><h2><a href="/propos"> A propos de Nous</a></h2></div>
+        <h4><a href="/"> << Accueil</a> > <a href="/propos"> A propos</a></h4>
+    </div>
     <section class="service text-center" id="cat">
+
+
         <div class="container">
+
             <div class="row">
                <h2> Qui Sommes nous ?</h2>
                 <h4>
                   <center>  
-                     Publié par : rédaction Pediatre-Dz
+                     Publié par : rédaction PediatrieDz
                   </center> 
                   <br>
                  Créateur de communautés, Pédiatre-dz est un binome des étudiants en 2 éme année master Génie Logiciel,

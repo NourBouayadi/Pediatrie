@@ -66,6 +66,8 @@ UNION ALL
         */
        return view('forum', compact(['discussions']));
     }
+
+
     public function indexParFavoris(){
         $favoris=Favori::where('user_id','=',\Auth::user()->id)
             ->where('favori','=','discussion_id')->paginate(5);
@@ -173,7 +175,7 @@ UNION ALL
         //TODO isRead favoris
         $discussion = Discussion::find($id);
         $unread=false;
-        $discussion->views++;
+        if($discussion->user_id != \Auth::user()->id) {$discussion->views++;}
         if (\Auth::user()->id==$discussion->user_id && !$discussion->isRead){
             $discussion->isRead=1;
             $unread=true;

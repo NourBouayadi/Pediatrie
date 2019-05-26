@@ -37,7 +37,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    PédiatrieDZ
+                    Pediatre-Dz
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -49,7 +49,7 @@
                         <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link"class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Catégories <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                FAQ <i class="fa fa-caret-down" aria-hidden="true"></i></a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/forum/categorie/1">Grossesse</a>
                                 <a class="dropdown-item" href="/forum/categorie/2">Nouveau-Né</a>
@@ -63,10 +63,8 @@
 
                             </div>
                         </li>
-                        <li class="nav-item"><a href="/annuaire" class="nav-link">Annuaire</a></li>
-                        <li class="nav-item"><a href="/forum" class="nav-link">FAQ</a></li>
-                        <li class="nav-item"><a href="/forum" class="nav-link">Forum</a></li>
-                        <li class="nav-item"><a href="/ficheMaladie" class="nav-link">Prédire</a></li>
+                        <li class="nav-item"><a href="/annuaire" class="nav-link">Pédiatres</a></li>
+                        <li class="nav-item"><a href="/ficheMaladie" class="nav-link">Annuaire de Maladies</a></li>
 
 
                     </ul>

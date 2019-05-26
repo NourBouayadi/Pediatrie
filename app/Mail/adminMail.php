@@ -10,15 +10,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class adminMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $pediatre;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($pediatre)
     {
         //
+        $this->pediatre=$pediatre;
     }
 
     /**
@@ -28,7 +29,7 @@ class adminMail extends Mailable
      */
     public function build()
     {
-        return $this->from('nour.bouayadi@gmail.com')
+        return $this->from('pediatrie13dz@gmail.com')
             ->view('admin.mail');
     }
 }

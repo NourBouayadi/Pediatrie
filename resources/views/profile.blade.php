@@ -17,7 +17,7 @@
                     <div class="widget-header">
                         <div class="widget-header-content">
                             <a class="avatar avatar-lg" href="javascript:void(0)">
-                                <img width=100px src="">
+                                <img width=100px src="{{asset('assets/img/ped.png')}}">
                             </a>
                             <h4 class="profile-user"></h4>
                             <span class="label label-primary">Pédiatre</span>
@@ -25,9 +25,9 @@
 
                             </p>
                             <p class="help-block">
-                                Last Active <b>2019 years ago</b>
+
                                 <br>
-                                Registered <b>1 month ago</b>
+
                             </p>
 
 
@@ -136,7 +136,7 @@
 
                         <div class="media" title="">
                             <a class="pull-left" href="/profile/admin">
-                                <img src="" class="">
+                                <img  class="">
                             </a>
 
                             <div class="media-body">
@@ -209,7 +209,7 @@
 
                                 <!--tr>
        
-        <td>
+        <td> Adresse:
             latitude: &nbsp;&nbsp;{{$pediatre->latitude}}
                                         <hr>
 
@@ -233,6 +233,7 @@
                     </div>
                 </div>
                 <div id="mapouter" class="row col-md-offset-2">
+                   <p class="col-md-offset-">Adresse</p>
                     <div class="gmap_canvas"><iframe width="500" height="250" id="gmap_canvas"
                                                      src="https://maps.google.com/maps?q={{$pediatre->latitude}}%2C{{$pediatre->longitude}}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                     </div></div>
@@ -242,7 +243,7 @@
                         <h3>Les commentaires</h3>
                         <table>
                             @foreach($reponses as $reponse)
-                                <tr>{{$reponse->description}} -{{$reponse->name}}</tr>
+                                <tr>{{$reponse->description}} ( par : {{$reponse->name}} )</tr>
                                 <br>
                                 <hr>
                             @endforeach

@@ -85,9 +85,10 @@ Route::get('ficheMaladie/edit/{id}', 'FicheController@edit');
 Route::post('ficheMaladie/update', 'FicheController@update');
 
 Route::delete('ficheMaladie/{id}', 'FicheController@delete');
+Route::get('/ficheMaladie/fiche','FicheController@indexParFiche')->middleware('auth');
 
 /**mail admin**/
-Route::get('/mail', function(){Mail::to('nour.bouayadi@gmail.com')->send(new \App\Mail\adminMail());echo ".";});
+Route::get('/mail/{id}','PediatreController@mail');
 /** Profile Pediatre (Fiche Professionnelle)**/
 /*Route::get('/profile', function () {
     return view('profile');
@@ -103,9 +104,10 @@ Route::get('/', 'PediatreController@indexAccueil');
 /**Route pour le profile pediatre*/
 Route::get('profile/{id}', 'PediatreController@indexPediatre')->middleware('auth');
 Route::get('profile/stars/{id}', 'PediatreController@stars')->middleware('auth');
-Route::get('editprofile/modify/{id}', 'PediatreController@modify')->middleware('auth');
+Route::get('/profile/editprofile/modify/{id}', 'PediatreController@modify')->middleware('auth');
 Route::put('profile/index/{id}', 'PediatreController@index')->middleware('auth');
 Route::post('profile/{id}', 'PediatreController@storeCommentaire')->middleware('auth');
+Route::post('/profile/update', 'PediatreController@update');
 
 
 

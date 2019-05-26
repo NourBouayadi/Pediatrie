@@ -137,9 +137,9 @@
                                     <td >
                                        <div class="row">
 
-                                           <button class="btn btn-secondary" aria-hidden="true">
+                                           <a href="/mail/{{$pediatre->id}}" class="btn btn-secondary" aria-hidden="true">
                                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                                           </button>
+                                           </a>
 
                                            <a href="{{ action('AdminController@approve', ['id' => $pediatre->id]) }}" class="btn btn-success">
                                                    <i class="fa fa-check" style="color:#FFFFFF;" aria-hidden="true"></i>
