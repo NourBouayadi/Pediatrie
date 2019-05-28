@@ -152,7 +152,11 @@
                         <td class="">{{$fiche->taux}} %</td>
                         <td class="hidden-xs hidden-sm">
                             @if($fiche->taux ==100)
-                                <p>La maladie la plus probable: {{$fiche->nom}}</p>
+                                @if(!$fiche->missing)
+                                    <p>La maladie la plus probable: {{$fiche->nom}}</p>
+                                @else
+                                    <p>La maladie la plus probable: {{$fiche->nom}} avec l'apparition d'autres symptomes pouvant correspondre à une autre maladie </p>
+                                @endif
                              @else
                                 <p>Possibilité d'apparition d'autres symtpomes de cette maladie dans le future</p>
                             @endif
@@ -178,7 +182,7 @@
 
 
                 ?>
-                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="profile/{{$fiche->pediatre_id}}"> Ma Fiche Professionnelle
+                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="/profile/{{\Auth::user()->id}}"> Ma Fiche Professionnelle
 
 
                     <?php

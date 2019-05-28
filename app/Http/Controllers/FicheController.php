@@ -135,8 +135,8 @@ maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
             $query
                 ->join('maladies_symptomes', 'maladies.id', '=', 'maladies_symptomes.maladie_id')
                 ->whereIn('symptome_id',$symptomes )
-                ->groupBy('maladie_id')
-                ->havingRaw('count(symptome_id)  >= ? ',array(sizeof($symptomes)));
+                ->groupBy('maladie_id');
+                //->havingRaw('count(symptome_id)  >= ? ',array(sizeof($symptomes)));
         }
         $fiches =$query->orderBy('vue', 'desc')->get();
 

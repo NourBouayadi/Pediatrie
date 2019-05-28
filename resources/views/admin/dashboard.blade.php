@@ -105,8 +105,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold text-warning text-uppercase mb-1">Pending
-                                                Requests
+                                            <div class="font-weight-bold text-warning text-uppercase mb-1">Demandes de Pédiatres
                                             </div>
                                             <div class="h3 col-md-offset-5 mb-0 font-weight-bold text-gray-800"><?php echo App\User::where("isPediatre", "=", 1)->where('isActive', '=', 0)->count();?></div>
                                         </div>
@@ -184,7 +183,7 @@
                         </div>
                     <div class="row">
                         <h1 class="h3 mb-0 text-gray-800">Retrait des Modérateurs</h1>
-                        <table class="col-md-10 table table-bordered table-striped">
+                        <table class="col-md-offset-1 col-md-10 table table-bordered table-striped">
                             <tr><th>catégorie</th>
                             <th>Nombre des modérateurs</th>
                             <th>Modérateurs</th>
