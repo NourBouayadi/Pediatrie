@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Categorie_moderateur;
 use App\User;
 
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -20,9 +22,17 @@ class AdminController extends Controller
             ->where('isPediatre', '=',1)
             ->paginate(3);
         //\Barryvdh\Debugbar\Facade::info($pediatres);
+            $categories= DB::table('categorie_moderateurs')
+                ->join('categories', 'categorie_moderateurs.categorie_id', '=','categories.id')
+                ->selectRaw('categories.name, categories.id, count(user_id) as num')
+                ->groupBy('categorie_moderateurs.categorie_id')->get();
+            $moderateurs= DB::table('categorie_moderateurs')
+                ->join('categories', 'categorie_moderateurs.categorie_id', '=','categories.id')
+                ->join('users','categorie_moderateurs.user_id', '=', 'users.id' )
+                ->selectRaw('users.name, users.id, categorie_id')->get();
 
 
-        return view('admin.dashboard', compact(['pediatres']));
+        return view('admin.dashboard', compact(['pediatres','categories','moderateurs']));
     }else return redirect('forum');
 
     }
@@ -37,6 +47,7 @@ class AdminController extends Controller
         // return redirect()->route('trainings', ['training' => $training])->with('success', 'Training Approved'); // if you want redirect to detail page of this training
     }*/
 
+
     public function approve($id){
         $pediatre = User::find($id);
         $pediatre->isActive = 1;
@@ -47,6 +58,20 @@ class AdminController extends Controller
     {
         $pediatre = User::find($id);
         $pediatre->delete();
+        return redirect('/dashboard');
+    }
+    public function retrait(Request $request)
+     {
+        $user = User::find($request->get('user_id'));
+        $user->isActive=0;
+        $user->save();
+
+        $moderateur = Categorie_moderateur::where('categorie_id', '=',$request->get('categorie_id') )
+                                            -> where('user_id', '=',$request->get('user_id') )->delete();
+
+
+
+
         return redirect('/dashboard');
     }
 

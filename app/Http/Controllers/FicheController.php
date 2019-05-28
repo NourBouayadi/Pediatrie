@@ -136,13 +136,27 @@ maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
                 ->join('maladies_symptomes', 'maladies.id', '=', 'maladies_symptomes.maladie_id')
                 ->whereIn('symptome_id',$symptomes )
                 ->groupBy('maladie_id')
-                ->havingRaw('count(symptome_id) >= ?',array(sizeof($symptomes)));
+                ->havingRaw('count(symptome_id)  >= ? ',array(sizeof($symptomes)));
         }
         $fiches =$query->orderBy('vue', 'desc')->get();
 
         $symptomes = Symptome::all();
 
-        return view('fiche.index', compact(['fiches','symptomes']));}
+        foreach( $fiches as $fiche){
+            $n=0;$missing=false;
+            $num=Maladies_symptome::groupBy('maladie_id')->having('maladie_id','=',$fiche->id)->count();
+            foreach($request->get('symptomes') as $symptome){
+                if(Maladies_symptome::where('symptome_id','=',$symptome)->where('maladie_id','=',$fiche->id)->exists()){
+                    $n++;
+                }else{
+                    $missing=true;
+                }
+                $fiche->taux=$n*100/$num;
+                $fiche->missing=$missing;
+            }
+        }
+        \Debugbar::info($fiches);
+        return view('fiche.search', compact(['fiches','symptomes']));}
 
     public function indexSymptomes(Request $request)
     {
