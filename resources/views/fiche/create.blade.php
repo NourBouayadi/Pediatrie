@@ -65,6 +65,10 @@
                      </div>
 
 
+                    <div class="form-group">
+                        <label for="">Recommendation</label>
+                            <textarea name="recommendation" class="form-control" rows="4"></textarea>
+                    </div>
 
                     <div class="form-group">
 

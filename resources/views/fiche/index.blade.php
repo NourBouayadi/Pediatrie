@@ -151,7 +151,6 @@
                         </td>
                         <td class="">{{$fiche->sexe}}</td>
                         <td class="hidden-xs hidden-sm">{{$fiche->vue}}</td>
-
                     </tr>
                 @endforeach
                 </tbody>

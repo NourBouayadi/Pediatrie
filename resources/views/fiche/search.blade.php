@@ -149,7 +149,7 @@
 
                             </h4>
                         </td>
-                        <td class="">{{$fiche->taux}} %</td>
+                        <td class="">{{number_format($fiche->taux,2)}} %</td>
                         <td class="hidden-xs hidden-sm">
                             @if($fiche->taux ==100)
                                 @if(!$fiche->missing)

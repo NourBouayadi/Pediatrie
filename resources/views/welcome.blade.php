@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PédiatrieDz</title>
+    <title>Pédiatrie-Dz</title>
     <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 
@@ -52,7 +52,7 @@ header section -->
             <div class="col-xs-5 header-logo">
                 <br>
 
-                <a href="#"><h1>Pédiatre-Dz</h1></a>
+                <a href="#"><h1>Pédiatrie-Dz</h1></a>
             </div>
 
             <div class="col-md-7">
@@ -135,7 +135,7 @@ header section -->
                     <div class="item active">
                         <img src="{{asset('assets/img/babby1.jpg')}}" alt="">
                         <div class="carousel-caption">
-                            <h1>Pédiatre-Dz</h1>
+                            <h1>Pédiatrie-Dz</h1>
                             <p>Faites nous confiance</p>
                           <button onclick="window.location='login'">S'inscrire</button>
                         </div>
@@ -143,7 +143,7 @@ header section -->
                     <div class="item">
                         <img src="{{asset('assets/img/babby5.jpg')}}" alt="">
                         <div class="carousel-caption">
-                            <h1>Pédiatre-Dz</h1>
+                            <h1>Pédiatrie-Dz</h1>
                             <p>Faites nous confiance</p>
                             <button onclick="window.location='login'">S'inscrire</button>
                         </div>
@@ -151,7 +151,7 @@ header section -->
                     <div class="item">
                         <img src="{{asset('assets/img/babby4.jpg')}}" alt="">
                         <div class="carousel-caption">
-                            <h1>Pédiatre-Dz</h1>
+                            <h1>Pédiatrie-Dz</h1>
                             <p>Faites nous confiance</p>
                             <button onclick="window.location='login'">S'inscrire</button>
                         </div>
@@ -163,7 +163,7 @@ header section -->
 
                         <div class="carousel-caption">
 
-                            <h1>Pédiatre-Dz</h1>
+                            <h1>Pédiatrie-Dz</h1>
 
                             <p>Faites nous confiance</p>
 

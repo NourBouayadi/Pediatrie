@@ -18,6 +18,7 @@
                         <!--value : pour l'auto remplissage car ici on modifie le contenu-->
                         <input type="text" name="description" class="form-control" value="{{ $discussion->description }}">
                     </div>
+
                     <input type="submit" value="Modifier" class="form-control btn btn-danger">
 
                 </form>

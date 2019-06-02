@@ -9,15 +9,7 @@
 
     <div class="sidebar col-md-2">
 
-      <form class="navbar-form" role="search" method="get" action="/forum/search">
-       
-            <div class="input-group">
-                <input type="text" value="" class="form-control" placeholder="Rechercher" name="search" id="search">
-            <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-            </div>
-            </div>
-      </form>
+      
       
       <div class="list-group">
             

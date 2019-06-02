@@ -51,6 +51,8 @@ Route::get('/forum/lock/{id}','DiscussionController@cloturer')->middleware('auth
 
 
 Route::get('/dashboard', 'AdminController@index')->middleware('auth');
+Route::post('/dashboard/attribution/show', 'AdminController@attribuer')->middleware('auth');
+
 Route::post('/dashboard/delete', 'AdminController@retrait')->middleware('auth');
 Route::get('/dashboard/{id}', ['as' => 'dashboard', 'uses' => 'AdminController@approve'])->middleware('auth');
 Route::delete('dashboard/{id}', 'AdminController@destroy')->middleware('auth');

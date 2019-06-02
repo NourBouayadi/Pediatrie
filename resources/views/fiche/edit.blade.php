@@ -70,6 +70,10 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="">Recommendation</label>
+                        <textarea name="recommendation" class="form-control" rows="4"> {{$fiche->recommendation}}</textarea>
+                    </div>
+                    <div class="form-group">
 
                         <input type="submit" value="Enregister" class="form-control btn btn-primary">
 

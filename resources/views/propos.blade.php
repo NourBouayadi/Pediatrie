@@ -48,7 +48,7 @@
                 <div class="col-xs-5 header-logo">
                     <br>
                     
-                    <a href="/"><h1>Pédiatre-Dz</h1></a>
+                    <a href="/"><h1>Pédiatrie-Dz</h1></a>
                 </div>
 
                    <div class="col-md-7">

@@ -60,7 +60,7 @@ class FicheController extends Controller
         $fiche->categorie_id = $request->input('categorie_id');
         $fiche->traitement_medical = $request->input('traitement_medical');
         $fiche->traitement_nonmedical = $request->input('traitement_nonmedical');
-        //$fiche->recommendation = $request->input('recommendation');
+        $fiche->recommendation = $request->input('recommendation');
         $fiche->pediatre_id = \Auth::user()->id;
         $fiche->save();
 /*la selection des symptomes peut etre multiple donc une boucle pour récuperer tous les choix, puis persister dans la table
@@ -92,6 +92,7 @@ maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
         $fiche->categorie_id = $request->input('categorie_id');
         $fiche->traitement_medical= $request->input('traitement_medical');
         $fiche->traitement_nonmedical= $request->input('traitement_nonmedical');
+        $fiche->recommendation = $request->input('recommendation');
         $fiche->save();
         DB::table('maladies_symptomes')->where('maladies_symptomes.maladie_id','=',$request->input('id'))->delete();
         foreach ($request->input('symptomes') as $id_symprome){
@@ -155,6 +156,7 @@ maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
                 $fiche->missing=$missing;
             }
         }
+        $fiches=$fiches->sortByDesc('taux')->sortBy('missing');
         \Debugbar::info($fiches);
         return view('fiche.search', compact(['fiches','symptomes']));}
 

@@ -181,9 +181,11 @@
                         </div>
 
                         </div>
-                    <div class="row">
-                        <h1 class="h3 mb-0 text-gray-800">Retrait des Modérateurs</h1>
-                        <table class="col-md-offset-1 col-md-10 table table-bordered table-striped">
+
+                    <!--Retrait des modérateurs-->
+                    <div class="row" style="padding-left:10px;">
+                        <h1 class="h3 mb-0 text-gray-800">Retrait des Modératrices</h1>
+                        <table class="col-md-11 table table-bordered table-striped">
                             <tr><th>catégorie</th>
                             <th>Nombre des modérateurs</th>
                             <th>Modérateurs</th>
@@ -201,7 +203,18 @@
                                             <tr>
                                                 @endif
                                                 <td>{{$moderateur->name}}</td>
-                                                <td>last activity</td>
+                                                <td>
+                                                    @php
+                                                       $discussion = \App\Discussion::where('user_id', '=', $moderateur->id)
+                                                                        ->max('created_at');
+                                                       $message = \App\Message::where('user_id', '=', $moderateur->id)
+                                                                        ->max('created_at');
+                                                        if($message > $discussion)
+                                                            echo $message;
+                                                        else
+                                                            echo $discussion;
+                                                    @endphp
+                                                </td>
                                                 <td>
                                                     <form action="{{url('/dashboard/delete')}}" method="post"
                                                           style="margin-bottom: 0;">
@@ -223,6 +236,50 @@
                                             </tr>
 
                         @endforeach
+                        </table>
+                    </div>
+
+                    <!--Attribution des modérateurs-->
+                    <div class="row" style="padding-left:10px;">
+                        <h1 class="h3 mb-0 text-gray-800">Attribution des Modératrices</h1>
+                        <table class="col-md-12 table table-bordered table-striped">
+                            <tr><th>Mamans</th>
+                                <th>Dernière Activité</th>
+                                @foreach($cats as $cat)
+                                    <th>{{$cat->name}}</th>
+                                @endforeach
+                            </tr>
+                            @foreach($mamans as $maman)
+
+                            <tr>
+                                <td>
+
+                                        {{$maman->name}}
+                                </td>
+                                <td> @php
+                                        $discussion = \App\Discussion::where('user_id', '=', $maman->id)
+                                                         ->max('created_at');
+                                        $message = \App\Message::where('user_id', '=', $maman->id)
+                                                         ->max('created_at');
+                                         if($message > $discussion)
+                                             echo $message;
+                                         else
+                                             echo $discussion;
+                                    @endphp</td>
+
+                                @foreach($cats as $cat)
+                                <td><input type="checkbox" class="form-check-input" value="{{$cat->id}}"  name="categories[]" form="form{{$maman->id}}"></td>
+                                @endforeach
+                                <td><input type="hidden" name="user_id" value="{{$maman->id}}" form="form{{$maman->id}}"/>
+                                    <button class="btn btn-primary" type="submit" form="form{{$maman->id}}"><i class="fa fa-plus-circle" aria-hidden="true" ></i></button>
+                                    <form action="/dashboard/attribution/show" id="form{{$maman->id}}" method="post">
+                                        {{csrf_field()}}
+                                    </form>
+                                </td>
+
+                            </tr>
+
+                            @endforeach
                         </table>
                     </div>
 

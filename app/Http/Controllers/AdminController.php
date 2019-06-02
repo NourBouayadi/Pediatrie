@@ -29,10 +29,25 @@ class AdminController extends Controller
             $moderateurs= DB::table('categorie_moderateurs')
                 ->join('categories', 'categorie_moderateurs.categorie_id', '=','categories.id')
                 ->join('users','categorie_moderateurs.user_id', '=', 'users.id' )
-                ->selectRaw('users.name, users.id, categorie_id')->get();
+                ->selectRaw('users.name, users.id, categorie_moderateurs.categorie_id')//,MAX(discussions.created_at) as discussion,discussions.user_id')
+                //->join('discussions', 'users.id', '=','discussions.user_id')
+                //->join('messages', 'users.id', '=','messages.user_id')
+                //->groupBy('discussions.user_id')
+                ->get();
+                \Debugbar::info($moderateurs);
 
 
-        return view('admin.dashboard', compact(['pediatres','categories','moderateurs']));
+            $mamans = DB::table('users')
+
+                    ->select('users.id','users.name')
+                    ->where('isActive','=','0')
+                    ->where('isPediatre','=','0')
+                    ->where('users.id','!=','0')
+                    ->get();
+            $cats = DB::table('categories')
+                     ->select('categories.id','categories.name')
+                  ->get();
+        return view('admin.dashboard', compact(['pediatres','categories','moderateurs', 'mamans', 'cats']));
     }else return redirect('forum');
 
     }
@@ -63,16 +78,32 @@ class AdminController extends Controller
     public function retrait(Request $request)
      {
         $user = User::find($request->get('user_id'));
-        $user->isActive=0;
-        $user->save();
 
         $moderateur = Categorie_moderateur::where('categorie_id', '=',$request->get('categorie_id') )
                                             -> where('user_id', '=',$request->get('user_id') )->delete();
-
-
+         if(Categorie_moderateur::where('user_id', '=',$request->get('user_id'))->doesntExist()) {
+             $user->isActive = 0;
+             $user->save();
+         }
 
 
         return redirect('/dashboard');
+    }
+
+    public function attribuer (Request $request)
+    {
+        $user = User::find($request->get('user_id'));
+        $user->isActive=1;
+        $user->save();
+        foreach ($request->input('categories') as $categorie_id){
+            $categorie=new Categorie_moderateur();
+            $categorie->categorie_id=$categorie_id;
+            $categorie->user_id = $request->get('user_id');
+            $categorie->save();
+        }
+        return redirect('/dashboard');
+
+
     }
 
 

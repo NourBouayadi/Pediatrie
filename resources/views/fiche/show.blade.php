@@ -34,7 +34,8 @@
                        <tr><th>Descrition</th><td> {{$fiche->description}}</td></tr>
                         <tr><th>Les Symptomes</th><td>@foreach ($symptomes as $symptome){{$symptome->nom}}<br> @endforeach</td></tr>
                        <tr><th>Traitement Medical</th><td> {{$fiche->traitement_medical}}</td></tr>
-                       <tr><th>Descrition</th><td> {{$fiche->traitement_nonmedical}}</td></tr>
+                       <tr><th>Description</th><td> {{$fiche->traitement_nonmedical}}</td></tr>
+                       <tr><th>Recommendation</th><td>{{$fiche->recommendation}}</td></tr>
 
                    </table>
                        <div> <button class="btn btn-primary col-md-offset-12"><a href="/ficheMaladie/edit/{{$fiche->id}}" style="color: white;">Modifier</a></button></div>
