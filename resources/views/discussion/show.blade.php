@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{{asset('assets/fonts/web-icons/web-icons.css')}}">
     <link rel="stylesheet" href="{{asset('assets/fonts/font-awesome/font-awesome.css')}}">
 
+    <link rel="stylesheet" href="{{asset('assets/css/rating.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/notationEtoile.css')}}">
+
 </head>
 <body id="app-layout">
 <nav class="navbar navbar-default">
@@ -95,46 +98,105 @@
 
             <li class="media well" style ="background-color: #ffffff ; border: none";>
                 <div class="pull-left user-info" href="#">
+                    @php
+                        $author=App\User::find($discussion->user_id);
+                    @endphp
                     <img class="avatar img-circle img-thumbnail" src="{{asset('assets/img/avatar.jpg')}}"
                          width="64" alt="Avatar">
                     <strong>
-                        <a href="http://demo.procoderr.tech/profile/admin">
+                        @if($author->type()=="pediatre")
+                        <a href="/profile/{{$discussion->user_id}}">
                             {{$discussion->getAuthor()}}
                         </a>
+                            @elseif ($author->type()=="modratrice"||$author->type()=="mom")
+                            {{$discussion->getAuthor()}}
+                                @endif
                     </strong>
                     <br>
 
                     <small class="btn-group btn-group-xs">
+
+                        @if($author->type()=="modratrice"||$author->type()=="mom")
                         <a class="btn btn-default"
-                           href="">0 Feedback Points
+                           href="">{{$author->points}} Points
                         </a>
-                    </small>
+                        @elseif($author->type()=="pediatre")
+                            <?php $points= $author->points;?>
+                                <div class="rating-stars text-center">
+                                    @if ($points <1 )
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                    @endif
+                                    @if ($points >=1 && $points <2 )
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                    @endif @if ($points >=2 && $points <3 )
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                    @endif @if ($points >=3 && $points <4 )
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star "></i>
+                                        <i class="fa fa-star "></i>
+                                    @endif
+                                    @if ($points >=4 && $points <5  )
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold "></i>
+                                        <i class="fa fa-star "></i>
+                                    @endif
+                                    @if ($points ==5)
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                        <i class="fa fa-star gold"></i>
+                                    @endif
+                             ({{$points}})
+                                </div>
+                        @endif
+                    </small><br>
+                    @if($author->id==\Auth::user()->id||\Auth::user()->type()=="modratrice")
                     <div class="forum-post-panel btn-group btn-group-xs">
                         <form action="{{url('forum/'.$discussion->id)}}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-
-                            <a href="http://demo.procoderr.tech/forums/post/1/edit" ><i
+                            @if($author->id==\Auth::user()->id)
+                            <a href="/forum/edit/{{$discussion->id}}" ><i
                                         class="wb-pencil btn btn-info btn-xs"></i>
                                 <span class="hidden-xs">
-          </span>
+                                </span>
                             </a>
-
+                            @endif
                             <button type="submit" class="wb-trash btn btn-danger btn-xs" onclick="supprimer();"></button>
                             <span class="hidden-xs"></span>
 
                         </form>
                     </div>
+                        @endif
 
                 </div>
                 <div style="float: right;" ><a
                             class=" btn btn-default btn-xs" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i
                                 class=" fa fa-clock-o"></i> {{$discussion->created_at}}
                     </a>
+                    @if($author->id==\Auth::user()->id||\Auth::user()->type()=="modratrice")
                     @if(!$discussion->isLocked)
                         <a href="/forum/lock/{{$discussion->id}}" class="btn btn-warning btn-xs" type="submit"> <i class="fa fa-lock"></i>cloturer</a>
                     @else
                         <a href="/forum/lock/{{$discussion->id}}" class="btn btn-warning btn-xs" type="submit"> <i class="fa fa-unlock"></i>ouvrir</a>
+                    @endif
                     @endif
                 </div>
 
@@ -158,37 +220,98 @@
             @foreach($discussion->getMessages() as $message)
                 <div class="row"> <li class="media well  col-md-12">
                         <div class="pull-left user-info" href="#">
+                            @php
+                                $author=App\User::find($message->user_id);
+                            @endphp
                             <img class="avatar img-circle img-thumbnail" src="{{asset('assets/img/avatar.jpg')}}"
                                  width="64" alt="Avatar">
                             <strong>
-                                <a href="http://demo.procoderr.tech/profile/admin">
+                                @if($author->type()=="pediatre")
+                                    <a href="/profile/{{$discussion->user_id}}">
+
                                     {{$message->getAuthor()}}
                                 </a>
+                                    @elseif($author->type()=="modratrice"||$author->type()=="mom")
+                                    {{$message->getAuthor()}}
+                                    @endif
                             </strong>
                             <br>
 
                             <small class="btn-group btn-group-xs">
-                                <a class="btn btn-default" href="">0 Feedback Points
-                                </a>
+
+
+                                @if($author->type()=="modratrice"||$author->type()=="mom")
+                                    <a class="btn btn-default"
+                                       href="">{{$author->points}} Points
+                                    </a>
+                                @elseif($author->type()=="pediatre")
+                                    <?php $points= $author->points;?>
+                                    <div class="rating-stars text-center">
+                                        @if ($points <1 )
+                                            <i class="fa fa-star "></i>
+                                            <i class="fa fa-star "></i>
+                                            <i class="fa fa-star "></i>
+                                            <i class="fa fa-star "></i>
+                                            <i class="fa fa-star "></i>
+                                        @endif
+                                        @if ($points >=1 && $points <2 )
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star "></i>
+                                            <i class="fa fa-star "></i>
+                                            <i class="fa fa-star "></i>
+                                            <i class="fa fa-star "></i>
+                                        @endif @if ($points >=2 && $points <3 )
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star "></i>
+                                            <i class="fa fa-star "></i>
+                                            <i class="fa fa-star "></i>
+                                        @endif @if ($points >=3 && $points <4 )
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star "></i>
+                                            <i class="fa fa-star "></i>
+                                        @endif
+                                        @if ($points >=4 && $points <5  )
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star gold "></i>
+                                            <i class="fa fa-star "></i>
+                                        @endif
+                                        @if ($points ==5)
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star gold"></i>
+                                            <i class="fa fa-star gold"></i>
+                                        @endif
+                                 ({{$points}})
+                                    </div>
+                                @endif
                             </small>
+                            <br>
+                            @if($author->id==\Auth::user()->id||\Auth::user()->type()=="modratrice")
                             <div class="forum-post-panel btn-group btn-group-xs">
                                 <form action="{{url('forum/show/'.$message->id)}}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 
-
+                                    @if($author->id==\Auth::user()->id)
                                     <a href="http://demo.procoderr.tech/forums/post/1/edit" class="btn btn-info btn-xs"><i
                                                 class="wb-pencil"></i>
                                         <span class="hidden-xs">
-          </span>
+                                        </span>
                                     </a>
-
+                                    @endif
                                     <button type="submit" class="btn btn-danger btn-xs" onclick="supprimer();">
 
                                         <i class="wb-trash"></i>
                                         <span class="hidden-xs"></span>
-                                    </button></form></div>
+                                    </button></form></div>@endif
                         </div>
+
 
                             <div style="float: right;" ><a
                                                 class=" btn btn-default btn-xs" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i

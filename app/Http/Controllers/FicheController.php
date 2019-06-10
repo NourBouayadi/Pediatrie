@@ -31,77 +31,90 @@ class FicheController extends Controller
     //afficher les fiches crées par chaque pediatre
         public function indexParFiche()
         {
-            $symptomes = Symptome::all();
-            $fiches = DB::table('maladies')
-                ->join('users','maladies.pediatre_id','=','users.id')
-                ->select('maladies.*', 'users.*')
-                ->where('maladies.pediatre_id','=',\Auth::user()->id)
-                ->orderBy('maladies.vue','desc')
-                ->orderBy('maladies.created_at','desc')
-                ->paginate(5);
-            return view('fiche.index', compact(['fiches','symptomes']) );
-
+            if (\Auth::user()->type() == "pediatre") {
+                $symptomes = Symptome::all();
+                $fiches = DB::table('maladies')
+                    ->join('users', 'maladies.pediatre_id', '=', 'users.id')
+                    ->select('maladies.*', 'users.*')
+                    ->where('maladies.pediatre_id', '=', \Auth::user()->id)
+                    ->orderBy('maladies.vue', 'desc')
+                    ->orderBy('maladies.created_at', 'desc')
+                    ->paginate(5);
+                return view('fiche.index', compact(['fiches', 'symptomes']));
+            }
+            else return redirect('/ficheMaladie');
         }
 
     public function create()
     {
-        $symptomes = Symptome::all();
+        if (\Auth::user()->type() == "pediatre") {
+            $symptomes = Symptome::all();
 
 
-        return view('fiche.create', compact(['symptomes']) );
+            return view('fiche.create', compact(['symptomes']));
+        }
+        else return redirect('/ficheMaladie');
     }
 
     public function store(Request $request)
     {
-        $fiche = new Maladie();
-        $fiche->nom = $request->input('nom');
-        $fiche->description = $request->input('description');
-        $fiche->sexe = $request->input('sexe');
-        $fiche->categorie_id = $request->input('categorie_id');
-        $fiche->traitement_medical = $request->input('traitement_medical');
-        $fiche->traitement_nonmedical = $request->input('traitement_nonmedical');
-        $fiche->recommendation = $request->input('recommendation');
-        $fiche->pediatre_id = \Auth::user()->id;
-        $fiche->save();
-/*la selection des symptomes peut etre multiple donc une boucle pour récuperer tous les choix, puis persister dans la table
-maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
-        foreach ($request->input('symptomes') as $id_symprome){
-            $symptome=new Maladies_symptome();
-            $symptome->maladie_id=$fiche->id;
-            $symptome->symptome_id=$id_symprome;
-            $symptome->save();
+        if (\Auth::user()->type() == "pediatre") {
+            $fiche = new Maladie();
+            $fiche->nom = $request->input('nom');
+            $fiche->description = $request->input('description');
+            $fiche->sexe = $request->input('sexe');
+            $fiche->categorie_id = $request->input('categorie_id');
+            $fiche->traitement_medical = $request->input('traitement_medical');
+            $fiche->traitement_nonmedical = $request->input('traitement_nonmedical');
+            $fiche->recommendation = $request->input('recommendation');
+            $fiche->pediatre_id = \Auth::user()->id;
+            $fiche->save();
+            /*la selection des symptomes peut etre multiple donc une boucle pour récuperer tous les choix, puis persister dans la table
+            maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
+            foreach ($request->input('symptomes') as $id_symprome) {
+                $symptome = new Maladies_symptome();
+                $symptome->maladie_id = $fiche->id;
+                $symptome->symptome_id = $id_symprome;
+                $symptome->save();
+            }
         }
-
         return redirect('ficheMaladie');
     }
 
     public function edit( $id)
     {
+
         $fiche = Maladie::find($id);
-        $symptomes = Symptome::all();
-        $selectSymptome=Maladies_symptome::select('symptome_id')->where('maladie_id','=',$id)->get();
-        \Debugbar::info($selectSymptome);
-        return view('fiche.edit', ['fiche' => $fiche,'symptomes'=>$symptomes,'selectSymptome'=>$selectSymptome]);
+        if($fiche->pediatre_id == \Auth::user()->id) {
+            $symptomes = Symptome::all();
+            $selectSymptome = Maladies_symptome::select('symptome_id')->where('maladie_id', '=', $id)->get();
+            \Debugbar::info($selectSymptome);
+            return view('fiche.edit', ['fiche' => $fiche, 'symptomes' => $symptomes, 'selectSymptome' => $selectSymptome]);
+        }else
+            return redirect('ficheMaladie/show/' . $id);
     }
     public function update(Request $request){
 
         $fiche = Maladie::find($request->input('id'));
-        $fiche->nom= $request->input('nom');
-        $fiche->description= $request->input('description');
-        $fiche->sexe = $request->input('sexe');
-        $fiche->categorie_id = $request->input('categorie_id');
-        $fiche->traitement_medical= $request->input('traitement_medical');
-        $fiche->traitement_nonmedical= $request->input('traitement_nonmedical');
-        $fiche->recommendation = $request->input('recommendation');
-        $fiche->save();
-        DB::table('maladies_symptomes')->where('maladies_symptomes.maladie_id','=',$request->input('id'))->delete();
-        foreach ($request->input('symptomes') as $id_symprome){
-            $symptome=new Maladies_symptome();
-            $symptome->maladie_id=$fiche->id;
-            $symptome->symptome_id=$id_symprome;
-            $symptome->save();
-        }
-        return redirect('ficheMaladie/show/'.$request->input('id'));
+        if($fiche->pediatre_id == \Auth::user()->id) {
+            $fiche->nom = $request->input('nom');
+            $fiche->description = $request->input('description');
+            $fiche->sexe = $request->input('sexe');
+            $fiche->categorie_id = $request->input('categorie_id');
+            $fiche->traitement_medical = $request->input('traitement_medical');
+            $fiche->traitement_nonmedical = $request->input('traitement_nonmedical');
+            $fiche->recommendation = $request->input('recommendation');
+            $fiche->save();
+            DB::table('maladies_symptomes')->where('maladies_symptomes.maladie_id', '=', $request->input('id'))->delete();
+            foreach ($request->input('symptomes') as $id_symprome) {
+                $symptome = new Maladies_symptome();
+                $symptome->maladie_id = $fiche->id;
+                $symptome->symptome_id = $id_symprome;
+                $symptome->save();
+            }
+            return redirect('ficheMaladie/show/' . $request->input('id'));
+        }else
+            return redirect('ficheMaladie/show/' . $request->input('id'));
     }
 
     public function destroy($id)
@@ -160,12 +173,16 @@ maladies_syptomes chaque maladie avec SES symtpomes sous forme de tuple */
         \Debugbar::info($fiches);
         return view('fiche.search', compact(['fiches','symptomes']));}
 
-    public function indexSymptomes(Request $request)
-    {
+    public function indexParCategorie($id){
         $symptomes = Symptome::all();
 
+        //$fiches = Maladie::all();
+        $fiches = DB::table('maladies')
+            ->join('users', 'maladies.pediatre_id','=','users.id')
+            ->select('maladies.*', 'users.name')
+            ->where('categorie_id','=',$id)
+            ->get();
+        return view('fiche.index', compact(['fiches', 'symptomes']) );
 
-        return view('fiche.create', compact(['symptomes']) );
     }
-
 }

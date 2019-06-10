@@ -48,7 +48,7 @@ class AdminController extends Controller
                      ->select('categories.id','categories.name')
                   ->get();
         return view('admin.dashboard', compact(['pediatres','categories','moderateurs', 'mamans', 'cats']));
-    }else return redirect('forum');
+    }else return redirect('/');
 
     }
 
@@ -64,44 +64,52 @@ class AdminController extends Controller
 
 
     public function approve($id){
-        $pediatre = User::find($id);
-        $pediatre->isActive = 1;
-        $pediatre->save();
-        return redirect('/dashboard');
+        if (\Auth::user()->type() == "admin") {
+            $pediatre = User::find($id);
+            $pediatre->isActive = 1;
+            $pediatre->save();
+            return redirect('/dashboard');
+        }else return redirect('/');
     }
     public function destroy($id)
     {
-        $pediatre = User::find($id);
-        $pediatre->delete();
-        return redirect('/dashboard');
+        if (\Auth::user()->type() == "admin") {
+            $pediatre = User::find($id);
+            $pediatre->delete();
+            return redirect('/dashboard');
+        }else return redirect('/');
     }
     public function retrait(Request $request)
      {
-        $user = User::find($request->get('user_id'));
+         if (\Auth::user()->type() == "admin") {
+             $user = User::find($request->get('user_id'));
 
-        $moderateur = Categorie_moderateur::where('categorie_id', '=',$request->get('categorie_id') )
-                                            -> where('user_id', '=',$request->get('user_id') )->delete();
-         if(Categorie_moderateur::where('user_id', '=',$request->get('user_id'))->doesntExist()) {
-             $user->isActive = 0;
-             $user->save();
-         }
+             $moderateur = Categorie_moderateur::where('categorie_id', '=', $request->get('categorie_id'))
+                 ->where('user_id', '=', $request->get('user_id'))->delete();
+             if (Categorie_moderateur::where('user_id', '=', $request->get('user_id'))->doesntExist()) {
+                 $user->isActive = 0;
+                 $user->save();
+             }
 
 
-        return redirect('/dashboard');
+             return redirect('/dashboard');
+         }else return redirect('/');
     }
 
     public function attribuer (Request $request)
     {
-        $user = User::find($request->get('user_id'));
-        $user->isActive=1;
-        $user->save();
-        foreach ($request->input('categories') as $categorie_id){
-            $categorie=new Categorie_moderateur();
-            $categorie->categorie_id=$categorie_id;
-            $categorie->user_id = $request->get('user_id');
-            $categorie->save();
-        }
-        return redirect('/dashboard');
+        if (\Auth::user()->type() == "admin") {
+            $user = User::find($request->get('user_id'));
+            $user->isActive = 1;
+            $user->save();
+            foreach ($request->input('categories') as $categorie_id) {
+                $categorie = new Categorie_moderateur();
+                $categorie->categorie_id = $categorie_id;
+                $categorie->user_id = $request->get('user_id');
+                $categorie->save();
+            }
+            return redirect('/dashboard');
+        }else return redirect('/');
 
 
     }

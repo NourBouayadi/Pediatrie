@@ -29,14 +29,14 @@
                                 <br>
 
                             </p>
-
-
+                            @if(\Auth::user()->id==$pediatre->id)
                             <td>
                                 <a href="editprofile/modify/{{$pediatre->id}}" class="btn btn-primary">
 
                                     <i class="fa fa-pencil"></i> Editer
                                 </a>
                             </td>
+                            @endif
                             <br>
                             <tr>
 
@@ -250,6 +250,7 @@
                         </table>
                         <br>
                     </div>
+                    @if(\Auth::user()->type()!="admin")
                     <div class="col-md-12">
                         <form action="" method="post">
                             {{ csrf_field() }}
@@ -262,6 +263,7 @@
                             </div>
                         </form>
                     </div>
+                        @endif
                 </div>
             </div>
         </div>

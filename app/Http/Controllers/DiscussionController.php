@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Discussion;
 use App\Likes_message;
 use App\Message;
+use App\Pediatre;
+use App\User;
 use Illuminate\Http\Request;
 use Auth;
 use App\Mom;
@@ -109,13 +111,8 @@ UNION ALL
         $discussion = Discussion::find($id);
         $discussion->titre = $request->input('titre');
         $discussion->description = $request->input('description');
-
-        $discussion->categorie_id = $request->input('categorie_id');
-        $discussion->user_id = \Auth::user()->id;
-
-
         $discussion->save();
-        return redirect('forum')->with('success', ' mise à jour étudiant');;
+        return redirect('/forum/show/'.$id)->with('success', ' mise à jour étudiant');;
     }
 
     public function destroy($id)
@@ -151,6 +148,12 @@ UNION ALL
         
 
         if($like==null) {
+            $message=Message::find($id);
+            if(Pediatre::where('id','=',$message->user_id)->doesntexist()){
+                $user=User::find($message->user_id);
+                $user->points++;
+                $user->save();
+            }
             $like = new Likes_message();
             $like->user_id = \Auth::user()->id;
             $like->message_id = $id;
@@ -159,6 +162,12 @@ UNION ALL
         }
         else {
             $like->delete();
+            $message=Message::find($id);
+            if(Pediatre::where('id','=',$message->user_id)->doesntexist()){
+                $user=User::find($message->user_id);
+                $user->points--;
+                $user->save();
+            }
             return "fa fa-thumbs-o-up";
         }
     }

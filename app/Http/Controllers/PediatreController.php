@@ -123,12 +123,17 @@ class PediatreController extends Controller
 
     public function modify($id)
     {
-        $pediatre = Pediatre::find($id);
-        return view('editprofile', compact(['pediatre']) );
+        if (\Auth::user()->id == $id) {
+            $pediatre = Pediatre::find($id);
+            return view('editprofile', compact(['pediatre']));
+        }
+        else
+            return redirect("/profile/".$id);
 
     }
     public function update(Request $request, $id)
     {
+        if (\Auth::user()->id == $id) {
         $pediatre = Pediatre::find($id);
         $pediatre->description= $request->input('description');
         $pediatre->tel1 = $request->input('tel1');
@@ -137,6 +142,7 @@ class PediatreController extends Controller
         $pediatre->latitude = $request->input('latitude');
         $pediatre->longitude = $request->input('longitude');
         $pediatre->save();
+        }
         return redirect('/profile/'.$id);
     }
     public function storeCommentaire($id, Request $request)

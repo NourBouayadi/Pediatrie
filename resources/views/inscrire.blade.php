@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> Forums | Procoderr</title>
+    <title> Pédiatrie-DZ </title>
 
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
@@ -35,85 +35,58 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="http://demo.procoderr.tech">
-                Procoderr Demo
+                Pédiatrie-DZ
 
             </a>
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
 
-            <!-- Right Side Of Navbar -->
+
             <ul class="nav navbar-nav navbar-right">
-                <!-- Authentication Links -->
-                <li class=active>
-                    <a href="http://demo.procoderr.tech/forums">Accueil</a>
-                </li>
 
-                <li class="dropdown ">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Catégories
-                        <span class="caret"></span>
-                    </a>
+                <li><a class="menu active" href="/" >Accueil</a></li>
+                <li  class="dropdown nav-item">
 
-                    <ul class="dropdown-menu" role="menu">
+
+                    <a class="nav-link"class="nav-link dropdown-toggle" href="/forum" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        FAQ <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" role="menu">
                         <li>
-                            <a href="http://demo.procoderr.tech/settings">
-                                Grossesse
-                            </a>
+                            <a class="dropdown-item" href="/forum/categorie/1">Grossesse</a>
                         </li>
                         <li>
-                            <a href="http://demo.procoderr.tech/logout">Nouveau-Né</a>
+                            <a class="dropdown-item" href="/forum/categorie/2">Nouveau-Né</a>
                         </li>
                         <li>
-                            <a href="http://demo.procoderr.tech/logout">Vêtements</a>
+                            <a class="dropdown-item" href="/forum/categorie/3">Vêtements</a>
                         </li>
                         <li>
-                            <a href="http://demo.procoderr.tech/logout">Jouets</a>
+                            <a class="dropdown-item" href="/forum/categorie/4">Jouets</a>
                         </li>
                         <li>
-                            <a href="http://demo.procoderr.tech/logout">Sommeil</a>
+                            <a class="dropdown-item" href="/forum/categorie/5">Sommeil</a>
                         </li>
                         <li>
-                            <a href="http://demo.procoderr.tech/logout">Santé</a>
+                            <a class="dropdown-item" href="/forum/categorie/6">Santé</a>
                         </li>
                         <li>
-                            <a href="http://demo.procoderr.tech/logout">Bien-être</a>
+                            <a class="dropdown-item" href="/forum/categorie/7">Bien-Etre</a>
                         </li>
                         <li>
-                            <a href="http://demo.procoderr.tech/logout">Psychologie</a>
+                            <a class="dropdown-item" href="/forum/categorie/8">Psychologie</a>
                         </li>
                         <li>
-                            <a href="http://demo.procoderr.tech/logout">Premières Marches</a>
+                            <a class="dropdown-item" href="/forum/categorie/9">Premières-Marches</a>
                         </li>
 
                     </ul>
                 </li>
-
-                <li>
-                    <a href="http://demo.procoderr.tech/profile">Annuaire</a>
-                </li>
-
-                <li>
-                    <a href="http://demo.procoderr.tech/admin">FAQ</a>
-                </li>
-
-                <li>
-                    <a href="http://demo.procoderr.tech/admin">Forum</a>
-                </li>
-
-                <li>
-                    <a href="http://demo.procoderr.tech/admin">Prédire</a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        Adiba
-
-                    </a>
-
-
-                </li>
-                </li>
+                <li><a class="menu" href="/Annuaire">Pédiatres </a></li>
+                <li><a class="menu" href="/ficheMaladie">Annuaire de Maladies</a></li>
+                <li><a class="menu active" href="/login" >Login</a></li>
+                <li><a class="menu active" href="/register" >Register</a></li>
             </ul>
         </div>
     </div>
@@ -131,7 +104,7 @@
                 </li>
                 <li>
                     <a href="#formulaire_pediatre" data-toggle="tab">
-                        Pédiatrie
+                        Pédiatre
                     </a>
                 </li>
             </ul>
@@ -209,7 +182,7 @@
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary" id="submit2" disabled="disabled">Submit
+                                <button type="submit" class="btn btn-primary" id="submit2" disabled="disabled">
                                     {{ __('Register') }}
                                 </button>
                             </div>
@@ -478,7 +451,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary" id="submit">Submit
+                                <button type="submit" class="btn btn-primary" id="submit">
                                     {{ __('Register') }}
                                 </button>
                             </div>
@@ -494,12 +467,7 @@
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        Copyright &copy; Procoderr 2019 - All rights reserved
-        <span class="pull-right"><a href="/contact">Contact Us</a></span>
-    </div>
-</footer>
+
 </body>
 <!-- JavaScripts -->
 <script src="{{asset('assets/js/scripts.js')}}"></script>

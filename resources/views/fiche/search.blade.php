@@ -32,13 +32,14 @@
 
 
             <div class="list-group">
+                @if (\Auth::user()->type() == "pediatre")
 
                 <a href="{{url('ficheMaladie/create')}}"
                    class=" list-group-item list-group-item-text list-group-item-success text-center"><i class="wb-plus"></i>
 
                     Nouvelle Fiche
                 </a>
-
+                @endif
 
                 <a href="{{url('ficheMaladie')}}" class="list-group-item">Toutes les Catégories</a>
 
@@ -176,75 +177,37 @@
             <div class="list-group">
 
 
-                <?php
-
-                if (\Auth::user()->type() == "pediatre"){
-
-
-                ?>
-                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="/profile/{{\Auth::user()->id}}"> Ma Fiche Professionnelle
-
-
-                    <?php
-                    }
-
-
-                    ?>
-
-                </a>
-
-
-
-
-
-                <?php
-
-                if (\Auth::user()->type() == "pediatre"){
-                ?>
-
-                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/forum/sujet')}}">
-
-                    Mes Articles
-
-                    <?php  } ?>
-
-
-
-                    <?php
-                    if(\Auth::user()->type() == "mom"){
-
-                    ?>
-
-                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/forum/sujet')}}">Mes Sujets
-
-                        <?php  } ?>
-
+                @if (\Auth::user()->type() == "pediatre")
+                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="/profile/{{\Auth::user()->id}}"> Ma Fiche Professionnelle
+                    </a>
+                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/forum/sujet')}}">
+                        Mes Articles
                         <span id="sujets" class="badge badge-info"></span><br>
-                        <!--Script pour compte le nombre de discussions crées par l'user auth (notification)-->
-                        <!--if(!$discussion->isRead && \Auth::user()->id == $discussion->user_id){-->
-                        <!-- </?php App\Discussion::where("user_id", "=", \Auth::user()->id )->count();?>-->
-                        @foreach(App\Maladie::all() as $fiche)
-                            <?php
-
-
-
-                            if(\Auth::user()->id == 1/*$fiche->user_id*/){
-
-
-                            ?>
-
-
-                            <a href="ficheMaladie/show/{{$fiche->id}}" class="list-group-item sujet"> {{$fiche->nom}}</a>
-                            <?php } ?>
-
+                        @foreach(App\Discussion::where('user_id','=',\Auth::user()->id)->where('isRead','=',false)->get() as $discussion)
+                            <a href="forum/show/ {{$discussion->id}}" class="list-group-item sujet"> {{$discussion->titre}}</a>
                         @endforeach
 
                     </a>
-
-
                     <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/ficheMaladie/fiche')}}">Mes Fiches Maladies</a>
+                    </a>
+                @elseif(\Auth::user()->type() == "mom" || \Auth::user()->type() == "modratrice")
+                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/forum/sujet')}}">Mes Sujets
+                        <span id="sujets" class="badge badge-info"></span><br>
+                        @foreach(App\Discussion::where('user_id','=',\Auth::user()->id)->where('isRead','=',false)->get() as $discussion)
+                            <a href="forum/show/ {{$discussion->id}}" class="list-group-item sujet"> {{$discussion->titre}}</a>
+                        @endforeach
+                    </a>
+                    <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#MesFavoris')}}">Mes Favoris
+                        <span id="favoris" class="badge badge-info"></span>
+                        @foreach(App\Favori::where('user_id','=',\Auth::user()->id)->get() as $favori)
 
-                </a>
+                            <a href="forum/show/{{$favori->discussion_id}}" class="list-group-item favoris"> {{App\Discussion::find($favori->discussion_id)->titre}}</a>
+
+                        @endforeach
+                    </a>
+                @endif
+
+
             </div>
         </div>
     </div>

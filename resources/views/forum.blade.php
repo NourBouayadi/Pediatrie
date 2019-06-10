@@ -12,7 +12,7 @@
       
       
       <div class="list-group">
-            
+            @if(\Auth::user()->type() == "mom"||\Auth::user()->type() == "modratrice"||\Auth::user()->type() == "pediatre")
             <a href="{{url('forum/create')}}"
                class=" list-group-item list-group-item-text list-group-item-success text-center"><i class="wb-plus"></i>
                  
@@ -23,13 +23,13 @@
                             echo "Nouveau Article";
             
                         }
-                      elseif(\Auth::user()->type() == "mom")
+                      elseif(\Auth::user()->type() == "mom"||\Auth::user()->type() == "modratrice")
                             
                             echo "Nouvelle Discussion";
                    ?>          
             
-            </a>
-
+                    </a>
+                @endif
 
             <a href="{{url('forum')}}" class="list-group-item">Toutes les Catégories</a>
             
@@ -110,7 +110,7 @@
                    <?php 
 
 
-                    if (\Auth::user()->type() == "mom"){
+                    if (\Auth::user()->type() == "mom"||\Auth::user()->type() == "modratrice"){
                              $class='fa fa-star-o';
                         
                         if(App\Favori::where('user_id','=',\Auth::user()->id)
@@ -126,7 +126,7 @@
               
                 <?php                  
                 
-                  if (\Auth::user()->type() == "mom"){
+                  if (\Auth::user()->type() == "mom"||\Auth::user()->type() == "modratrice"){
                     
                 ?>
                            <td class='text-center'><i class='{{$class}}' id='{{$discussion->id}}'
@@ -182,107 +182,44 @@
 
 
         <div class="list-group">
-        
-     
-         <?php
-    
-                    if (\Auth::user()->type() == "pediatre"){
-            
-                    
-            ?> 
-                          <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="profile"> Ma Fiche Professionnelle
-       
-
-      <?php        
-                          }
 
 
-  ?>  
+            @if (\Auth::user()->type() == "pediatre")
+                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="/profile/{{\Auth::user()->id}}"> Ma Fiche Professionnelle
+                </a>
+                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/forum/sujet')}}">
+                    Mes Articles
+                    <span id="sujets" class="badge badge-info"></span><br>
+                    @foreach(App\Discussion::where('user_id','=',\Auth::user()->id)->where('isRead','=',false)->get() as $discussion)
+                        <a href="forum/show/ {{$discussion->id}}" class="list-group-item sujet"> {{$discussion->titre}}</a>
+                    @endforeach
 
-</a>
+                </a>
+                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/ficheMaladie/fiche')}}">Mes Fiches Maladies</a>
+                </a>
+            @elseif(\Auth::user()->type() == "mom" || \Auth::user()->type() == "modratrice")
+                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/forum/sujet')}}">Mes Sujets
+                    <span id="sujets" class="badge badge-info"></span><br>
+                    @foreach(App\Discussion::where('user_id','=',\Auth::user()->id)->where('isRead','=',false)->get() as $discussion)
+                        <a href="forum/show/ {{$discussion->id}}" class="list-group-item sujet"> {{$discussion->titre}}</a>
+                    @endforeach
+                </a>
+                <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#MesFavoris')}}">Mes Favoris
+                    <span id="favoris" class="badge badge-info"></span>
+                    @foreach(App\Favori::where('user_id','=',\Auth::user()->id)->get() as $favori)
 
-           <?php
-       
-                    if (\Auth::user()->type() == "pediatre"){
-            ?> 
-            
-              <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/forum/sujet')}}">
-                
-               Mes Articles
-          
-             <?php  } ?> 
+                        <a href="forum/show/{{$favori->discussion_id}}" class="list-group-item favoris"> {{App\Discussion::find($favori->discussion_id)->titre}}</a>
 
-            
-            
-             <?php   
-                        if(\Auth::user()->type() == "mom"){
-            
-             ?>
-              
-               <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('/forum/sujet')}}">Mes Sujets
-              
-              <?php  } ?>              
-                
-                <span id="sujets" class="badge badge-info"></span><br>
-                    <!--Script pour compte le nombre de discussions crées par l'user auth (notification)-->
-                <!--if(!$discussion->isRead && \Auth::user()->id == $discussion->user_id){-->
-                <!-- </?php App\Discussion::where("user_id", "=", \Auth::user()->id )->count();?>-->
-                @foreach(App\Discussion::all() as $discussion)
-                    <?php
-
-
-
-                    if(\Auth::user()->id == $discussion->user_id){
-                             
-
-                    ?>
-
-
-                    <a href="forum/show/ {{$discussion->id}}" class="list-group-item sujet"> {{$discussion->titre}}</a>
-                    <?php } ?>
-
-                @endforeach
-
-            </a>
-        
-            <?php
-       
-                    if (\Auth::user()->type() == "pediatre"){
-            ?> 
-                      <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('ficheMaladie')}}">Mes Fiches Maladies</a>
-             
- 
-            <?php  } ?> 
-            
-     
-
-                    <?php   
-                      if(\Auth::user()->type() == "mom"){
-                         ?>
-                            <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="{{url('#MesFavoris')}}">Mes Favoris</a>
-                     <?php  } ?>          
-               
-                <span id="favoris" class="badge badge-info"></span>
-                @foreach(App\Favori::where('user_id','=',\Auth::user()->id)->get() as $favori)
-
-                    <a href="forum/show/{{$favori->discussion_id}}" class="list-group-item favoris"> {{App\Discussion::find($favori->discussion_id)->titre}}</a>
-
-                @endforeach
-
-                 </a>
-        
-
-
-       
-    
-
+                    @endforeach
+                </a>
+            @endif
 
 
         </div>
     </div>
 </div>
 
-@endsection
+
 <!-- JavaScripts -->
 <script>
     $(':checkbox').radiocheck();
@@ -312,5 +249,4 @@
     document.getElementById("sujets").innerHTML = document.getElementsByClassName("sujet").length;
     document.getElementById("favoris").innerHTML = document.getElementsByClassName("favoris").length;
 </script>
-</body>
-</html>
+@endsection

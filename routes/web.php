@@ -60,6 +60,8 @@ Route::delete('dashboard/{id}', 'AdminController@destroy')->middleware('auth');
 Route::get('forum/show/{id}','DiscussionController@show')->middleware('auth');
 Route::get('forum/fav/{id}', 'DiscussionController@fav')->middleware('auth');
 Route::get('forum/like/{id}', 'DiscussionController@like')->middleware('auth');
+Route::get('forum/edit/{id}', 'DiscussionController@edit')->middleware('auth');
+Route::post('forum/update/{id}', 'DiscussionController@update')->middleware('auth');
 
 Route::get('/search/', 'DiscussionController@search')->middleware('auth');
 
@@ -81,14 +83,14 @@ Route::resource('forum', 'DiscussionController')->middleware('auth');
 /** Route pour la fiche Maladie**/
 Route::get('ficheMaladie', 'FicheController@index');
 
-Route::get('ficheMaladie/create', 'FicheController@create');
-Route::post('ficheMaladie/create', 'FicheController@store');
+Route::get('ficheMaladie/create', 'FicheController@create')->middleware('auth');
+Route::post('ficheMaladie/create', 'FicheController@store')->middleware('auth');
 Route::get('ficheMaladie/show/{id}', 'FicheController@show');
 Route::get('ficheMaladie/search', 'FicheController@search');
-Route::get('ficheMaladie/edit/{id}', 'FicheController@edit');
-Route::post('ficheMaladie/update', 'FicheController@update');
+Route::get('ficheMaladie/edit/{id}', 'FicheController@edit')->middleware('auth');
+Route::post('ficheMaladie/update', 'FicheController@update')->middleware('auth');
+Route::get('ficheMaladie/categorie/{id}', 'FicheController@indexParCategorie');
 
-Route::delete('ficheMaladie/{id}', 'FicheController@delete');
 Route::get('/ficheMaladie/fiche','FicheController@indexParFiche')->middleware('auth');
 
 /**mail admin**/
@@ -106,10 +108,10 @@ Route::get('/annuaire/search/', 'PediatreController@search');
 Route::get('/', 'PediatreController@indexAccueil');
 
 /**Route pour le profile pediatre*/
-Route::get('profile/{id}', 'PediatreController@indexPediatre')->middleware('auth');
+Route::get('profile/{id}', 'PediatreController@indexPediatre');
 Route::get('profile/stars/{id}', 'PediatreController@stars')->middleware('auth');
 Route::get('/profile/editprofile/modify/{id}', 'PediatreController@modify')->middleware('auth');
-Route::put('profile/index/{id}', 'PediatreController@index')->middleware('auth');
+//Route::put('profile/index/{id}', 'PediatreController@index')->middleware('auth');
 Route::post('profile/{id}', 'PediatreController@storeCommentaire')->middleware('auth');
 Route::post('/profile/update', 'PediatreController@update');
 
