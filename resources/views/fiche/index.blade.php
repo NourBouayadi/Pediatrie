@@ -32,6 +32,7 @@
 
 
             <div class="list-group">
+                @auth
                 @if (\Auth::user()->type() == "pediatre")
                 <a href="{{url('ficheMaladie/create')}}"
                    class=" list-group-item list-group-item-text list-group-item-success text-center"><i class="wb-plus"></i>
@@ -39,7 +40,7 @@
                    Nouvelle Fiche
                 </a>
                 @endif
-
+                @endauth
                 <a href="{{url('ficheMaladie')}}" class="list-group-item">Toutes les Catégories</a>
 
                 <a href="{{url('ficheMaladie/categorie/1')}}" class="list-group-item ">Grossesse
@@ -159,6 +160,7 @@
         </div>
         <br><br>
         <br><br>
+        @auth
         <div class="sidebar col-md-2">
 
 
@@ -198,6 +200,7 @@
 
             </div>
         </div>
+            @endauth
     </div>
 
   <!--  <div class="container col-md-12">-->

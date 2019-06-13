@@ -57,19 +57,22 @@ Route::post('/dashboard/delete', 'AdminController@retrait')->middleware('auth');
 Route::get('/dashboard/{id}', ['as' => 'dashboard', 'uses' => 'AdminController@approve'])->middleware('auth');
 Route::delete('dashboard/{id}', 'AdminController@destroy')->middleware('auth');
 
-Route::get('forum/show/{id}','DiscussionController@show')->middleware('auth');
+Route::get('forum/show/{id}','DiscussionController@show');
 Route::get('forum/fav/{id}', 'DiscussionController@fav')->middleware('auth');
 Route::get('forum/like/{id}', 'DiscussionController@like')->middleware('auth');
 Route::get('forum/edit/{id}', 'DiscussionController@edit')->middleware('auth');
 Route::post('forum/update/{id}', 'DiscussionController@update')->middleware('auth');
 
-Route::get('/search/', 'DiscussionController@search')->middleware('auth');
+Route::get('/forum/search', 'DiscussionController@search');
 
 Route::post('forum/show/{id}', 'MessageController@store')->middleware('auth');
 Route::delete('forum/show/{id}', 'MessageController@destroy')->middleware('auth');
+Route::get('forum/edit/message/{id}', 'MessageController@edit')->middleware('auth');
+Route::post('forum/edit/message/{id}', 'MessageController@update')->middleware('auth');
+
 
 /**Routes pour les catégories*/
-Route::get('/forum/categorie/{id}','DiscussionController@indexParCategorie')->middleware('auth');
+Route::get('/forum/categorie/{id}','DiscussionController@indexParCategorie');
 /** Routes pour Mes Sujets**/
 Route::get('/forum/sujet/','DiscussionController@indexParSujet')->middleware('auth');
 /** Routes pour Mes Favoris**/
@@ -78,7 +81,12 @@ Route::get('/forum/favoris','DiscussionController@indexParFavoris')->middleware(
 Route::get('/forum/article/','DiscussionController@article');
 /** Routes pour les discussions**/
 Route::get('/forum/discussion/','DiscussionController@discussion');
-Route::resource('forum', 'DiscussionController')->middleware('auth');
+Route::get('/forum/','DiscussionController@index');
+Route::get('/forum/create','DiscussionController@create')->middleware('auth');
+Route::post('/forum/','DiscussionController@store')->middleware('auth');
+Route::delete('/forum/{id}','DiscussionController@destroy')->middleware('auth');
+
+//Route::resource('forum', 'DiscussionController')->middleware('auth');
 
 /** Route pour la fiche Maladie**/
 Route::get('ficheMaladie', 'FicheController@index');
@@ -113,7 +121,7 @@ Route::get('profile/stars/{id}', 'PediatreController@stars')->middleware('auth')
 Route::get('/profile/editprofile/modify/{id}', 'PediatreController@modify')->middleware('auth');
 //Route::put('profile/index/{id}', 'PediatreController@index')->middleware('auth');
 Route::post('profile/{id}', 'PediatreController@storeCommentaire')->middleware('auth');
-Route::post('/profile/update', 'PediatreController@update');
+Route::post('/profile/update', 'PediatreController@update')->middleware('auth');
 
 
 

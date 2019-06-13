@@ -29,6 +29,7 @@
                                 <br>
 
                             </p>
+                            @auth
                             @if(\Auth::user()->id==$pediatre->id)
                             <td>
                                 <a href="editprofile/modify/{{$pediatre->id}}" class="btn btn-primary">
@@ -37,6 +38,7 @@
                                 </a>
                             </td>
                             @endif
+                            @endauth
                             <br>
                             <tr>
 
@@ -46,7 +48,8 @@
                                 <!-- Rating Stars Box -->
                                 <!-- if auth user is owner of profile, or auth user has already given feedback then show avg -->
                                 <?php $points= App\User::find($pediatre->id)->points;\Debugbar::info($points);?>
-                                 @if(\Auth::user()->id ==$pediatre->id || \App\Evaluation::where('pediatre_id','=',$pediatre->id)->where('user_id','=',\Auth::user()->id)->exists())
+
+                                @if(\Auth::user()==null||\Auth::user()->id ==$pediatre->id ||\Auth::user()->type() =="admin"|| \App\Evaluation::where('pediatre_id','=',$pediatre->id)->where('user_id','=',\Auth::user()->id)->exists())
                                   <div class="rating-stars text-center">
                                     @if ($points <1 )
                                         <i class="fa fa-star "></i>
@@ -237,19 +240,23 @@
                     <div class="gmap_canvas"><iframe width="500" height="250" id="gmap_canvas"
                                                      src="https://maps.google.com/maps?q={{$pediatre->latitude}}%2C{{$pediatre->longitude}}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                     </div></div>
-                <div class="col-md-8">
+                <div class="col-md-12">
 
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <h3>Les commentaires</h3>
-                        <table>
+                        <table  class="table table-striped">
                             @foreach($reponses as $reponse)
-                                <tr>{{$reponse->description}} ( par : {{$reponse->name}} )</tr>
-                                <br>
-                                <hr>
+                                <tr>
+                                   <td> {{$reponse->description}}</td>
+
+                                </tr>
+
+                                <tr> <td> par : <b>{{$reponse->name}}</b> ({{$reponse->created_at}})</td></tr>
                             @endforeach
                         </table>
                         <br>
                     </div>
+                    @auth
                     @if(\Auth::user()->type()!="admin")
                     <div class="col-md-12">
                         <form action="" method="post">
@@ -264,6 +271,7 @@
                         </form>
                     </div>
                         @endif
+                        @endauth
                 </div>
             </div>
         </div>

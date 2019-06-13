@@ -29,7 +29,7 @@ class AdminController extends Controller
             $moderateurs= DB::table('categorie_moderateurs')
                 ->join('categories', 'categorie_moderateurs.categorie_id', '=','categories.id')
                 ->join('users','categorie_moderateurs.user_id', '=', 'users.id' )
-                ->selectRaw('users.name, users.id, categorie_moderateurs.categorie_id')//,MAX(discussions.created_at) as discussion,discussions.user_id')
+                ->selectRaw('users.name, users.id,users.points, categorie_moderateurs.categorie_id')//,MAX(discussions.created_at) as discussion,discussions.user_id')
                 //->join('discussions', 'users.id', '=','discussions.user_id')
                 //->join('messages', 'users.id', '=','messages.user_id')
                 //->groupBy('discussions.user_id')
@@ -39,7 +39,7 @@ class AdminController extends Controller
 
             $mamans = DB::table('users')
 
-                    ->select('users.id','users.name')
+                    ->select('users.id','users.name','users.points')
                     ->where('isActive','=','0')
                     ->where('isPediatre','=','0')
                     ->where('users.id','!=','0')

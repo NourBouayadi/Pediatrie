@@ -34,12 +34,12 @@
                     <div class="row">
 
                         <!-- Nombre Membre  Mamans Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="col-xl-2 col-md-6  col-md-offset-1 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class=" font-weight-bold text-primary text-uppercase ">Nombre de
+                                            <div class=" font-weight-bold text-primary text-uppercase ">
                                                 Mamans
                                             </div>
                                             <div class="h3 col-md-offset-5 mb-0 font-weight-bold text-gray-800"><a
@@ -56,13 +56,36 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Nombre Membre  Pediatre Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                      <!-- Nombre de Modératrice-->
+                        <div class="col-xl-2 col-md-6 mb-4">
+                            <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class=" font-weight-bold text-primary text-uppercase ">Nombre de
+                                            <div class=" font-weight-bold text-danger text-uppercase ">
+                                                Modératrices
+                                            </div>
+                                            <div class="h3 col-md-offset-5 mb-0 font-weight-bold text-gray-800"><a
+                                                        href="/forum"> <?php echo App\User::where("id", "!=", 0)
+                                                        ->where("isActive", "=", 1)
+                                                        ->where("isPediatre", "=", 0)
+                                                        ->count();?></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fa fa-users fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nombre Membre  Pediatre Card Example -->
+                        <div class="col-xl-2 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class=" font-weight-bold text-info text-uppercase ">
                                                 Pédiatres
                                             </div>
                                             <div class="h3 col-md-offset-5 mb-0 font-weight-bold text-gray-800"><a
@@ -79,12 +102,12 @@
                             </div>
                         </div>
                         <!-- Nombre Discussions Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="col-xl-2 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold text-success text-uppercase mb-1">Nombre de
+                                            <div class="font-weight-bold text-success text-uppercase mb-1">
                                                 Sujets
                                             </div>
                                             <div class="h3 col-md-offset-5 mb-0 font-weight-bold text-gray-800"><a
@@ -100,14 +123,15 @@
 
 
                         <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="col-xl-2 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold text-warning text-uppercase mb-1">Demandes de Pédiatres
+                                            <div class="font-weight-bold text-warning text-uppercase mb-1">Demandes
                                             </div>
-                                            <div class="h3 col-md-offset-5 mb-0 font-weight-bold text-gray-800"><?php echo App\User::where("isPediatre", "=", 1)->where('isActive', '=', 0)->count();?></div>
+                                            <div class="h3 col-md-offset-5 mb-0 font-weight-bold text-gray-800"><a
+                                                        href=""><?php echo App\User::where("isPediatre", "=", 1)->where('isActive', '=', 0)->count();?></a></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fa fa-file fa-2x text-gray-300"></i>
@@ -143,7 +167,7 @@
                                         <td>{{$pediatre->name}}</td>
                                         <td>{{$pediatre->email}}</td>
                                         <td><a class="btn btn-primary" target="_blank"
-                                               href="/attestations/{{$pediatre->id}}.pdf' ?>">attestation</a></td>
+                                               href="/attestations/{{$pediatre->id}}.pdf">attestation</a></td>
                                         <td>{{$pediatre->created_at}}</td>
                                         <td>
                                             <div class="row">
@@ -187,8 +211,8 @@
                         <h1 class="h3 mb-0 text-gray-800">Retrait des Modératrices</h1>
                         <table class="col-md-11 table table-bordered table-striped">
                             <tr><th>catégorie</th>
-                            <th>Nombre des modérateurs</th>
-                            <th>Modérateurs</th>
+                            <th>Nombre des modératrices</th>
+                            <th>Modératrices</th>
                             <th>Dernière Activité</th>
                             <th>Supprimer</th>
                             </tr>
@@ -244,6 +268,7 @@
                         <h1 class="h3 mb-0 text-gray-800">Attribution des Modératrices</h1>
                         <table class="col-md-12 table table-bordered table-striped">
                             <tr><th>Mamans</th>
+                                <th>Points</th>
                                 <th>Dernière Activité</th>
                                 @foreach($cats as $cat)
                                     <th>{{$cat->name}}</th>
@@ -256,6 +281,7 @@
 
                                         {{$maman->name}}
                                 </td>
+                                <td>{{$maman->points}}</td>
                                 <td> @php
                                         $discussion = \App\Discussion::where('user_id', '=', $maman->id)
                                                          ->max('created_at');

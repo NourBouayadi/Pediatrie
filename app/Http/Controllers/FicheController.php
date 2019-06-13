@@ -129,7 +129,7 @@ class FicheController extends Controller
         $symptomes = DB::table('maladies_symptomes')
             ->join('symptomes', 'maladies_symptomes.symptome_id', '=','symptomes.id')
             ->select('symptomes.nom','maladies_symptomes.symptome_id')->where('maladie_id', '=',$id)->get();
-        if($fiche->pediatre_id != \Auth::user()->id)
+        if(\Auth::user()!=null&&$fiche->pediatre_id != \Auth::user()->id)
 
         {$fiche->vue++;}
         $fiche->save();
@@ -155,21 +155,28 @@ class FicheController extends Controller
         $fiches =$query->orderBy('vue', 'desc')->get();
 
         $symptomes = Symptome::all();
-
-        foreach( $fiches as $fiche){
-            $n=0;$missing=false;
-            $num=Maladies_symptome::groupBy('maladie_id')->having('maladie_id','=',$fiche->id)->count();
-            foreach($request->get('symptomes') as $symptome){
-                if(Maladies_symptome::where('symptome_id','=',$symptome)->where('maladie_id','=',$fiche->id)->exists()){
-                    $n++;
-                }else{
-                    $missing=true;
+        if($request->get('symptomes')!==null && sizeof($request->get('symptomes'))>0) {
+            foreach ($fiches as $fiche) {
+                $n = 0;
+                $missing = false;
+                $num = Maladies_symptome::groupBy('maladie_id')->having('maladie_id', '=', $fiche->id)->count();
+                foreach ($request->get('symptomes') as $symptome) {
+                    if (Maladies_symptome::where('symptome_id', '=', $symptome)->where('maladie_id', '=', $fiche->id)->exists()) {
+                        $n++;
+                    } else {
+                        $missing = true;
+                    }
+                    $fiche->taux = $n * 100 / $num;
+                    $fiche->missing = $missing;
                 }
-                $fiche->taux=$n*100/$num;
-                $fiche->missing=$missing;
+            }
+            $fiches = $fiches->sortByDesc('taux')->sortBy('missing');
+        }else{
+            foreach ($fiches as $fiche) {
+                $fiche->taux =0;
+                $fiche->missing = false;
             }
         }
-        $fiches=$fiches->sortByDesc('taux')->sortBy('missing');
         \Debugbar::info($fiches);
         return view('fiche.search', compact(['fiches','symptomes']));}
 

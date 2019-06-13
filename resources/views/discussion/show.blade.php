@@ -167,7 +167,9 @@
                                 </div>
                         @endif
                     </small><br>
-                    @if($author->id==\Auth::user()->id||\Auth::user()->type()=="modratrice")
+                    @if(!$discussion->isLocked)
+                        @auth
+                        @if($author->id==\Auth::user()->id||\Auth::user()->type()=="modratrice")
                     <div class="forum-post-panel btn-group btn-group-xs">
                         <form action="{{url('forum/'.$discussion->id)}}" method="post">
                             {{ csrf_field() }}
@@ -185,19 +187,23 @@
                         </form>
                     </div>
                         @endif
+                        @endauth
+                    @endif
 
                 </div>
                 <div style="float: right;" ><a
                             class=" btn btn-default btn-xs" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i
                                 class=" fa fa-clock-o"></i> {{$discussion->created_at}}
                     </a>
-                    @if($author->id==\Auth::user()->id||\Auth::user()->type()=="modratrice")
+                    @auth
+                    @if(\Auth::user()->type()=="modratrice" || \Auth::user()->id==$discussion->user_id)
                     @if(!$discussion->isLocked)
                         <a href="/forum/lock/{{$discussion->id}}" class="btn btn-warning btn-xs" type="submit"> <i class="fa fa-lock"></i>cloturer</a>
                     @else
                         <a href="/forum/lock/{{$discussion->id}}" class="btn btn-warning btn-xs" type="submit"> <i class="fa fa-unlock"></i>ouvrir</a>
                     @endif
                     @endif
+                    @endauth
                 </div>
 
                 <div class="media-body">
@@ -292,6 +298,8 @@
                                 @endif
                             </small>
                             <br>
+                            @if(!$discussion->isLocked)
+                                @auth
                             @if($author->id==\Auth::user()->id||\Auth::user()->type()=="modratrice")
                             <div class="forum-post-panel btn-group btn-group-xs">
                                 <form action="{{url('forum/show/'.$message->id)}}" method="post">
@@ -299,7 +307,7 @@
                                     {{ method_field('DELETE') }}
 
                                     @if($author->id==\Auth::user()->id)
-                                    <a href="http://demo.procoderr.tech/forums/post/1/edit" class="btn btn-info btn-xs"><i
+                                    <a href="/forum/edit/message/{{$message->id}}" class="btn btn-info btn-xs"><i
                                                 class="wb-pencil"></i>
                                         <span class="hidden-xs">
                                         </span>
@@ -310,14 +318,18 @@
                                         <i class="wb-trash"></i>
                                         <span class="hidden-xs"></span>
                                     </button></form></div>@endif
+                                    @endauth
+                            @endif
                         </div>
 
 
                             <div style="float: right;" ><a
-                                                class=" btn btn-default btn-xs" href="http://demo.procoderr.tech/forums/thread/1/post/1"><i
+                                                class=" btn btn-default btn-xs"><i
                                                     class=" fa fa-clock-o"></i> {{$message->created_at}}
                                         </a>
                                 <!-- Script php pour aimer un message-->
+                                @if(!$discussion->isLocked && \Auth::user()->type()!="admin")
+                                    @auth
                         <?php $class='fa fa-thumbs-o-up';
                         if(App\Likes_message::where('user_id','=',\Auth::user()->id)
                                 ->where('message_id','=',$message->id)->first()!=null)
@@ -327,7 +339,8 @@
                             <i class="{{$class}}" id="{{$message->id}}"
                                onclick="likes(this)"></i>
                             <?php $n=App\Likes_message::where("message_id", "=", $message->id)->count();echo $n;?>
-
+                                    @endauth
+                                    @endif
                         </div>
                         <div class="media-body">
                             <p> {{$message->description}}</p> </div>
@@ -338,8 +351,10 @@
 
             @endforeach
         </ul>
-
+@auth
+    @if(!\Auth::user()->type() =="admin")
         @if(!$discussion->isLocked)
+
             <form method="POST" action="" accept-charset="UTF-8">
                 {{csrf_field()}}
                 <div class="tile">
@@ -352,9 +367,7 @@
 
                         <textarea class="form-control fl flat" rows="5" id="message" name="description" cols="50"></textarea>
                         <input type="text" name="discussion_id" hidden value="{{$discussion->id}}">
-                        <span class="help-block pull-right">
-      You may use Markdown - <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">Basic writing and formatting syntax</a>
-    </span>
+
                     </div>
 
                     <div class="form-group">
@@ -365,7 +378,8 @@
         @else
     </div> <div class="row alert-danger"> <div class="col-md-offset-3 col-md-6"> <p>Vous ne pouvez pas répondre à cette discussion </p></div></div>
     @endif
-
+    @endif
+@endauth
     <div class="modal fade" id="reportPost">
         <div class="modal-dialog">
             <div class="modal-content">

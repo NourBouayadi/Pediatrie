@@ -60,12 +60,14 @@
                                 </tr>
 
                             </table>
+                            @auth
                             @if($fiche->pediatre_id == \Auth::user()->id)
                             <div>
                                 <a href="/ficheMaladie/edit/{{$fiche->id}}" style="color: white;" class="btn btn-primary col-md-offset-12">Modifier</a>
 
                             </div>
                             @endif
+                            @endauth
                         </div>
 
 

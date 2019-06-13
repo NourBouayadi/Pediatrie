@@ -32,6 +32,7 @@
 
 
             <div class="list-group">
+                @auth
                 @if (\Auth::user()->type() == "pediatre")
 
                 <a href="{{url('ficheMaladie/create')}}"
@@ -40,7 +41,7 @@
                     Nouvelle Fiche
                 </a>
                 @endif
-
+                @endauth
                 <a href="{{url('ficheMaladie')}}" class="list-group-item">Toutes les Catégories</a>
 
                 <a href="{{url('ficheMaladie/categorie/1')}}" class="list-group-item ">Grossesse
@@ -176,7 +177,7 @@
 
             <div class="list-group">
 
-
+                @auth
                 @if (\Auth::user()->type() == "pediatre")
                     <a class=" list-group-item list-group-item-text list-group-item-success text-center" href="/profile/{{\Auth::user()->id}}"> Ma Fiche Professionnelle
                     </a>
@@ -206,7 +207,7 @@
                         @endforeach
                     </a>
                 @endif
-
+                @endauth
 
             </div>
         </div>

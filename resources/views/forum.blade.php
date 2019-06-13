@@ -9,9 +9,22 @@
 
     <div class="sidebar col-md-2">
 
-      
+        <form class="navbar-form" role="search" method="get" action="/forum/search">
+
+            <div class="input-group">
+                @if(isset($search))
+                    <input type="text" value="{{$search}}" class="form-control" placeholder="Rechercher" name="search" id="search">
+                @else
+                    <input type="text" value="" class="form-control" placeholder="Rechercher" name="search" id="search">
+                @endif
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
       
       <div class="list-group">
+          @auth
             @if(\Auth::user()->type() == "mom"||\Auth::user()->type() == "modratrice"||\Auth::user()->type() == "pediatre")
             <a href="{{url('forum/create')}}"
                class=" list-group-item list-group-item-text list-group-item-success text-center"><i class="wb-plus"></i>
@@ -30,7 +43,7 @@
             
                     </a>
                 @endif
-
+            @endauth
             <a href="{{url('forum')}}" class="list-group-item">Toutes les Catégories</a>
             
             <a href="{{url('forum/categorie/1')}}" class="list-group-item ">Grossesse
@@ -107,6 +120,7 @@
 
   
                 @foreach($discussions as $discussion)
+                    @auth
                    <?php 
 
 
@@ -119,13 +133,13 @@
                             $class='fa fa-star';}
                     ?>
 
-
+                    @endauth
 
                 <tr>
 
-              
+              @auth
                 <?php                  
-                
+
                   if (\Auth::user()->type() == "mom"||\Auth::user()->type() == "modratrice"){
                     
                 ?>
@@ -134,10 +148,10 @@
                                 </i></td>
                                             
                 <?php } ?>
-
+                    @endauth
                <?php  
                 
-                   if(\Auth::user()->type() == "pediatre"){
+                   if(\Auth::user()==null||\Auth::user()->type() == "pediatre"||\Auth::user()->type() == "admin"){
                                  
                  ?>
                                 
@@ -148,7 +162,7 @@
 
                   <td>
 
-                       <h4><a href="forum/show/{{$discussion->id}}">{{$discussion->titre}}</a>
+                       <h4><a href="/forum/show/{{$discussion->id}}">{{$discussion->titre}}</a>
                             <br>
 
                             <small class="help-block"> Par
@@ -178,6 +192,7 @@
         </ul>
     </div>
     <br><br>
+    @auth
     <div class="sidebar col-md-2">
 
 
@@ -217,6 +232,7 @@
 
         </div>
     </div>
+    @endauth
 </div>
 
 
@@ -236,7 +252,7 @@
                 fav.setAttribute("class", xhttp.response);
             }
         };
-        xhttp.open("GET", "form/fav/" + fav.getAttribute("id"), true);
+        xhttp.open("GET", "forum/fav/" + fav.getAttribute("id"), true);
         xhttp.send();
         /*}
         else {

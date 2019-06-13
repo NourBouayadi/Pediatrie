@@ -12,6 +12,7 @@ use Auth;
 use App\Mom;
 use App\Favori;
 use Illuminate\Support\Facades\DB;
+
 class DiscussionController extends Controller
 {
     public function index()
@@ -21,204 +22,245 @@ class DiscussionController extends Controller
         $discussions = Discussion::paginate(5);
 
 
-        return view('forum', compact(['discussions']) );
+        return view('forum', compact(['discussions']));
 
     }
-    //TODO
 
-    public function indexParCategorie($id){
+    public function indexParCategorie($id)
+    {
         $discussions = Discussion::where('categorie_id', '=', $id)->paginate(5);//->get();
         return view('forum', compact(['discussions']));
     }
 
-    public function indexParSujet(){
+    public function indexParSujet()
+    {
 
 
+        /*   $discussions = DB::select('(SELECT discussions.`*`,COUNT(messages.`id`) AS num from `messages`,`discussions` WHERE messages.`discussion_id`= discussions.`id` group by messages.`discussion_id` )
+   UNION ALL
+   (SELECT discussions.`*`,0 AS favorisnum FROM `discussions` WHERE `id` NOT IN (SELECT DISTINCT `discussion_id` FROM `messages`) ) ORDER BY  `isRead` ASC , `num` DESC;
+   ');*/
+        if (\Auth::user()->type() == "mom" || \Auth::user()->type() == "modratrice" || \Auth::user()->type() == "pediatre") {
+            $q1 = DB::select('SELECT DISTINCT `discussion_id` FROM `messages`');
+            $list = [];
+            foreach ($q1 as $discussion) {
+                array_push($list, $discussion->discussion_id);
+            }
 
-     /*   $discussions = DB::select('(SELECT discussions.`*`,COUNT(messages.`id`) AS num from `messages`,`discussions` WHERE messages.`discussion_id`= discussions.`id` group by messages.`discussion_id` )
-UNION ALL
-(SELECT discussions.`*`,0 AS favorisnum FROM `discussions` WHERE `id` NOT IN (SELECT DISTINCT `discussion_id` FROM `messages`) ) ORDER BY  `isRead` ASC , `num` DESC;
-');*/
+            $q2 = DB::table('discussions')
+                ->join('messages', 'discussions.id', "=", 'messages.discussion_id')
+                ->selectRaw('discussions.*, count(messages.id) as num ')
+                ->where('discussions.user_id', '=', \Auth::user()->id)
+                ->groupBy('messages.discussion_id');
 
-        $q1 = DB::select('SELECT DISTINCT `discussion_id` FROM `messages`');
-        $list=[];
-        foreach ($q1 as $discussion){
-            array_push($list,$discussion->discussion_id);
+
+            $q3 = DB::table('discussions')
+                ->selectRaw('discussions.*, 0 as num')
+                ->whereNotIn('id', $list)
+                ->where('discussions.user_id', '=', \Auth::user()->id)
+                ->unionAll($q2)
+                ->orderBy('isRead', 'asc')
+                ->orderBy('num', 'desc');
+            $discussions = $q3->paginate(5);
+            /*(SELECT discussions.`*`,COUNT(messages.`id`) AS num from `messages`,`discussions` WHERE messages.`discussion_id`= discussions.`id` group by messages.`discussion_id` )
+            UNION ALL
+            (SELECT discussions.`*`,0 AS favorisnum FROM `discussions` WHERE `id` NOT IN (SELECT DISTINCT `discussion_id` FROM `messages`) ) ORDER BY  `isRead` ASC , `num` DESC;
+
+            */
+            return view('forum', compact(['discussions']));
+        } else {
+            return redirect()->back();
         }
-
-        $q2 = DB::table('discussions')
-                    ->join('messages', 'discussions.id', "=", 'messages.discussion_id')
-                    ->selectRaw('discussions.*, count(messages.id) as num ')
-                    ->where('discussions.user_id','=',\Auth::user()->id)
-                    ->groupBy('messages.discussion_id');
-
-      
-        $q3 = DB::table('discussions')
-                 ->selectRaw('discussions.*, 0 as num')
-                 ->whereNotIn('id',$list)
-                 ->where('discussions.user_id','=',\Auth::user()->id)
-                 ->unionAll($q2)
-                 ->orderBy('isRead','asc')
-                 ->orderBy('num','desc');
-        $discussions=$q3->paginate(5);
-        /*(SELECT discussions.`*`,COUNT(messages.`id`) AS num from `messages`,`discussions` WHERE messages.`discussion_id`= discussions.`id` group by messages.`discussion_id` )
-        UNION ALL
-        (SELECT discussions.`*`,0 AS favorisnum FROM `discussions` WHERE `id` NOT IN (SELECT DISTINCT `discussion_id` FROM `messages`) ) ORDER BY  `isRead` ASC , `num` DESC;
-
-        */
-       return view('forum', compact(['discussions']));
     }
 
 
-    public function indexParFavoris(){
-        $favoris=Favori::where('user_id','=',\Auth::user()->id)
-            ->where('favori','=','discussion_id')->paginate(5);
-
-        return view('forum', compact(['discussions']));
+    public function indexParFavoris()
+    {
+        if (\Auth::user()->type() == "mom" || \Auth::user()->type() == "modratrice") {
+            $favoris = Favori::where('user_id', '=', \Auth::user()->id)
+                ->where('favori', '=', 'discussion_id')->paginate(5);
+            return view('forum', compact(['discussions']));
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function create()
     {
-        return view('discussion.create');
+        if (\Auth::user()->type() == "mom" || \Auth::user()->type() == "modratrice" || \Auth::user()->type() == "pediatre") {
+            return view('discussion.create');
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function store(Request $request)
     {
+        if (\Auth::user()->type() == "mom" || \Auth::user()->type() == "modratrice" || \Auth::user()->type() == "pediatre") {
+            $discussion = new Discussion();
+            $discussion->titre = $request->input('titre');
+            $discussion->description = $request->input('description');
 
-        $discussion = new Discussion();
-        $discussion->titre = $request->input('titre');
-        $discussion->description = $request->input('description');
+            $discussion->categorie_id = $request->input('categorie_id');
 
-        $discussion->categorie_id = $request->input('categorie_id');
+            $discussion->user_id = \Auth::user()->id;
+            $discussion->save();
 
-        $discussion->user_id = \Auth::user()->id;
-        $discussion->save();
-
-        session()->flash('success', 'la discussion a été bien enregistrée');
-
+            session()->flash('success', 'la discussion a été bien enregistrée');
+            return redirect('forum/show/'.$discussion->id);
+        }
         return redirect('forum');
 
     }
 
-    public function edit( $id)
+    public function edit($id)
     {
         $discussion = Discussion::find($id);
-        return view('discussion.edit', ['discussion' => $discussion]);
+        if (\Auth::user()->id == $discussion->user_id && !$discussion->isLocked) {
+            return view('discussion.edit', ['discussion' => $discussion]);
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function update(Request $request, $id)
     {
         $discussion = Discussion::find($id);
-        $discussion->titre = $request->input('titre');
-        $discussion->description = $request->input('description');
-        $discussion->save();
-        return redirect('/forum/show/'.$id)->with('success', ' mise à jour étudiant');;
+        if (\Auth::user()->id == $discussion->user_id && !$discussion->isLocked) {
+            $discussion->titre = $request->input('titre');
+            $discussion->description = $request->input('description');
+            $discussion->save();
+        } else {
+            return redirect()->back();
+        }
+        return redirect('/forum/show/' . $id)->with('success', ' mise à jour étudiant');;
     }
 
     public function destroy($id)
     {
         $discussion = Discussion::find($id);
-        $discussion->delete();
+        if (\Auth::user()->id == $discussion->user_id || \Auth::user()->type() == "modratrice") {
+            $discussion->delete();
+        }
         return redirect('forum');
     }
 
-    public function fav ($id) {
+    public function fav($id)
+    {
         \Debugbar::disable();
-        if(Discussion::where('id','=',$id)->where('user_id', '=',\Auth::user()->id )->first()==null ){
-            $fav=Favori::where('user_id','=',\Auth::user()->id)->where('discussion_id','=',$id)->first();
-            if($fav==null) {
-                $fav = new Favori();
-                $fav->user_id = \Auth::user()->id;
-                $fav->discussion_id = $id;
-                $fav->save();
-                return "fa fa-star";
+        if (\Auth::user()->type() == "mom" || \Auth::user()->type() == "modratrice") {
+            if (Discussion::where('id', '=', $id)->where('user_id', '=', \Auth::user()->id)->first() == null) {
+                $fav = Favori::where('user_id', '=', \Auth::user()->id)->where('discussion_id', '=', $id)->first();
+                if ($fav == null) {
+                    $fav = new Favori();
+                    $fav->user_id = \Auth::user()->id;
+                    $fav->discussion_id = $id;
+                    $fav->save();
+                    return "fa fa-star";
+                } else {
+                    $fav->delete();
+                }
             }
-            else {
-                $fav->delete();
-            }
+            return "fa fa-star-o";
         }
         return "fa fa-star-o";
+
     }
 
-    public function like ($id){
+    public function like($id)
+    {
         \Debugbar::disable();
-        
-        
-        $like=Likes_message::where('user_id','=',\Auth::user()->id)->where('message_id','=',$id)->first();
-        
-
-        if($like==null) {
-            $message=Message::find($id);
-            if(Pediatre::where('id','=',$message->user_id)->doesntexist()){
-                $user=User::find($message->user_id);
-                $user->points++;
-                $user->save();
+        $message = Message::find($id);
+        $discussion = Discussion::find($message->discussion_id);
+        if (\Auth::user()->type() == "mom" || \Auth::user()->type() == "modratrice" || \Auth::user()->type() == "pediatre") {
+            if (!$discussion->isLocked){
+                $like = Likes_message::where('user_id', '=', \Auth::user()->id)->where('message_id', '=', $id)->first();
+                if ($like == null) {
+                    $message = Message::find($id);
+                    if (Pediatre::where('id', '=', $message->user_id)->doesntexist()) {
+                        $user = User::find($message->user_id);
+                        $user->points++;
+                        $user->save();
+                    }
+                    $like = new Likes_message();
+                    $like->user_id = \Auth::user()->id;
+                    $like->message_id = $id;
+                    $like->save();
+                    return "fa fa-thumbs-up";
+                } else {
+                    $like->delete();
+                    $message = Message::find($id);
+                    if (Pediatre::where('id', '=', $message->user_id)->doesntexist()) {
+                        $user = User::find($message->user_id);
+                        $user->points--;
+                        $user->save();
+                    }
+                    return "fa fa-thumbs-o-up";
+                }
             }
-            $like = new Likes_message();
-            $like->user_id = \Auth::user()->id;
-            $like->message_id = $id;
-            $like->save();
-            return "fa fa-thumbs-up";
         }
-        else {
-            $like->delete();
-            $message=Message::find($id);
-            if(Pediatre::where('id','=',$message->user_id)->doesntexist()){
-                $user=User::find($message->user_id);
-                $user->points--;
-                $user->save();
-            }
-            return "fa fa-thumbs-o-up";
-        }
+        return "fa fa-thumbs-o-up";
     }
 
 
-
-    public function search (Request $request){
-        $discussions=Discussion::where('titre', 'like', '%' . $request->get('search') . '%')
+    public function search(Request $request)
+    {
+        $discussions = Discussion::where('titre', 'like', '%' . $request->get('search') . '%')
             ->orWhere('description', 'like', '%' . $request->get('search') . '%')
             ->paginate(5);//->get();
-        return view('forum', compact( 'discussions'));
+        $search=$request->get('search') ;
+        return view('forum', compact(['discussions','search']));
     }
-    public function show($id) {
+
+    public function show($id)
+    {
         //TODO isRead favoris
         $discussion = Discussion::find($id);
-        $unread=false;
-        if($discussion->user_id != \Auth::user()->id) {$discussion->views++;}
-        if (\Auth::user()->id==$discussion->user_id && !$discussion->isRead){
-            $discussion->isRead=1;
-            $unread=true;
+        $unread = false;
+        if (\Auth::user()!=null&&$discussion->user_id != \Auth::user()->id) {
+            $discussion->views++;
+        }
+        if (\Auth::user()!=null&&\Auth::user()->id == $discussion->user_id && !$discussion->isRead) {
+            $discussion->isRead = 1;
+            $unread = true;
         }
         $discussion->save();
         \Debugbar::info($discussion->views);
-        return view('discussion.show', compact(['discussion','unread']));
+        return view('discussion.show', compact(['discussion', 'unread']));
 
     }
-    public function cloturer($id){
+
+    public function cloturer($id)
+    {
         $discussion = Discussion::find($id);
-        if($discussion->isLocked)
-            $discussion->isLocked=0;
-        else
-            $discussion->isLocked=1;
-        $discussion->save();
+        if (\Auth::user()->type() == "modratrice" || \Auth::user()->id==$discussion->user_id) {
+            if ($discussion->isLocked)
+                $discussion->isLocked = 0;
+            else
+                $discussion->isLocked = 1;
+            $discussion->save();
+        }
         return redirect()->back();
 
     }
 
-    public function article(){
+    public function article()
+    {
 
         $discussions = DB::table('discussions')
-                       ->join('users' , 'discussions.user_id', 'users.id')
-                       ->where('isPediatre','=', 1)
-                       ->paginate(5);
+            ->join('users', 'discussions.user_id', 'users.id')
+            ->where('isPediatre', '=', 1)
+            ->paginate(5);
         return view('forum', compact(['discussions']));
 
     }
-    public function discussion(){
+
+    public function discussion()
+    {
 
         $discussions = DB::table('discussions')
-            ->join('users' , 'discussions.user_id', 'users.id')
-            ->where('isPediatre','=', 0)
+            ->join('users', 'discussions.user_id', 'users.id')
+            ->where('isPediatre', '=', 0)
             ->paginate(5);
         return view('forum', compact(['discussions']));
 

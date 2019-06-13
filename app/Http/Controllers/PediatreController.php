@@ -97,7 +97,7 @@ class PediatreController extends Controller
 
         $reponses = DB::table('reponses')
             ->join('users', 'reponses.user_id', '=', 'users.id')
-            ->select('reponses.description', 'users.name')
+            ->select('reponses.description','reponses.created_at', 'users.name')
             ->where('reponses.pediatre_id', '=', $id)->get();
 
         return view('profile', compact(['pediatre', 'reponses']) );
